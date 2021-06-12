@@ -2,8 +2,8 @@ import React from 'react';
 
 const DashBoard = () => {
     return (
-        <div>
-            DashBoard
+        <div className="wrapper">
+        <h1>Dashboard</h1>
         </div>
     );
 }

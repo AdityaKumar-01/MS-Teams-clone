@@ -32,10 +32,22 @@ const SignUp = () => {
       userNameRef.current.value === ""
     )
       seterrorMsg("Enter details");
-    else if (passwordConfirmRef.current.value != passwordRef.current.value)
+    else if (passwordConfirmRef.current.value !== passwordRef.current.value)
       seterrorMsg("Password didn't match");
     else{
-      history.push("/dashboard");
+      // Sending data to backend to check user exists else enroll the user
+      const user = {
+        name: userNameRef.current.value,
+        email: emailRef.current.value,
+        password: passwordRef.current.value,
+      };
+      axios.post("/user/signUp", user)
+        .then(() => {
+          history.push("/dashboard");
+        })
+        .catch((err) => {
+          console.log("err");
+        });
     }
     
   };
