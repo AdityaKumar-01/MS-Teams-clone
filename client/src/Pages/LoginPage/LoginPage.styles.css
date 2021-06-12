@@ -1,0 +1,113 @@
+/* Headers style */
+
+.header {
+  font-size: 40px;
+}
+
+.header::after {
+  content: "";
+  display: flex;
+  width: 100%;
+  padding-top: 1%;
+  border-bottom: 2px solid #f54748;
+}
+
+/* Common flex style for containers */
+
+.form-wrapper,
+.form-content,
+.form-body,
+.form-option {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+/* Specific styles for each part */
+
+.form-wrapper {
+  flex-direction: column;
+  width: 100%;
+  height: 100vh;
+}
+
+/* Content like image and form  */
+.form-content {
+  justify-content: space-around;
+  width: 100%;
+}
+
+/* Login page image */
+.form-img img {
+  width: 400px;
+  height: 300px;
+}
+
+/* Form body holding both sign in and sign up form */
+
+.form-body {
+  flex-direction: column;
+  background-color: #343f56;
+  height: 120%;
+  width: 30%;
+  border-radius: 10px;
+  color: #f54748;
+  box-shadow: 0 0 10px black;
+}
+
+/* form body header option to switch forms */
+.form-option {
+  justify-content: space-around;
+  width: 80%;
+}
+
+.form-option span {
+  cursor: pointer;
+  border-radius: 10px;
+  padding: 3%;
+}
+
+/* selected form type */
+.showUp {
+  background-color: #1d2431;
+}
+
+.form-component {
+  height: 70%;
+}
+
+/* Media Queries */
+
+@media (max-width: 1000px) {
+  .form-img img {
+    width: 300px;
+    height: 230px;
+  }
+
+  .form-wrapper {
+    height: 80vh;
+  }
+}
+
+@media (max-width: 700px) {
+  .form-img img {
+    display: none;
+  }
+  .form-content {
+    flex-direction: column-reverse;
+    height: 50vh;
+    width: 140%;
+  }
+  .form-wrapper {
+    height: 100vh;
+    justify-content: space-evenly;
+  }
+}
+
+@media (max-width: 500px) {
+  .form-content {
+    flex-direction: column-reverse;
+    height: 50vh;
+    width: 160%;
+  }
+}

@@ -1,0 +1,63 @@
+/* to remove extra space in form */
+.signin-form{
+    margin-top:-10%;
+    height:100%;
+}
+/* form container */
+.form{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width:100%;
+     max-width:200px;
+}
+
+/* error msg */
+.error-span{
+    margin-bottom:5%;
+    margin-top:-10%;
+    font-size:14px;
+    text-align: center;
+}
+
+/* form input fields */
+.form input{
+    width:150%;
+    max-width:250px;
+    height:30px;
+    border-radius: 5px;  
+    border:none;
+    outline:none;
+    text-align: center;
+
+}
+
+/* form button */
+.form button{
+    width:80%;
+    max-width:170px;
+    background-color:#f54748;
+    border:none;
+    outline:none;
+    border-radius: 5px;
+    height:30px;
+    margin-bottom: 10%;
+    cursor: pointer;
+    color:white;
+}
+
+.form button:hover{
+    background-color:#c93f3f;
+}
+
+
+/* media queries */
+
+
+@media (max-width: 1000px){
+    .form input{
+    width:100%;
+   
+}
+}
