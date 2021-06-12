@@ -1,5 +1,7 @@
+//  Required NPM packages
 const mongoose = require("mongoose");
 
+// User schema tostore data in Mongo DB
 const userSchema = {
   email: {
     type: String,
@@ -15,6 +17,8 @@ const userSchema = {
   },
 };
 
+// model for CRUD operations
 const user = mongoose.model("user", userSchema);
 
+// Export the module
 module.exports = user;
