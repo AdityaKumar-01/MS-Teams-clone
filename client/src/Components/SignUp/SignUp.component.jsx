@@ -32,7 +32,11 @@ const SignUp = () => {
     axios
       .post("/user/signUp", user)
       .then((data) => {
-        if (data.data.status === 201) history.push("/dashboard");
+        if (data.data.status === 201){ 
+          localStorage.setItem("userName", userNameRef.current.value); 
+          localStorage.setItem("passsword", passwordRef.current.value);
+          history.push("/dashboard")
+        }
         else if(data.data.status === 400) seterrorMsg(data.data.msg);
       })
       .catch((err) => {

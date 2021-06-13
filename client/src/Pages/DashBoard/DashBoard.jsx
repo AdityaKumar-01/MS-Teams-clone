@@ -1,40 +1,73 @@
 // React libraries
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 
 // Utility libraries
-import axios from "axios";
 
 // External CSS
 import "./Dashboard.styles.css";
 
 // Components
-import ChatCard from "./../../Components/ChatCard/ChatCard.component";
+import CreateTeam from "./../../Components/CreateTeam/CreateTeam.component";
+import TeamsSection from "./../../Components/TeamsSection/TeamsSection.component";
+import ProfileSetting from "./../../Components/ProfileSetting/ProfileSetting.component";
+import Assignment from "./../../Components/Assignment/Assignment.components";
+
+// Material UI Icons
+import AddCircleRoundedIcon from "@material-ui/icons/AddCircleRounded";
+import GroupRoundedIcon from "@material-ui/icons/GroupRounded";
+import SettingsRoundedIcon from "@material-ui/icons/SettingsRounded";
+import AssignmentTurnedInRoundedIcon from "@material-ui/icons/AssignmentTurnedInRounded";
+
 const DashBoard = () => {
 
-  // Hook to store chat room name of user
-  const [userChats, setUserChats] = useState([]);
-
-  // useEffect to get data from backend at page loading 
-  useEffect(() => {
-    axios
-      .get("/chat/getChat")
-      .then((response) => {
-        setUserChats(response.data.names); // setting data to hooks received from backend
-      })
-      .catch((err) => console.log(err));
-  }, []);
-
+  // React hooks to handle local states
+  const [showSection, setShowSection] = useState([false, true, false, false]); // state of all section to display
+  const [currentSection, setcurrentSection] = useState(1); // index of current displayed section 
+  
+  // function to toggle sections
+  const showHide = (num) => {
+    if (num !== currentSection) {
+      var arr = showSection;
+      arr[currentSection] = false; // make the state of current displayed section to false
+      arr[num] = !arr[num]; // toggle the state of section to be displayed
+      setShowSection(arr);
+      setcurrentSection(num);
+    }
+  };
   return (
     <div className="dashboard-wrapper">
-      <div className="form-header header">Join Your Chat Room</div>
-      <div className="chat-name">
-        {userChats ? (
-          userChats.map((name, i) => {
-            return <ChatCard name={name} key={i} />; // map every name recieved to Chat Card components to render
-          })
-        ) : (
-          <h1>Nothing here</h1>
-        )}
+    {/* Navbar items */}
+      <div className="nav-bar-list">
+        <ul>
+          <li onClick={() => showHide(0)}>
+            <AddCircleRoundedIcon
+              style={{ color: "f54748", fontSize: 35, cursor: "pointer" }}
+            />
+          </li>
+          <li onClick={() => showHide(1)}>
+            <GroupRoundedIcon
+              style={{ color: "f54748", fontSize: 35, cursor: "pointer" }}
+            />
+          </li>
+          <li onClick={() => showHide(2)}>
+            <SettingsRoundedIcon
+              style={{ color: "f54748", fontSize: 35, cursor: "pointer" }}
+            />
+          </li>
+          <li onClick={() => showHide(3)}>
+            <AssignmentTurnedInRoundedIcon
+              style={{ color: "f54748", fontSize: 35, cursor: "pointer" }}
+            />
+          </li>
+        </ul>
+      </div>
+
+        {/* conditional rendering of sections  */}
+      <div className="display-section">
+        {showSection[0] ? <CreateTeam /> : null}
+        {showSection[1] ? <TeamsSection /> : null}
+        {showSection[2] ? <ProfileSetting /> : null}
+        {showSection[3] ? <Assignment /> : null}
       </div>
     </div>
   );

@@ -1,0 +1,32 @@
+.empty-wrapper, .empty-msg{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    width:80%;
+}
+
+.empty-img img{
+    width:350px;
+    height:300px;
+}
+.empty-msg p{
+    color: #343f56;
+    font-size:25px;
+}
+
+.create-chat{
+    width:100px;
+    height:40px;
+    background-color:#343f56;
+    color:#f54748;
+    border:none;
+    outline:none;
+    border-radius: 5px;
+    font-weight: 500;
+    cursor:pointer;
+}
+
+.create-chat:hover{
+    background-color: #293041;
+}

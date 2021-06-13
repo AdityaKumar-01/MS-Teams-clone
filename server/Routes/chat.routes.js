@@ -26,13 +26,12 @@ const prepareChatList = (data) => {
   })
   return res;
 };
-router.get("/getChat", (req, res) => {
-
+router.post("/getChat", (req, res) => {
   // Header requried to fetch data from Chat room
   const authObject = {
     "Project-ID": "8c36364b-c849-4434-997b-2ba4dd7683d4",
-    "User-Name": "aditya",
-    "User-Secret": "secret",
+    "User-Name": req.body.name,
+    "User-Secret": req.body.password,
   };
   try {
     // Call to get data with header
@@ -41,7 +40,8 @@ router.get("/getChat", (req, res) => {
         headers: authObject,
       })
       .then((data) => {
-        res.json(prepareChatList(data.data)); // send JSOn obj return from the function to frontend
+        console.log(data.data);
+        res.json(prepareChatList(data.data)); // send JSON obj return from the function to frontend
       })
       .catch((err) => {
         console.log(err);
@@ -51,4 +51,37 @@ router.get("/getChat", (req, res) => {
   }
 });
 
+
+router.post("/createChat", (req, res) => {
+  
+  const authObject = {
+    "Project-ID": "8c36364b-c849-4434-997b-2ba4dd7683d4",
+    "User-Name": req.body.name,
+    "User-Secret": req.body.password,
+  };
+  // Header requried to fetch data from Chat room
+  var data = {
+    "title": req.body.title,    
+  };
+
+  // config object with API call methid and header
+  var config = {
+    method: "post",
+    url: "https://api.chatengine.io/chats/",
+    headers: authObject,
+    data: data,
+  };
+
+  // Make the call
+  axios(config)
+    .then(function (response) {
+      // Notify the frontend that the chat is being created
+      res.json({ status: 201, msg: "Chat Created successfully" });
+    })
+    .catch(function (error) {
+      console.log(error);
+      // if any error occurred send 400 status and error msg to be displayd
+      res.json({ status: 400, msg: "Cannot create Chat" });
+    });
+});
 module.exports = router; // export the module

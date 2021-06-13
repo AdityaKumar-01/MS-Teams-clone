@@ -10,10 +10,10 @@ dotenv.config();
 
 // Mongoose model for user details
 const user = require("../Models/user");
-router.post("/signUp", (req, res) => {
 
+router.post("/signUp", (req, res) => {
   // check user exist with same username or not
-  user.countDocuments({ userName: req.body.name}, (err, c) => {
+  user.countDocuments({ userName: req.body.name }, (err, c) => {
     // if you get 0 documents then no user exist with same name
     if (c == 0) {
       // Create user obj to save in data abse with the data entered in the form
@@ -44,8 +44,6 @@ router.post("/signUp", (req, res) => {
       // Make the call
       axios(config)
         .then(function (response) {
-          // localStorage.setItem("username", username);
-          // localStorage.setItem("password", password);
           // Notify the frontend that the user is being created
           res.json({ status: 201, msg: "User Created successfully" });
         })
@@ -55,7 +53,18 @@ router.post("/signUp", (req, res) => {
           res.json({ status: 400, msg: "User Already Exists" });
         });
     } else res.json({ status: 400, msg: "User Already Exists" }); // if any error occurred send 400 status and error msg to be displayd
-  }); 
+  });
 });
 
-module.exports = router // export the module
+router.post("/signIn", (req, res) => {
+  // check user exist with same username or not
+  user.find({ userName: req.body.name }, (err, data) => {
+    // if you get 1 document then there exist a user with this name
+    if (data.length >= 1 && sha256(req.body.password) === data[0].password) {
+      // Notify the frontend that the user is signedIn
+      res.json({ status: 201, msg: "User Found" });
+    } else res.json({ status: 404, msg: "Check your credentials" }); // if any error occurred send 404 status and error msg to be displayd
+  });
+});
+
+module.exports = router; // export the module
