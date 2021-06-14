@@ -5,4 +5,6 @@
   align-items: center;
   width:80%;
   padding:2%;
+  flex-wrap: wrap;
+  height:80vh;
 }

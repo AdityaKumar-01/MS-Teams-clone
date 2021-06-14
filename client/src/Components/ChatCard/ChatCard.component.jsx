@@ -7,7 +7,7 @@ const ChatCard = ({ name }) => {
   return (
     <div className="chat-card">
       <span>
-        <Avatar name={name} size="150" className="card-avatar"/>
+        <Avatar name={name} size="80" className="card-avatar"/>
       </span>
       <span>{name}</span>
     </div>

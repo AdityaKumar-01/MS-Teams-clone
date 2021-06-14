@@ -34,7 +34,7 @@ const SignUp = () => {
       .then((data) => {
         if (data.data.status === 201){ 
           localStorage.setItem("userName", userNameRef.current.value); 
-          localStorage.setItem("passsword", passwordRef.current.value);
+          localStorage.setItem("password", passwordRef.current.value);
           history.push("/dashboard")
         }
         else if(data.data.status === 400) seterrorMsg(data.data.msg);

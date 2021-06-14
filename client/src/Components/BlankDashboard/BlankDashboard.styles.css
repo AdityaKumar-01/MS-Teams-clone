@@ -5,7 +5,9 @@
     align-items: center;
     width:80%;
 }
-
+.empty-wrapper{
+    height:80vh;
+}
 .empty-img img{
     width:350px;
     height:300px;
@@ -15,18 +17,19 @@
     font-size:25px;
 }
 
-.create-chat{
+.create-chat-btn{
     width:100px;
     height:40px;
     background-color:#343f56;
     color:#f54748;
-    border:none;
+    border:2px solid #343f56;
     outline:none;
     border-radius: 5px;
     font-weight: 500;
     cursor:pointer;
+    transform:transition background-color 1s;
 }
-
-.create-chat:hover{
-    background-color: #293041;
+.create-chat-btn:hover{
+    background-color: transparent;
+    transform:transition background-color 1s;
 }

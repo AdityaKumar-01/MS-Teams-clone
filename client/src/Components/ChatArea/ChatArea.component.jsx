@@ -6,6 +6,7 @@ import {
   ChatFeed,
 } from "react-chat-engine";
 
+
 const ChatArea = () => {
   return (
     <ChatEngineWrapper>

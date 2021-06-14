@@ -76,12 +76,12 @@ router.post("/createChat", (req, res) => {
   axios(config)
     .then(function (response) {
       // Notify the frontend that the chat is being created
-      res.json({ status: 201, msg: "Chat Created successfully" });
+      res.json({ status: 201, msg: "Team Created Successfully" });
     })
     .catch(function (error) {
       console.log(error);
       // if any error occurred send 400 status and error msg to be displayd
-      res.json({ status: 400, msg: "Cannot create Chat" });
+      res.json({ status: 400, msg: "Cannot Create Team" });
     });
 });
 module.exports = router; // export the module

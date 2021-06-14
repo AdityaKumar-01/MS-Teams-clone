@@ -14,10 +14,11 @@
 
 /* Nav bar conatiner */
 .nav-bar-list {
-  height: 80vh;
+  height: 60vh;
   background-color: #343f56;
   border-radius: 10px;
   box-shadow: 0 0 10px black;
+  position:fixed;
 }
 
 .nav-bar-list ul {

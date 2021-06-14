@@ -1,15 +1,16 @@
 .chat-card{
-    width:300px;
-    height:300px;
+    width:250px;
+    height:200px;
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
     align-items: center;
     background-color: #343f56;
-    color:#fb9300;
-    font-size: 25px;
-    border-radius: 10px;
-    box-shadow: 0 0 10px black;
+    color:#f54748;
+    font-size: 20px;
+    border-radius: 8px;
+    margin-bottom:5%;
+    font-weight: 400;
 }
 
 .chat-card span{
@@ -18,4 +19,6 @@
 
 .card-avatar{ 
     border-radius: 10px;
+    height:10px;
+    width:10px;
 }
