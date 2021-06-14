@@ -18,7 +18,11 @@ import GroupRoundedIcon from "@material-ui/icons/GroupRounded";
 import SettingsRoundedIcon from "@material-ui/icons/SettingsRounded";
 import AssignmentTurnedInRoundedIcon from "@material-ui/icons/AssignmentTurnedInRounded";
 import PersonSharpIcon from "@material-ui/icons/PersonSharp";
+import ChatArea from './../../Components/ChatArea/ChatArea.component';
+
+
 const DashBoard = () => {
+  
   // React hooks to handle local states
   const [showSection, setShowSection] = useState([false, true, false, false, false]); // state of all section to display
   const [currentSection, setcurrentSection] = useState(1); // index of current displayed section
@@ -72,6 +76,7 @@ const DashBoard = () => {
         {showSection[1] ? <TeamsSection showHide={showHide} /> : null}
         {showSection[2] ? <ProfileSetting /> : null}
         {showSection[3] ? <Assignment /> : null}
+        {showSection[4] ? <ChatArea/> : null}
       </div>
     </div>
   );

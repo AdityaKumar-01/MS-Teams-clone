@@ -14,7 +14,7 @@ const TeamsSection = ({ showHide }) => {
     axios
       .post("/chat/getChat", user)
       .then((response) => {
-        setUserChats(response.data.names); // setting data to hooks received from backend
+        setUserChats(response.data.info); // setting data to hooks received from backend
       })
       .catch((err) => console.log(err));
   };
@@ -25,8 +25,8 @@ const TeamsSection = ({ showHide }) => {
   return (
     <div className="chat-name">
       {userChats ? (
-        userChats.map((name, i) => {
-          return <ChatCard name={name} key={i} />; // map every name recieved to Chat Card components to render
+        userChats.map((data, i) => {
+          return <ChatCard data={data} key={i} />; // map every name recieved to Chat Card components to render
         })
       ) : (
         <BlankDashboard showHide={showHide} /> // render when user doesn't have any team

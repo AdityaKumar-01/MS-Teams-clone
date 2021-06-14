@@ -1,5 +1,5 @@
 // react libraries
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useContext } from "react";
 import { useHistory } from "react-router-dom";
 
 //  Other utility libraries
@@ -7,8 +7,9 @@ import axios from "axios";
 
 //  external CSS
 import "./SignUp.styles.css";
-
+import { UserContext } from "../../Context/userContext";
 const SignUp = () => {
+  const { setUserName, setPwd } = useContext(UserContext);
   // Refs to store form current values
   const userNameRef = useRef();
   const emailRef = useRef();
@@ -35,6 +36,8 @@ const SignUp = () => {
         if (data.data.status === 201){ 
           localStorage.setItem("userName", userNameRef.current.value); 
           localStorage.setItem("password", passwordRef.current.value);
+           setUserName(userNameRef.current.value);
+           setPwd(passwordRef.current.value);
           history.push("/dashboard")
         }
         else if(data.data.status === 400) seterrorMsg(data.data.msg);

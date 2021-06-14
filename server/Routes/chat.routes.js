@@ -18,11 +18,11 @@ const prepareChatList = (data) => {
   res = {
     status: 200,
     msg:"Fine",
-    names: []
+    info: []
   }
   data.forEach((item) => {
-    res.names.push(item.title); // storing titles to chat room
-    
+    res.info.push({"title":item.title, "id": item.id}); // storing titles to chat room
+    // console.log(item.title, item.id);    
   })
   return res;
 };

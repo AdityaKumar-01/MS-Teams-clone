@@ -1,5 +1,5 @@
 // React library
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useContext } from "react";
 import { useHistory } from "react-router-dom";
 
 // utility libraries
@@ -7,9 +7,9 @@ import axios from "axios"
 
 //  CSS
 import "./SignIn.styles.css"
-
+import {UserContext} from "../../Context/userContext";
 const SignIn = () => {
-
+  const { setUserName, setPwd } = useContext(UserContext);
   // ref to store form value
   const userNameRef = useRef();
   const passwordRef = useRef();
@@ -34,6 +34,8 @@ const SignIn = () => {
           // Store the data to local storage to avoid user logging every time
           localStorage.setItem("userName", userNameRef.current.value);
           localStorage.setItem("password", passwordRef.current.value);
+          setUserName(userNameRef.current.value);
+          setPwd(passwordRef.current.value);
           history.push("/dashboard");
         } else if (data.data.status === 404) seterrorMsg(data.data.msg);
       })

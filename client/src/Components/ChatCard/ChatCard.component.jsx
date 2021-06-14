@@ -1,15 +1,25 @@
 // React library
-import React from "react";
+import React,{useContext} from "react";
 import Avatar from "react-avatar";
+import {useHistory} from "react-router-dom"
+import { UserContext } from "../../Context/userContext";
+
 // external CSS
 import "./ChatCard.styles.css";
-const ChatCard = ({ name }) => {
+const ChatCard = ({ data }) => {
+  const { setRoomId } = useContext(UserContext);
+let history = useHistory();
+  const handleClick = () => {
+    console.log(data.id);
+    setRoomId(data.id);
+    history.push(`/dashboard/chat/${data.id}`)
+  }
   return (
-    <div className="chat-card">
+    <div className="chat-card" onClick= {() => handleClick()}>
       <span>
-        <Avatar name={name} size="80" className="card-avatar"/>
+        <Avatar name={data.title} size="80" className="card-avatar"/>
       </span>
-      <span>{name}</span>
+      <span>{data.title}{data.id}</span>
     </div>
   );
 };
