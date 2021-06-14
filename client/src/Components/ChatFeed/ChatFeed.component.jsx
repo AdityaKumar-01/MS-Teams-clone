@@ -1,6 +1,6 @@
-import MyMessage from "./MyMessage";
-import TheirMessage from "./TheirMessage";
-import MessageForm from "./MessageForm";
+import MyMessage from './../MyMessage/MyMessage.component';
+import TheirMessage from './../TheirMessage/TheirMessage.component';
+import MessageForm from './../MessageForm/MessageForm.component';
 
 const ChatFeed = (props) => {
   const { chats, activeChat, userName, messages } = props;

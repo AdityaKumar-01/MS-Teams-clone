@@ -1,0 +1,86 @@
+/* These are styles to overwite the chat engine default styling */
+/* Class names are pre defined by engine cannot rename them  */
+* {
+  font-family: "Ubuntu", sans-serif;
+}
+
+.ce-chat-list {
+  background-color: white !important;
+}
+
+.ce-chats-container {
+  background-color: white !important;
+}
+
+.ce-active-chat-card {
+  background-color: white !important;
+  border-radius: 10px !important;
+}
+.ce-active-chat-card:hover {
+  background-color: rgb(226, 226, 226) !important;
+}
+.ce-chat-subtitle-text {
+  color: #f54748 !important;
+}
+
+.ce-chat-form-container {
+  padding-bottom: 20px !important;
+}
+
+.ce-text-input {
+  border-radius: 6px !important;
+}
+
+.ce-primary-button {
+  border-radius: 6px !important;
+  background-color: #f54748 !important;
+  position: relative;
+  bottom: 1px;
+}
+
+.ce-danger-button {
+  background-color: white !important;
+  border-radius: 22px !important;
+}
+
+.ce-settings {
+  background-color: white !important;
+}
+
+.ce-autocomplete-input {
+  border-radius: 6px !important;
+  border: none !important;
+  outline: none !important;
+}
+.ce-autocomplete-input:hover {
+  background-color: rgb(182, 182, 182) !important;
+}
+.ce-autocomplete-input::placeholder {
+  color: black;
+  font-family: "Ubuntu", sans-serif;
+}
+.ce-autocomplete-options {
+  border-radius: 6px !important;
+  border: 1px solid #3b2a50 !important;
+  background-color: white !important;
+}
+
+.ce-chat-settings-container {
+  padding-top: 12px !important;
+}
+
+.ce-chat-avatars-row {
+  display: none !important;
+}
+.ce-text-input {
+  font-size: 25px !important;
+}
+
+.ce-person-container {
+  font-weight: 500;
+}
+
+.ce-avatar-status {
+  width: 12px !important;
+  height: 12px !important;
+}

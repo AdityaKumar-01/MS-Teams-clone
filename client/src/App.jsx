@@ -15,7 +15,7 @@ const App = () => {
         <UserProvider>
           <Route path="/" exact component={LoginPage} />
           <Route path="/dashboard" exact component={DashBoard} />
-          <Route path="/dashboard/chat/:id" component={ChatArea} />
+          <Route path="/dashboard/chat" component={ChatArea} />
         </UserProvider>
       </Switch>
     </BrowserRouter>

@@ -40,7 +40,6 @@ router.post("/getChat", (req, res) => {
         headers: authObject,
       })
       .then((data) => {
-        console.log(data.data);
         res.json(prepareChatList(data.data)); // send JSON obj return from the function to frontend
       })
       .catch((err) => {
