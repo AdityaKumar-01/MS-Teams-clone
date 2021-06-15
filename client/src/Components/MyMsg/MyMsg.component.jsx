@@ -1,8 +1,10 @@
-const MyMessage = ({ message }) => {
+import React from 'react';
+
+const MyMsg = ({ message }) => {
   if (message.attachments && message.attachments.length > 0) {
     return (
       <img
-        src={message.attachments[0].file}
+        src={message.attachments[0].file} // send the message as a image`
         alt="message-attachment"
         className="message-image"
         style={{ float: "right" }}
@@ -24,4 +26,4 @@ const MyMessage = ({ message }) => {
   );
 };
 
-export default MyMessage;
+export default MyMsg;

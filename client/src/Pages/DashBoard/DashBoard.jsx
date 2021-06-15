@@ -1,8 +1,6 @@
 // React libraries
 import React, { useState } from "react";
 
-// Utility libraries
-
 // External CSS
 import "./Dashboard.styles.css";
 
@@ -11,6 +9,7 @@ import CreateTeam from "./../../Components/CreateTeam/CreateTeam.component";
 import TeamsSection from "./../../Components/TeamsSection/TeamsSection.component";
 import ProfileSetting from "./../../Components/ProfileSetting/ProfileSetting.component";
 import Assignment from "./../../Components/Assignment/Assignment.components";
+import ChatArea from "./../../Components/ChatArea/ChatArea.component";
 
 // Material UI Icons
 import AddCircleRoundedIcon from "@material-ui/icons/AddCircleRounded";
@@ -18,13 +17,16 @@ import GroupRoundedIcon from "@material-ui/icons/GroupRounded";
 import SettingsRoundedIcon from "@material-ui/icons/SettingsRounded";
 import AssignmentTurnedInRoundedIcon from "@material-ui/icons/AssignmentTurnedInRounded";
 import PersonSharpIcon from "@material-ui/icons/PersonSharp";
-import ChatArea from './../../Components/ChatArea/ChatArea.component';
-
 
 const DashBoard = () => {
-  
   // React hooks to handle local states
-  const [showSection, setShowSection] = useState([false, true, false, false, false]); // state of all section to display
+  const [showSection, setShowSection] = useState([
+    false,
+    true,
+    false,
+    false,
+    false,
+  ]); // state of all section to display
   const [currentSection, setcurrentSection] = useState(1); // index of current displayed section
 
   // function to toggle sections
@@ -76,7 +78,7 @@ const DashBoard = () => {
         {showSection[1] ? <TeamsSection showHide={showHide} /> : null}
         {showSection[2] ? <ProfileSetting /> : null}
         {showSection[3] ? <Assignment /> : null}
-        {showSection[4] ? <ChatArea/> : null}
+        {showSection[4] ? <ChatArea /> : null}
       </div>
     </div>
   );

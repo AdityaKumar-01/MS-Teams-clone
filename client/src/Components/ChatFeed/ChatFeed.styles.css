@@ -1,0 +1,20 @@
+  
+  .chatFeed {
+    height: 100%;
+    width: 100%;
+    overflow: scroll;
+    overflow-x: hidden;
+  }
+  
+  .chatTitleContainer {
+    width: calc(100% - 36px);
+    padding: 18px;
+    text-align: center;
+  }
+  
+  .chatTitle {
+    color: #F54748;
+    font-weight: 800;
+    font-size: 30px;
+  }
+  

@@ -1,12 +1,16 @@
 import React from "react";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
+
 // Pages
 import LoginPage from "./Pages/LoginPage/LoginPage";
 import DashBoard from "./Pages/DashBoard/DashBoard";
 import ChatArea from "./Components/ChatArea/ChatArea.component";
+
 // CSS
 import "./App.css";
-import { UserProvider } from './Context/userContext';
+
+// Context API
+import { UserProvider } from "./Context/userContext";
 
 const App = () => {
   return (

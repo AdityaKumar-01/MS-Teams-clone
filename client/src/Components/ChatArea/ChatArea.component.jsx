@@ -1,22 +1,29 @@
+// react libraries
 import React, { useContext } from "react";
 import { UserContext } from "../../Context/userContext";
+
+// React chat engine components
 import { ChatEngine,} from "react-chat-engine";
 
+// Components 
+import ChatFeed from "./../ChatFeed/ChatFeed.component";
+
+// External CSS
 import "./ChatArea.styles.css";
 import "./ChatArea.essential.styles.css";
-import ChatFeed from './../ChatFeed/ChatFeed.component';
 
 const ChatArea = () => {
-  const { id } = useContext(UserContext);
+  const { id } = useContext(UserContext); // fetching data using context 
   
-  console.log(localStorage.getItem("password"));
   return (
+    // Chat engine parent element from react chatengine to render chat area
     <ChatEngine
       height="100vh"
-      projectID="8c36364b-c849-4434-997b-2ba4dd7683d4"
+      projectID={process.env.REACT_APP_PROJECT_ID}
+      // get userName and password from local storage to avoid vanishing of states on page reload
       userName={localStorage.getItem("userName")}
-      userSecret={localStorage.getItem("password")}
-      activeChat={id}
+      userSecret={localStorage.getItem("password")} 
+      // render custom made chat feed component with all the props provided 
       renderChatFeed={(chatAppProps) => <ChatFeed {...chatAppProps} />}
     />
   );

@@ -1,13 +1,26 @@
-import MyMessage from './../MyMessage/MyMessage.component';
-import TheirMessage from './../TheirMessage/TheirMessage.component';
-import MessageForm from './../MessageForm/MessageForm.component';
+// react libraries
+import React from "react";
 
+// components
+import MyMsg from "../MyMsg/MyMsg.component";
+import TheirMsg from "../TheirMsg/TheirMsg.component";
+import MsgForm from "../MsgForm/MsgForm.component";
+
+
+import "./ChatFeed.styles.css";
 const ChatFeed = (props) => {
+  // props send by react chat engine
+  // cannot alter the name
   const { chats, activeChat, userName, messages } = props;
 
-  const chat = chats && chats[activeChat];
+  const chat = chats && chats[activeChat]; // to see we have any chat in the room or not
 
-  const renderReadReceipts = (message, isMyMessage) =>
+  // render the recipients who has read teh message
+  // Only work when user has DP
+  const displayRcpt = (message, isSenderMsg) =>
+  // map every person in the chat taking their avatar logo 
+  // chat engine provide a attribute of last_read that tells what was
+  // the last msg read by any user in a particular chat room
     chat.people.map(
       (person, index) =>
         person.last_read === message.id && (
@@ -15,7 +28,7 @@ const ChatFeed = (props) => {
             key={`read_${index}`}
             className="read-receipt"
             style={{
-              float: isMyMessage ? "right" : "left",
+              float: isSenderMsg ? "right" : "left",
               backgroundImage:
                 person.person.avatar && `url(${person.person.avatar})`,
             }}
@@ -23,34 +36,35 @@ const ChatFeed = (props) => {
         )
     );
 
-  const renderMessages = () => {
-    const keys = Object.keys(messages);
+    // This function will render messages recieved as props
+    // check for sender is it same as the currently logged userName or different
+    // based on this render 2 different components with their own styling
 
-    return keys.map((key, index) => {
+  const renderMsg = () => {
+    const keys = Object.keys(messages); // holds the key for every msg 
+      return keys.map((key, index) => {
       const message = messages[key];
-      const lastMessageKey = index === 0 ? null : keys[index - 1];
-      const isMyMessage = userName === message.sender.username;
+      const lastMsgKey = index === 0 ? null : keys[index - 1]; // helps the app to find the last message in continuation by the sender
+      const isSenderMsg = userName === message.sender.username; // identify the current msg is send by user or what holds boolean value
 
+      // render messages based on sender 
       return (
         <div key={`msg_${index}`} style={{ width: "100%" }}>
           <div className="message-block">
-            {isMyMessage ? (
-              <MyMessage message={message} />
+            {isSenderMsg ? ( // conditional rendering of msg if send by currently logged user float it to right else left
+              <MyMsg message={message} />
             ) : (
-              <TheirMessage
-                message={message}
-                lastMessage={messages[lastMessageKey]}
-              />
+              <TheirMsg message={message} lastMessage={messages[lastMsgKey]} />
             )}
           </div>
           <div
             className="read-receipts"
             style={{
-              marginRight: isMyMessage ? "18px" : "0px",
-              marginLeft: isMyMessage ? "0px" : "68px",
+              marginRight: isSenderMsg ? "18px" : "0px",
+              marginLeft: isSenderMsg ? "0px" : "68px",
             }}
           >
-            {renderReadReceipts(message, isMyMessage)}
+            {displayRcpt(message, isSenderMsg)}
           </div>
         </div>
       );
@@ -60,17 +74,14 @@ const ChatFeed = (props) => {
   if (!chat) return <div />;
 
   return (
-    <div className="chat-feed">
-      <div className="chat-title-container">
-        <div className="chat-title">{chat?.title}</div>
-        <div className="chat-subtitle">
-          {chat.people.map((person) => ` ${person.person.username}`)}
-        </div>
+    <div className="chatFeed">
+      <div className="chatTitleContainer">
+        <div className="chatTitle">{chat?.title}</div>
       </div>
-      {renderMessages()}
+      {renderMsg()}
       <div style={{ height: "100px" }} />
-      <div className="message-form-container">
-        <MessageForm {...props} chatId={activeChat} />
+      <div className="messageFormContainer">
+        <MsgForm {...props} chatId={activeChat} />
       </div>
     </div>
   );
