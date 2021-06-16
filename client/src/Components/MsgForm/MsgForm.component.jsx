@@ -15,6 +15,10 @@ const MsgForm = (props) => {
   const [msg, setMsg] = useState(""); // holds state of input msg
   const { chatId, creds } = props; // credentials of the user required to make a API call
 
+  const handleMeet = () => {
+    const text = "meet-chichi";
+    sendMessage(creds, chatId, { text});
+  }
   // function to update state on writing anything in the msg box
   const handleChange = (event) => {
     setMsg(event.target.value);
@@ -64,7 +68,10 @@ const MsgForm = (props) => {
         onChange={handleAttach.bind(this)}
       />
       <button className="meet-button">
-        <VideoCallIcon style={{ color: "#F54748", fontSize: 30 }} />
+        <VideoCallIcon
+          onClick={() => handleMeet()}
+          style={{ color: "#F54748", fontSize: 30, cursor:"pointer" }}
+        />
       </button>
       <button type="submit" className="send-button">
         <SendIcon className="send-icon" style={{ color: "#F54748" }} />

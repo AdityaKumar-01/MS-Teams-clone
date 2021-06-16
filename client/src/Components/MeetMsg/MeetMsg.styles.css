@@ -1,0 +1,42 @@
+.meet-block {
+  background: rgb(245, 71, 72);
+  background: linear-gradient(
+    90deg,
+    rgba(245, 71, 72, 1) 0%,
+    rgba(52, 63, 86, 1) 100%
+  );
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  width:300px;
+  height:130px;
+  margin-bottom:20px;
+  border-radius:10px;
+}
+
+.meet-row{
+    width:100%;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:0px 10px;
+}
+.meet-heading{
+    color:white;
+    font-size:16px;
+}
+.join-btn{
+    border-radius:5px;
+    cursor:pointer;
+    color:white;
+    font-size: 18px;
+    padding:15%;
+    background-color:transparent;
+    transition: letter-spacing 0.3s
+}
+
+.join-btn:hover{
+    letter-spacing:2px;
+    transition: letter-spacing 0.3s
+}

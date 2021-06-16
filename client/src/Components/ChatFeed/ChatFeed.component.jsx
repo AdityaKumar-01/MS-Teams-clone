@@ -5,7 +5,7 @@ import React from "react";
 import MyMsg from "../MyMsg/MyMsg.component";
 import TheirMsg from "../TheirMsg/TheirMsg.component";
 import MsgForm from "../MsgForm/MsgForm.component";
-
+import MeetMsg from "./../MeetMsg/MeetMsg.component";
 
 import "./ChatFeed.styles.css";
 const ChatFeed = (props) => {
@@ -18,9 +18,9 @@ const ChatFeed = (props) => {
   // render the recipients who has read teh message
   // Only work when user has DP
   const displayRcpt = (message, isSenderMsg) =>
-  // map every person in the chat taking their avatar logo 
-  // chat engine provide a attribute of last_read that tells what was
-  // the last msg read by any user in a particular chat room
+    // map every person in the chat taking their avatar logo
+    // chat engine provide a attribute of last_read that tells what was
+    // the last msg read by any user in a particular chat room
     chat.people.map(
       (person, index) =>
         person.last_read === message.id && (
@@ -36,36 +36,37 @@ const ChatFeed = (props) => {
         )
     );
 
-    // This function will render messages recieved as props
-    // check for sender is it same as the currently logged userName or different
-    // based on this render 2 different components with their own styling
+  // This function will render messages recieved as props
+  // check for sender is it same as the currently logged userName or different
+  // based on this render 2 different components with their own styling
 
   const renderMsg = () => {
-    const keys = Object.keys(messages); // holds the key for every msg 
-      return keys.map((key, index) => {
+    const keys = Object.keys(messages); // holds the key for every msg
+    return keys.map((key, index) => {
       const message = messages[key];
+      console.log(message);
       const lastMsgKey = index === 0 ? null : keys[index - 1]; // helps the app to find the last message in continuation by the sender
       const isSenderMsg = userName === message.sender.username; // identify the current msg is send by user or what holds boolean value
 
-      // render messages based on sender 
+      const checkMeet = message.text.split("-")[0] === "meet";
+
+      // render messages based on sender
       return (
         <div key={`msg_${index}`} style={{ width: "100%" }}>
-          <div className="message-block">
-            {isSenderMsg ? ( // conditional rendering of msg if send by currently logged user float it to right else left
-              <MyMsg message={message} />
-            ) : (
-              <TheirMsg message={message} lastMessage={messages[lastMsgKey]} />
-            )}
-          </div>
-          <div
-            className="read-receipts"
-            style={{
-              marginRight: isSenderMsg ? "18px" : "0px",
-              marginLeft: isSenderMsg ? "0px" : "68px",
-            }}
-          >
-            {displayRcpt(message, isSenderMsg)}
-          </div>
+          {checkMeet ? (
+            <MeetMsg message={message} isSenderMsg = {isSenderMsg}/>
+          ) : (
+            <div className="message-block">
+              {isSenderMsg ? ( // conditional rendering of msg if send by currently logged user float it to right else left
+                <MyMsg message={message} />
+              ) : (
+                <TheirMsg
+                  message={message}
+                  lastMessage={messages[lastMsgKey]}
+                />
+              )}
+            </div>
+          )}
         </div>
       );
     });
