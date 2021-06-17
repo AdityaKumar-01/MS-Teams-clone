@@ -2,7 +2,8 @@
 const express = require("express");
 const router = express.Router();
 const axios = require("axios");
-
+const dotenv = require("dotenv");
+dotenv.config();
 //  a function to return a json objects with names of chat
 const prepareChatList = (data) => {
   // If no chat room avaiable return 404 and msg
@@ -17,19 +18,19 @@ const prepareChatList = (data) => {
   // If found render over the array of JSON objects to get title
   res = {
     status: 200,
-    msg:"Fine",
-    info: []
-  }
+    msg: "Fine",
+    info: [],
+  };
   data.forEach((item) => {
-    res.info.push({"title":item.title, "id": item.id}); // storing titles to chat room
-    // console.log(item.title, item.id);    
-  })
+    res.info.push({ title: item.title, id: item.id }); // storing titles to chat room
+    // console.log(item.title, item.id);
+  });
   return res;
 };
 router.post("/getChat", (req, res) => {
   // Header requried to fetch data from Chat room
   const authObject = {
-    "Project-ID": "8c36364b-c849-4434-997b-2ba4dd7683d4",
+    "Project-ID": process.env.CHAT_ENGINE_PROJECT_ID,
     "User-Name": req.body.name,
     "User-Secret": req.body.password,
   };
@@ -50,17 +51,59 @@ router.post("/getChat", (req, res) => {
   }
 });
 
-
 router.post("/createChat", (req, res) => {
-  
+  const isDM = req.body.isDM;
+  const userNames = [req.body.userName]
   const authObject = {
-    "Project-ID": "8c36364b-c849-4434-997b-2ba4dd7683d4",
+    "Project-ID": process.env.CHAT_ENGINE_PROJECT_ID,
+    "User-Name": req.body.name,
+    "User-Secret": req.body.password,
+  };
+  // Header requried to fetch data from Chat room
+  if (isDM) {
+    var data = {
+      usernames: userNames,
+      is_direct_chat: isDM,
+    };
+  } else {
+    var data = {
+      title: req.body.title,
+    };
+  }
+  
+
+  // config object with API call methid and header
+  var config = {
+    method: "post",
+    url: "https://api.chatengine.io/chats/",
+    headers: authObject,
+    data: data,
+  };
+
+  // Make the call
+  axios(config)
+    .then(function (response) {
+      isDM ? res.json({ status: 201, msg: "Team Created Successfully", isDM: true }):res.json({ status: 201, msg: "Team Created Successfully", isDM: false });
+      // Notify the frontend that the chat is being created
+      
+    })
+    .catch(function (error) {
+      console.log(error);
+      // if any error occurred send 400 status and error msg to be displayd
+      res.json({ status: 400, msg: "Cannot Create Team" });
+    });
+});
+
+router.post("/createDM", (req, res) => {
+  const authObject = {
+    "Project-ID": process.env.CHAT_ENGINE_PROJECT_ID,
     "User-Name": req.body.name,
     "User-Secret": req.body.password,
   };
   // Header requried to fetch data from Chat room
   var data = {
-    "title": req.body.title,    
+    usernames: ["devi"],
+    is_direct_chat: true,
   };
 
   // config object with API call methid and header
@@ -82,5 +125,32 @@ router.post("/createChat", (req, res) => {
       // if any error occurred send 400 status and error msg to be displayd
       res.json({ status: 400, msg: "Cannot Create Team" });
     });
+});
+
+router.post("/getDM", (req, res) => {
+  // Header requried to fetch data from Chat room
+  const authObject = {
+    "Project-ID": process.env.CHAT_ENGINE_PROJECT_ID,
+    "User-Name": req.body.name,
+    "User-Secret": req.body.password,
+  };
+  try {
+    // Call to get data with header
+    axios
+      .get("https://api.chatengine.io/chats", {
+        headers: authObject,
+      })
+      .then((data) => {
+        data.data.forEach((info) => {
+          console.log(info.is_direct_chat);
+        });
+        res.json(prepareChatList(data.data)); // send JSON obj return from the function to frontend
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  } catch (err) {
+    console.log(err);
+  }
 });
 module.exports = router; // export the module

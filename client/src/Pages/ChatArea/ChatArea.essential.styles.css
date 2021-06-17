@@ -11,16 +11,21 @@
 .ce-chats-container {
   background-color: white !important;
 }
-
+.ce-chat-card {
+  background-color:rgb(173, 173, 173) !important;
+  border-radius: 5px !important;
+  margin:2%;
+}
 .ce-active-chat-card {
-  background-color: white !important;
-  border-radius: 10px !important;
+  background-color: #343f56 !important;
+  color:#f54748 !important;
+  
 }
 .ce-active-chat-card:hover {
-  background-color: rgb(226, 226, 226) !important;
+  background-color: #202735 !important;
 }
 .ce-chat-subtitle-text {
-  color: #f54748 !important;
+  display:none !important;
 }
 
 .ce-chat-form-container {

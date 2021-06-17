@@ -1,7 +1,14 @@
-
+.teams-section-wrapper{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+  width:80%;
+  
+}
 .chat-name{
   display: flex;
-  justify-content: space-evenly;
+  justify-content: space-around;
   align-items: center;
   width:80%;
   padding:2%;

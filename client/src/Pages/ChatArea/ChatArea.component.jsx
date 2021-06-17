@@ -6,7 +6,7 @@ import { UserContext } from "../../Context/userContext";
 import { ChatEngine,} from "react-chat-engine";
 
 // Components 
-import ChatFeed from "./../ChatFeed/ChatFeed.component";
+import ChatFeed from "../../Components/ChatFeed/ChatFeed.component";
 
 // External CSS
 import "./ChatArea.styles.css";

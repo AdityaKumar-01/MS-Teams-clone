@@ -7,6 +7,7 @@ import TheirMsg from "../TheirMsg/TheirMsg.component";
 import MsgForm from "../MsgForm/MsgForm.component";
 import MeetMsg from "./../MeetMsg/MeetMsg.component";
 
+// External CSS
 import "./ChatFeed.styles.css";
 const ChatFeed = (props) => {
   // props send by react chat engine
@@ -15,26 +16,7 @@ const ChatFeed = (props) => {
 
   const chat = chats && chats[activeChat]; // to see we have any chat in the room or not
 
-  // render the recipients who has read teh message
-  // Only work when user has DP
-  const displayRcpt = (message, isSenderMsg) =>
-    // map every person in the chat taking their avatar logo
-    // chat engine provide a attribute of last_read that tells what was
-    // the last msg read by any user in a particular chat room
-    chat.people.map(
-      (person, index) =>
-        person.last_read === message.id && (
-          <div
-            key={`read_${index}`}
-            className="read-receipt"
-            style={{
-              float: isSenderMsg ? "right" : "left",
-              backgroundImage:
-                person.person.avatar && `url(${person.person.avatar})`,
-            }}
-          />
-        )
-    );
+ 
 
   // This function will render messages recieved as props
   // check for sender is it same as the currently logged userName or different

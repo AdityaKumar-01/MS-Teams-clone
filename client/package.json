@@ -16,6 +16,7 @@
     "react-dom": "^17.0.2",
     "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.3",
+    "react-scroll-to-bottom": "^4.1.2",
     "socket.io-client": "^4.1.2",
     "twilio": "^3.63.1",
     "twilio-video": "^2.14.0",

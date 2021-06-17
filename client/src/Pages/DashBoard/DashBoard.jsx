@@ -7,9 +7,9 @@ import "./Dashboard.styles.css";
 // Components
 import CreateTeam from "./../../Components/CreateTeam/CreateTeam.component";
 import TeamsSection from "./../../Components/TeamsSection/TeamsSection.component";
+import DMChats from "./../../Components/DMChats/DMChats.component";
 import ProfileSetting from "./../../Components/ProfileSetting/ProfileSetting.component";
 import Assignment from "./../../Components/Assignment/Assignment.components";
-import ChatArea from "./../../Components/ChatArea/ChatArea.component";
 
 // Material UI Icons
 import AddCircleRoundedIcon from "@material-ui/icons/AddCircleRounded";
@@ -76,9 +76,9 @@ const DashBoard = () => {
       <div className="display-section">
         {showSection[0] ? <CreateTeam showHide={showHide} /> : null}
         {showSection[1] ? <TeamsSection showHide={showHide} /> : null}
-        {showSection[2] ? <ProfileSetting /> : null}
+        {showSection[2] ? <DMChats /> : null}
         {showSection[3] ? <Assignment /> : null}
-        {showSection[4] ? <ChatArea /> : null}
+        {showSection[4] ? <ProfileSetting /> : null}
       </div>
     </div>
   );

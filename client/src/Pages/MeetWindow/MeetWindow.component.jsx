@@ -2,7 +2,7 @@ import React, { useEffect, useContext } from "react";
 
 import { UserContext } from "../../Context/userContext";
 
-import Room from './../Room/Room.component';
+import Room from '../../Components/Room/Room.component';
 const MeetWindow = () => {
   const { handleLogOut, room, roomName, connecting } = useContext(UserContext);
 

@@ -1,0 +1,38 @@
+/* General message and form styling */
+
+
+.message-row {
+  float: left;
+  width: 100%;
+  display: flex;
+  margin-left: 18px;
+}
+
+.message-block {
+  width: 100%;
+  display: inline-block;
+}
+
+.message {
+  padding: 12px;
+  font-size: 14px;
+  border-radius: 10px;
+  max-width: 60%;
+  background-color: #343f56;
+  display:flex;
+  flex-direction: column;
+  min-width:max-content
+}
+.sender-name{
+  color:white;
+}
+.message-image {
+  margin-right: 18px;
+  object-fit: cover;
+  border-radius: 6px;
+  height: 30vw;
+  max-height: 200px;
+  max-width: 400px;
+  min-height: 100px;
+  min-width: 200px;
+}

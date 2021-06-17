@@ -4,14 +4,14 @@ import { BrowserRouter, Switch, Route } from "react-router-dom";
 // Pages
 import LoginPage from "./Pages/LoginPage/LoginPage";
 import DashBoard from "./Pages/DashBoard/DashBoard";
-import ChatArea from "./Components/ChatArea/ChatArea.component";
+import ChatArea from "./Pages/ChatArea/ChatArea.component";
+import MeetWindow from "./Pages/MeetWindow/MeetWindow.component";
 
 // CSS
 import "./App.css";
 
 // Context API
 import { UserProvider } from "./Context/userContext";
-import MeetWindow from './Components/MeetWindow/MeetWindow.component';
 
 const App = () => {
   return (

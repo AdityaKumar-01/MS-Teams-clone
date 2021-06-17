@@ -1,6 +1,6 @@
-import React,{useState, useEffect} from 'react';
-import ChatCard from './../ChatCard/ChatCard.component';
-import BlankDashboard from './../BlankDashboard/BlankDashboard.component';
+import React, { useState, useEffect } from "react";
+import ChatCard from "./../ChatCard/ChatCard.component";
+import BlankDashboard from "./../BlankDashboard/BlankDashboard.component";
 import axios from "axios";
 
 import "./TeamsSection.styles.css";
@@ -23,14 +23,17 @@ const TeamsSection = ({ showHide }) => {
     getUserChat();
   }, []);
   return (
-    <div className="chat-name">
-      {userChats ? (
-        userChats.map((data, i) => {
-          return <ChatCard data={data} key={i} />; // map every name recieved to Chat Card components to render
-        })
-      ) : (
-        <BlankDashboard showHide={showHide} /> // render when user doesn't have any team
-      )}
+    <div className="teams-section-wrapper">
+      <div className="header">Your Teams</div>
+      <div className="chat-name">
+        {userChats ? (
+          userChats.map((data, i) => {
+            return <ChatCard data={data} key={i} />; // map every name recieved to Chat Card components to render
+          })
+        ) : (
+          <BlankDashboard showHide={showHide} /> // render when user doesn't have any team
+        )}
+      </div>
     </div>
   );
 };
