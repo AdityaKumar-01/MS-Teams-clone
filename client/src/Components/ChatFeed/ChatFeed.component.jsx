@@ -44,11 +44,10 @@ const ChatFeed = (props) => {
     const keys = Object.keys(messages); // holds the key for every msg
     return keys.map((key, index) => {
       const message = messages[key];
-      console.log(message);
       const lastMsgKey = index === 0 ? null : keys[index - 1]; // helps the app to find the last message in continuation by the sender
       const isSenderMsg = userName === message.sender.username; // identify the current msg is send by user or what holds boolean value
 
-      const checkMeet = message.text.split("-")[0] === "meet";
+      const checkMeet = message.text.split("@")[0] === "meet";
 
       // render messages based on sender
       return (

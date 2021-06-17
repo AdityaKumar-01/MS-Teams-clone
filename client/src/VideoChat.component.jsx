@@ -1,53 +1,12 @@
-import React, { useState, useCallback, useEffect } from "react";
-import { v4 as uuidv4 } from "uuid";
-import * as Video from "twilio-video";
+import React, {useEffect, useContext } from "react";
+
 import Room from "./Room.component";
-import axios from "axios";
+import {UserContext} from "./Context/userContext"
 const VideoChat = () => {
-  const [roomName, setRoomName] = useState(uuidv4());
-  const [room, setRoom] = useState(null);
-  const [userName, setUserName] = useState("");
-  const [connecting, setConnecting] = useState(false);
-
-  useEffect(() => {
-    setUserName(localStorage.getItem("userName"));
-    handleSubmit();
-  }, []);
-  const handleSubmit = useCallback(async () => {
-
-    const info = {
-      identity: userName,
-      room: roomName,
-    };
-    setConnecting(true);
-    await axios.post("/video/token", info).then((data) => {
-      console.log(data);
-      Video.connect(data.data.token, {
-        name: roomName,
-      })
-        .then((room) => {
-            console.log(room);
-          setConnecting(false);
-          setRoom(room);
-        })
-        .catch((err) => {
-          console.log(err);
-          console.log(data.data.token);
-          setConnecting(false);
-        });
-    });
-  }, [roomName, userName]);
-
-  const handleLogOut = useCallback(() => {
-    setRoom((prevRoom) => {
-      if (prevRoom) {
-        prevRoom.localParticpants.tracks.forEach((trackPub) => {
-          trackPub.track.stop();
-        });
-        prevRoom.disconnect();
-      }
-    });
-  }, []);
+ 
+const { handleLogOut, room, roomName, connecting } = useContext(UserContext);
+ 
+  
   useEffect(() => {
     if (room) {
       const tidyUp = (event) => {

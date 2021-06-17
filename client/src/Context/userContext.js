@@ -1,36 +1,90 @@
 // React libraries
-import React,{ useState} from 'react';
-
+import React, { useState, useCallback } from "react";
+import { v4 as uuidv4 } from "uuid";
+import * as Video from "twilio-video";
+import axios from "axios";
+import {useHistory} from "react-router-dom";
 // USerContext that will help to fetch values
 const UserContext = React.createContext();
 
-// UserProvider react item to deliver all values 
+// UserProvider react item to deliver all values
 // Provider contains all the states and funcions which can be required by other components
 
-const UserProvider = ({children}) =>{
-    const [name, setName] = useState("");
-    const [secret, setSecret] = useState("");
-    const [id, setId] = useState(0);
-    
-    const setUserName = (name) => {
-        setName(name);
-    }
-    const setPwd= (pwd) => {
-      setSecret(pwd);
+const UserProvider = ({ children }) => {
+  const [name, setName] = useState("");
+  const [secret, setSecret] = useState("");
+  const [id, setId] = useState(0);
+  const [roomName, setRoomName] = useState("");
+  const [room, setRoom] = useState(null);
+  const [connecting, setConnecting] = useState(false);
+
+  let history = useHistory();
+  const setUserName = (name) => {
+    setName(name);
+  };
+
+  const setPwd = (pwd) => {
+    setSecret(pwd);
+  };
+
+  const setRoomId = (roomId) => {
+    setId(roomId);
+  };
+
+  const handleSubmit = useCallback(async () => {
+    const info = {
+      identity: name,
+      room: roomName,
     };
-    const setRoomId= (roomId) => {
-      setId(roomId);
-    };
-    // values holds functions and states to be shared
-    const value = { setUserName, setPwd, setRoomId, name, secret, id };
-    return(
-        <UserContext.Provider
-         value={value}>
-            {children}
-        </UserContext.Provider>
-    )
-}
+
+    setConnecting(true);
+    await axios.post("/video/token", info).then((data) => {
+      console.log(roomName);
+      Video.connect(data.data.token, {
+        name: localStorage.getItem("roomName"),
+      })
+        .then((room) => {
+          console.log(roomName);
+          console.log(room);
+          setConnecting(false);
+          setRoom(room);
+        })
+        .catch((err) => {
+          console.log(err);
+          setConnecting(false);
+        });
+    });
+  }, [roomName, name]);
+
+  const handleLogOut = useCallback(() => {
+    setRoom((prevRoom) => {
+      if (prevRoom) {
+        prevRoom.localParticipant.tracks.forEach((trackPub) => {
+          trackPub.track.stop();
+        });
+        prevRoom.disconnect();
+        history.push("/dashboard/chat")
+      }
+    });
+  }, []);
+  // values holds functions and states to be shared
+  const value = {
+    setUserName,
+    setPwd,
+    setRoomId,
+    name,
+    secret,
+    id,
+    handleSubmit,
+    handleLogOut,
+    connecting,
+    room,
+    roomName,
+    setRoomName,
+  };
+  return <UserContext.Provider value={value}>{children}</UserContext.Provider>;
+};
 // export both context and provider
 // Context are required by components to fetch data
-// Provider is reponsible to tell the react app that we are using context API 
-export { UserContext , UserProvider};
+// Provider is reponsible to tell the react app that we are using context API
+export { UserContext, UserProvider };
