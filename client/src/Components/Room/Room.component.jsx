@@ -1,12 +1,15 @@
 import React, { useState, useEffect } from "react";
-import Participant from "./Participant.component";
+import Attendees from './../Attendees/Attendees.component';
+
 
 const Room = ({ roomName, room, handleLogOut }) => {
   const [participants, setParticipants] = useState([]);
 
   useEffect(() => {
     const participantConnected = (participant) => {
+      console.log(participants);
       setParticipants((prevParticipants) => [...prevParticipants, participant]);
+      console.log(participants);
     };
     const participantDisConnected = (participant) => {
       setParticipants((prevParticipants) =>
@@ -25,7 +28,7 @@ const Room = ({ roomName, room, handleLogOut }) => {
   }, [room]);
 
   const remoteParticipants = participants.map((participant) => (
-    <Participant key={participant.id} participant={participant} />
+    <Attendees key={participant.sid} participant={participant} />
   ));
   return (
     <div>
@@ -34,7 +37,7 @@ const Room = ({ roomName, room, handleLogOut }) => {
         <button onClick={handleLogOut}>Leave Meeting</button>
         <div className="all-participants">
           {room && (
-            <Participant
+            <Attendees
               key={room.localParticipant.sid}
               participant={room.localParticipant}
             />

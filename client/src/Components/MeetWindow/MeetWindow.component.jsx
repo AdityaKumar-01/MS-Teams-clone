@@ -1,12 +1,11 @@
-import React, {useEffect, useContext } from "react";
+import React, { useEffect, useContext } from "react";
 
-import Room from "./Room.component";
-import {UserContext} from "./Context/userContext"
-const VideoChat = () => {
- 
-const { handleLogOut, room, roomName, connecting } = useContext(UserContext);
- 
-  
+import { UserContext } from "../../Context/userContext";
+
+import Room from './../Room/Room.component';
+const MeetWindow = () => {
+  const { handleLogOut, room, roomName, connecting } = useContext(UserContext);
+
   useEffect(() => {
     if (room) {
       const tidyUp = (event) => {
@@ -38,4 +37,4 @@ const { handleLogOut, room, roomName, connecting } = useContext(UserContext);
   return render;
 };
 
-export default VideoChat;
+export default MeetWindow;
