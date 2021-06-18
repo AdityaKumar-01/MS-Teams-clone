@@ -1,28 +1,29 @@
+
 import React, { useRef } from "react";
 
 import axios from "axios";
 
 import "./CreateTeam.styles.css";
 const CreateTeam = ({ showHide }) => {
-  const titleRef = useRef();
-  const dmRef = useRef();
+  const titleRef = useRef(); // holds data for creating team
+  const dmRef = useRef(); // holds data for making DM
   const createChat = (e) => {
     e.preventDefault();
     console.log(e.target.className);
     let data;
-    if (e.target.className === "create-team-form") {
+    if (e.target.className === "create-team-form") { // check which form was submitted
       data = {
         name: localStorage.getItem("userName"),
         password: localStorage.getItem("password"),
         title: titleRef.current.value,
-        isDM: false,
+        isDM: false, // false for teams
       };
     } else {
       data = {
         name: localStorage.getItem("userName"),
         password: localStorage.getItem("password"),
-        userName: dmRef.current.value,
-        isDM: true,
+        userName: dmRef.current.value, // other person to whom user makes DM
+        isDM: true, // true for DM
       };
     }
 
@@ -31,10 +32,10 @@ const CreateTeam = ({ showHide }) => {
       .then((data) => {
         // on success call render the team selection area
         if (data.data.status === 201 && !data.data.isDM) {
-          showHide(1);
+          showHide(1); // redirect to teams section
         }
         if (data.data.status === 201 && data.data.isDM) {
-          showHide(2);
+          showHide(2); // redirect to DMs section
         }
       })
       .catch((error) => {

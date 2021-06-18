@@ -6,6 +6,7 @@ import axios from "axios";
 import "./TeamsSection.styles.css";
 const TeamsSection = ({ showHide }) => {
   const [userChats, setUserChats] = useState([]);
+  const [loading, setLoading] = useState(true);
   const getUserChat = () => {
     const user = {
       name: localStorage.getItem("userName"),
@@ -15,26 +16,35 @@ const TeamsSection = ({ showHide }) => {
     axios
       .post("/chat/getChat", user)
       .then((response) => {
-        setUserChats(response.data.info); // setting data to hooks received from backend
+        setUserChats(response.data.info);
+        setLoading(false);
+        console.log("done", loading); // setting data to hooks received from backend
       })
       .catch((err) => console.log(err));
   };
   // useEffect to get data from backend at page loading
   useEffect(() => {
+    console.log("call1 ", loading);
     getUserChat();
   }, []);
   return (
     <div className="teams-section-wrapper">
-      <div className="header">Your Teams</div>
-      <div className="chat-name">
-        {userChats && userChats.length >0 ? (
-          userChats.map((data, i) => {
-            return <ChatCard data={data} key={i} />; // map every name recieved to Chat Card components to render
-          })
-        ) : (
-          <BlankDashboard showHide={showHide} /> // render when user doesn't have any team
-        )}
-      </div>
+      {loading ? (
+        <div className="loader"></div>
+      ) : (
+        <div className="section-wrapper">
+          <div className="header">Your Teams</div>
+          <div className="chat-name">
+            {userChats && userChats.length > 0 ? (
+              userChats.map((data, i) => {
+                return <ChatCard data={data} key={i} />; // map every name recieved to Chat Card components to render
+              })
+            ) : (
+              <BlankDashboard showHide={showHide} /> // render when user doesn't have any team
+            )}
+          </div>
+        </div>
+      )}
     </div>
   );
 };

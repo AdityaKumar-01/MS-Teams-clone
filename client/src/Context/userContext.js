@@ -1,9 +1,11 @@
 // React libraries
 import React, { useState, useCallback } from "react";
-import { v4 as uuidv4 } from "uuid";
+
+// NPM packages
 import * as Video from "twilio-video";
 import axios from "axios";
 import {useHistory} from "react-router-dom";
+
 // USerContext that will help to fetch values
 const UserContext = React.createContext();
 
@@ -11,12 +13,12 @@ const UserContext = React.createContext();
 // Provider contains all the states and funcions which can be required by other components
 
 const UserProvider = ({ children }) => {
-  const [name, setName] = useState("");
-  const [secret, setSecret] = useState("");
-  const [id, setId] = useState(0);
-  const [roomName, setRoomName] = useState("");
-  const [room, setRoom] = useState(null);
-  const [connecting, setConnecting] = useState(false);
+  const [name, setName] = useState(""); // holds name of currently log user
+  const [secret, setSecret] = useState(""); // holds pwd of currently log user
+  const [id, setId] = useState(0); // holds id of chat
+  const [roomName, setRoomName] = useState(""); // holds name current meet room name i.e. a uuid
+  const [room, setRoom] = useState(null); // holds room data of ongoing meet
+  const [connecting, setConnecting] = useState(false); // holds status of connection before joining any meet
 
   let history = useHistory();
   const setUserName = (name) => {
@@ -63,7 +65,7 @@ const UserProvider = ({ children }) => {
           trackPub.track.stop();
         });
         prevRoom.disconnect();
-        history.push("/dashboard/chat")
+        history.push("/dashboard/chat");
       }
     });
   }, []);

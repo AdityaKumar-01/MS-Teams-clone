@@ -40,7 +40,7 @@ const SignIn = () => {
         } else if (data.data.status === 404) seterrorMsg(data.data.msg);
       })
       .catch((err) => {
-        console.log("err");
+        console.log(err);
       });
   };
   //  handle form submition

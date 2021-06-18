@@ -5,7 +5,6 @@ const axios = require("axios");
 const dotenv = require("dotenv");
 dotenv.config();
 
-
 //  a function to return a json objects with names of chat
 const prepareChatList = (data, isDM) => {
   // If no chat room avaiable return 404 and msg
@@ -23,25 +22,23 @@ const prepareChatList = (data, isDM) => {
     msg: "Fine",
     info: [],
   };
-  if (isDM){
+  if (isDM) {
     data.forEach((item) => {
-      item.people.forEach(pObj => {res.info.push({ title: pObj.person.username, id: 000 });})
+      item.people.forEach((pObj) => {
+        res.info.push({ title: pObj.person.username, id: 000 });
+      });
     });
-  }
-  else{
+  } else {
     data.forEach((item) => {
-      if(!item.is_direct_chat)
+      if (!item.is_direct_chat)
         res.info.push({ title: item.title, id: item.id }); // storing titles to chat room
-      
     });
   }
-    
+
   return res;
 };
 
-
 router.post("/getChat", (req, res) => {
-
   // Header requried to fetch data from Chat room
   const isDM = req.body.isDM;
 
@@ -57,7 +54,6 @@ router.post("/getChat", (req, res) => {
         headers: authObject,
       })
       .then((data) => {
-       
         res.json(prepareChatList(data.data, isDM)); // send JSON obj return from the function to frontend
       })
       .catch((err) => {
@@ -68,11 +64,9 @@ router.post("/getChat", (req, res) => {
   }
 });
 
-
 router.post("/createChat", (req, res) => {
-
   const isDM = req.body.isDM;
-  const userNames = [req.body.userName, req.body.name]
+  const userNames = [req.body.userName, req.body.name];
   const authObject = {
     "Project-ID": process.env.CHAT_ENGINE_PROJECT_ID,
     "User-Name": req.body.name,
@@ -89,7 +83,6 @@ router.post("/createChat", (req, res) => {
       title: req.body.title,
     };
   }
-  
 
   // config object with API call methid and header
   var config = {
@@ -102,9 +95,18 @@ router.post("/createChat", (req, res) => {
   // Make the call
   axios(config)
     .then(function (response) {
-      isDM ? res.json({ status: 201, msg: "Team Created Successfully", isDM: true }):res.json({ status: 201, msg: "Team Created Successfully", isDM: false });
+      isDM
+        ? res.json({
+            status: 201,
+            msg: "Team Created Successfully",
+            isDM: true,
+          })
+        : res.json({
+            status: 201,
+            msg: "Team Created Successfully",
+            isDM: false,
+          });
       // Notify the frontend that the chat is being created
-      
     })
     .catch(function (error) {
       console.log(error);

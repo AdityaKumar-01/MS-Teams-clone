@@ -76,7 +76,7 @@ const DashBoard = () => {
       <div className="display-section">
         {showSection[0] ? <CreateTeam showHide={showHide} /> : null}
         {showSection[1] ? <TeamsSection showHide={showHide} /> : null}
-        {showSection[2] ? <DMChats /> : null}
+        {showSection[2] ? <DMChats showHide={showHide} /> : null}
         {showSection[3] ? <Assignment /> : null}
         {showSection[4] ? <ProfileSetting /> : null}
       </div>

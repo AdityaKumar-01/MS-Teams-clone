@@ -1,6 +1,5 @@
 // react libraries
-import React, { useContext } from "react";
-import { UserContext } from "../../Context/userContext";
+import React from "react";
 
 // React chat engine components
 import { ChatEngine,} from "react-chat-engine";
@@ -13,8 +12,7 @@ import "./ChatArea.styles.css";
 import "./ChatArea.essential.styles.css";
 
 const ChatArea = () => {
-  const { id } = useContext(UserContext); // fetching data using context 
-  
+ 
   return (
     // Chat engine parent element from react chatengine to render chat area
     <ChatEngine
