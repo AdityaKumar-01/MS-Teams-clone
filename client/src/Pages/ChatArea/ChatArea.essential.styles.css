@@ -35,6 +35,11 @@
 .ce-text-input {
   border-radius: 6px !important;
 }
+.ce-chat-settings-container div{
+  margin-top:-20% !important;
+  font-size:30px !important;
+}
+
 
 .ce-primary-button {
   border-radius: 6px !important;

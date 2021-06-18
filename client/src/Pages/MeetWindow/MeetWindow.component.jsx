@@ -3,6 +3,7 @@ import React, { useEffect, useContext } from "react";
 import { UserContext } from "../../Context/userContext";
 
 import Room from '../../Components/Room/Room.component';
+import "./MeetWindow.styles.css"
 const MeetWindow = () => {
   const { handleLogOut, room, roomName, connecting } = useContext(UserContext);
 
@@ -32,7 +33,19 @@ const MeetWindow = () => {
       <Room roomName={roomName} room={room} handleLogOut={handleLogOut} />
     );
   } else {
-    render = <div>{connecting ? <h1>Connecting</h1> : <h1>Connected</h1>}</div>;
+    render = (
+      <div>
+        {connecting ? (
+          <div className="loading-container">
+            <h1 className="linear-wipe">Connecting ...</h1>
+          </div>
+        ) : (
+          <div className="loading-container">
+            <h1 className="linear-wipe">Connected</h1>{" "}
+          </div>
+        )}
+      </div>
+    );
   }
   return render;
 };

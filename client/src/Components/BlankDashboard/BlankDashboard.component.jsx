@@ -14,9 +14,9 @@ const BlankDashboard = ({ showHide }) => {
         <img src={empty} alt="empty" />
       </span>
       <span className="empty-msg">
-        <p>You don't have any team</p>
+        <p>Seems like you don't have any</p>
         <button className="create-chat-btn" onClick={() => showHide(0)}>
-          Create Team
+          Create Now
         </button>
       </span>
     </div>

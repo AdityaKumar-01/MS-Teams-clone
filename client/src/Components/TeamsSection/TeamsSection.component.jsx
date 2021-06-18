@@ -10,6 +10,7 @@ const TeamsSection = ({ showHide }) => {
     const user = {
       name: localStorage.getItem("userName"),
       password: localStorage.getItem("password"),
+      isDM:false
     };
     axios
       .post("/chat/getChat", user)
@@ -26,7 +27,7 @@ const TeamsSection = ({ showHide }) => {
     <div className="teams-section-wrapper">
       <div className="header">Your Teams</div>
       <div className="chat-name">
-        {userChats ? (
+        {userChats && userChats.length >0 ? (
           userChats.map((data, i) => {
             return <ChatCard data={data} key={i} />; // map every name recieved to Chat Card components to render
           })

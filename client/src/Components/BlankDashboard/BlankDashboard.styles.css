@@ -15,6 +15,7 @@
 .empty-msg p{
     color: #343f56;
     font-size:25px;
+    margin-bottom:20px
 }
 
 .create-chat-btn{

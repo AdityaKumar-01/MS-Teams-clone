@@ -60,12 +60,12 @@ const DashBoard = () => {
             />
           </li>
           <li onClick={() => showHide(3)}>
-            <SettingsRoundedIcon
+            <AssignmentTurnedInRoundedIcon
               style={{ color: "f54748", fontSize: 35, cursor: "pointer" }}
             />
           </li>
           <li onClick={() => showHide(4)}>
-            <AssignmentTurnedInRoundedIcon
+            <SettingsRoundedIcon
               style={{ color: "f54748", fontSize: 35, cursor: "pointer" }}
             />
           </li>
