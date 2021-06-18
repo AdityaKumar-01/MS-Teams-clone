@@ -1,15 +1,23 @@
 import React, { useState, useEffect } from "react";
-import Attendees from './../Attendees/Attendees.component';
 
+// components
+import Attendees from "./../Attendees/Attendees.component";
+import MeetController from "./../MeetController/MeetController.component";
 
+// Icons
+import ForumSharpIcon from "@material-ui/icons/ForumSharp";
+
+// External CSS
+import "./room.styles.css";
 const Room = ({ roomName, room, handleLogOut }) => {
   const [participants, setParticipants] = useState([]);
 
   useEffect(() => {
+     console.log(room.localParticipant.audioTracks);
     const participantConnected = (participant) => {
-      console.log(participants);
+     
       setParticipants((prevParticipants) => [...prevParticipants, participant]);
-      console.log(participants);
+     
     };
     const participantDisConnected = (participant) => {
       setParticipants((prevParticipants) =>
@@ -25,17 +33,16 @@ const Room = ({ roomName, room, handleLogOut }) => {
       room.off("participantConnected", participantConnected);
       room.off("participantDisConnected", participantDisConnected);
     };
+   
   }, [room]);
 
   const remoteParticipants = participants.map((participant) => (
     <Attendees key={participant.sid} participant={participant} />
   ));
   return (
-    <div>
-      <main className="room">
-        <h2> Room : {roomName}</h2>
-        <button onClick={handleLogOut}>Leave Meeting</button>
-        <div className="all-participants">
+    <div className="room-wrapper">
+      <div className="room-left-panel">
+        <div className="participants-frames">
           {room && (
             <Attendees
               key={room.localParticipant.sid}
@@ -44,7 +51,10 @@ const Room = ({ roomName, room, handleLogOut }) => {
           )}
           {remoteParticipants}
         </div>
-      </main>
+        <MeetController handleLogOut={handleLogOut} roomName={roomName} />
+      </div>
+      <div className="room-right-panel">chat section</div>
+      <ForumSharpIcon />
     </div>
   );
 };

@@ -56,13 +56,14 @@ const SignIn = () => {
   return (
     <div className="signin-form form">
       {errorMsg === "" ? null : <span className="error-span">{errorMsg}</span>}
-      <input ref={userNameRef} type="text" required placeholder="Username" />
+      <input ref={userNameRef}  type="text" required placeholder="Username" />
       <br />
       <input
         ref={passwordRef}
         type="password"
         required
         placeholder="Password"
+        
       />
       <br />
       <button onClick={handleClick}>Sign In</button>

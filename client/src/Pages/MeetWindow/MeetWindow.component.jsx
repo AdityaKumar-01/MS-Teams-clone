@@ -1,8 +1,12 @@
 import React, { useEffect, useContext } from "react";
 
+// Context
 import { UserContext } from "../../Context/userContext";
 
+// Components
 import Room from '../../Components/Room/Room.component';
+
+// External CSS
 import "./MeetWindow.styles.css"
 const MeetWindow = () => {
   const { handleLogOut, room, roomName, connecting } = useContext(UserContext);

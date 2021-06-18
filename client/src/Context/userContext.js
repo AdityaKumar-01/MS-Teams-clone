@@ -4,7 +4,7 @@ import React, { useState, useCallback } from "react";
 // NPM packages
 import * as Video from "twilio-video";
 import axios from "axios";
-import {useHistory} from "react-router-dom";
+import { useHistory } from "react-router-dom";
 
 // USerContext that will help to fetch values
 const UserContext = React.createContext();
@@ -19,6 +19,8 @@ const UserProvider = ({ children }) => {
   const [roomName, setRoomName] = useState(""); // holds name current meet room name i.e. a uuid
   const [room, setRoom] = useState(null); // holds room data of ongoing meet
   const [connecting, setConnecting] = useState(false); // holds status of connection before joining any meet
+  const [vidOn, setVidOn] = useState(true);
+  const [audOn, setAudOn] = useState(true);
 
   let history = useHistory();
   const setUserName = (name) => {
@@ -83,6 +85,10 @@ const UserProvider = ({ children }) => {
     room,
     roomName,
     setRoomName,
+    vidOn,
+    setVidOn,
+    audOn,
+    setAudOn,
   };
   return <UserContext.Provider value={value}>{children}</UserContext.Provider>;
 };
