@@ -1,15 +1,26 @@
+// react libraries
 import React, { useContext } from "react";
-import VideoCallIcon from "@material-ui/icons/VideoCall";
-import "./MeetMsg.styles.css";
 import { useHistory } from "react-router-dom";
 
+// Material UI icon
+import VideoCallIcon from "@material-ui/icons/VideoCall";
+
+// External CSS
+import "./MeetMsg.styles.css";
+
+// Context API
 import { UserContext } from "../../Context/userContext";
+
 const MeetMsg = ({ msgObj, isSenderMsg, chatId }) => {
-  // {message.text.split("-")[1]}
-  const { handleSubmit, setRoomName } = useContext(UserContext);
+
+  // get data from context API
+  const { handleSubmit, setRoomName, setRoomId } = useContext(UserContext);
+  
   let history = useHistory();
+  
+  // function to join a meeting
   const startMeet = () => {
-    console.log(msgObj);
+    setRoomId(chatId);
     localStorage.setItem("chatId",chatId)
     setRoomName(msgObj.text.split("@")[1]);
     localStorage.setItem("roomName", msgObj.text.split("@")[1]);

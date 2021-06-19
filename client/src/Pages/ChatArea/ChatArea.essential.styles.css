@@ -94,3 +94,31 @@
   width: 12px !important;
   height: 12px !important;
 }
+
+.ce-chat-feed-container{
+    min-height: 500px !important ;
+    max-height:500px !important;
+    
+}
+.ce-person-avatar .ce-avatar{
+    display: block
+}
+.ce-avatar, .ce-their-message-sender, .ce-avatar-dot{
+    display: none;
+}
+.ce-message-bubble.ce-their-message-bubble{
+    margin-left:-20px !important;
+    background-color: #F54748 !important;
+}
+.ce-message-bubble.ce-my-message-bubble{
+     background-color: #343F56 !important;
+}
+.ce-chat-title-text{
+    color:#F54748
+}
+.ql-editor, .ql-editor::placeholder{
+  color:black;
+}
+.ce-send-message-button{
+  display: none;
+}

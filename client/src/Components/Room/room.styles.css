@@ -31,26 +31,10 @@
     top:10px;
     overflow:hidden;
 }
-.ce-chat-feed-container{
-    min-height: 500px !important ;
-    max-height:500px !important;
-    
-}
-.ce-avatar, .ce-their-message-sender, .ce-avatar-dot{
-    display: none;
-}
-.ce-message-bubble.ce-their-message-bubble{
-    margin-left:-20px !important;
-    background-color: #F54748 !important;
-}
-.ce-message-bubble.ce-my-message-bubble{
-     background-color: #343F56 !important;
-}
-.ce-chat-title-text{
-    color:#F54748
-}
+
 .msg-in-meet-btn{
 position: fixed;
-bottom:10px;
-right:20px;
+bottom:20px;
+right:30px;
+font-size: 30px;
 }

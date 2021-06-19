@@ -9,6 +9,7 @@ import MeetMsg from "./../MeetMsg/MeetMsg.component";
 
 // External CSS
 import "./ChatFeed.styles.css";
+
 const ChatFeed = (props) => {
   // props send by react chat engine
   // cannot alter the name
@@ -23,10 +24,14 @@ const ChatFeed = (props) => {
   const renderMsg = () => {
     const keys = Object.keys(messages); // holds the key for every msg
     return keys.map((key, index) => {
+      // create 2 var one for object of meesage and other to format text from msgObj
       var msgObj = messages[key];
+
+      // remove <p> and </p> tag from text
       var conMsg = String(msgObj.text);
       conMsg = conMsg.replace("</p>", "");
       conMsg = conMsg.replace("<p>", "");
+      
       const lastMsgKey = index === 0 ? null : keys[index - 1]; // helps the app to find the last message in continuation by the sender
       const isSenderMsg = userName === msgObj.sender.username; // identify the current msg is send by user or what holds boolean value
 

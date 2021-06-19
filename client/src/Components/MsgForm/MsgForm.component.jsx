@@ -14,11 +14,16 @@ import { v4 as uuidv4 } from "uuid";
 const MsgForm = (props) => {
   const [msg, setMsg] = useState(""); // holds state of input msg
   const { chatId, creds } = props; // credentials of the user required to make a API call
+  const authObject = {
+   projectID:process.env.REACT_APP_PROJECT_ID,
+   userName:localStorage.getItem("userName"),
+        userSecret:localStorage.getItem("password")
+  };
   const handleMeet = () => {
     const uid = uuidv4();
     console.log(uid);
     const text = `meet@${uid}`;
-    sendMessage(creds, chatId, { text});
+    sendMessage(authObject, chatId, { text });
   }
   // function to update state on writing anything in the msg box
   const handleChange = (event) => {

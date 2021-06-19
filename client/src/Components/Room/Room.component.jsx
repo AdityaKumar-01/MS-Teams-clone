@@ -83,7 +83,10 @@ const Room = ({ roomName, room, handleLogOut }) => {
       </div>
       <div className="room-right-panel">{showChat ? <ChatInMeet /> : null}</div>
       <span className="msg-in-meet-btn">
-        <ForumSharpIcon onClick={() => setShowChat(!showChat)} />
+        <ForumSharpIcon
+          style={{ fontSize: 40, cursor:"pointer" }}
+          onClick={() => setShowChat(!showChat)}
+        />
       </span>
     </div>
   );
