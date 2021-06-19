@@ -12,16 +12,19 @@ import "./App.css";
 
 // Context API
 import { UserProvider } from "./Context/userContext";
+import { MeetProvider } from "./Context/meetContext";
 
 const App = () => {
   return (
     <BrowserRouter>
       <Switch>
         <UserProvider>
-          <Route path="/" exact component={LoginPage} />
-          <Route path="/dashboard" exact component={DashBoard} />
-          <Route path="/dashboard/chat" component={ChatArea} />
-          <Route path="/meet" exact component={MeetWindow} />
+          <MeetProvider>
+            <Route path="/" exact component={LoginPage} />
+            <Route path="/dashboard" exact component={DashBoard} />
+            <Route path="/dashboard/chat" component={ChatArea} />
+            <Route path="/meet" exact component={MeetWindow} />
+          </MeetProvider>
         </UserProvider>
       </Switch>
     </BrowserRouter>

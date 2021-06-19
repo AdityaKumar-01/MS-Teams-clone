@@ -2,10 +2,10 @@ import React from 'react';
 
 // utility libraries
 import Avatar from "react-avatar";
-const TheirMsg = ({ lastMessage, message }) => {
+const TheirMsg = ({ lastMessage, msgObj, conMsg }) => {
   // if it was not the last msg and the sender is not the user currently logged in
   const isFirstMsgByUser =
-    !lastMessage || lastMessage.sender.username !== message.sender.username;
+    !lastMessage || lastMessage.sender.username !== msgObj.sender.username;
 
   return (
     <div className="message-row">
@@ -13,15 +13,15 @@ const TheirMsg = ({ lastMessage, message }) => {
         <div
           className="message-avatar"
           style={{
-            backgroundImage: message.sender && `url(${message.sender.avatar})`,
+            backgroundImage: msgObj.sender && `url(${msgObj.sender.avatar})`,
           }}
         >
-          <Avatar name={message.sender.username} size="45" round={true} />
+          <Avatar name={msgObj.sender.username} size="45" round={true} />
         </div>
       )}
-      {message.attachments && message.attachments.length > 0 ? ( // if the message is an attachment then display the img
+      {msgObj.attachments && msgObj.attachments.length > 0 ? ( // if the message is an attachment then display the img
         <img
-          src={message.attachments[0].file}
+          src={msgObj.attachments[0].file}
           alt="message-attachment"
           className="message-image"
           style={{ marginLeft: isFirstMsgByUser ? "4px" : "48px" }}
@@ -36,8 +36,8 @@ const TheirMsg = ({ lastMessage, message }) => {
             marginLeft: isFirstMsgByUser ? "4px" : "8px", // if the avatar is to be displayed then give more margin on left
           }}
         >
-          <span className="sender-name">{message.sender.username}</span>
-          <span className="sender-text">{message.text}</span>
+          <span className="sender-name">{msgObj.sender.username}</span>
+          <span className="sender-text">{conMsg}</span>
         </div>
       )}
     </div>

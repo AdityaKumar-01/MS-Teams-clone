@@ -16,8 +16,6 @@ const ChatFeed = (props) => {
 
   const chat = chats && chats[activeChat]; // to see we have any chat in the room or not
 
- 
-
   // This function will render messages recieved as props
   // check for sender is it same as the currently logged userName or different
   // based on this render 2 different components with their own styling
@@ -25,25 +23,33 @@ const ChatFeed = (props) => {
   const renderMsg = () => {
     const keys = Object.keys(messages); // holds the key for every msg
     return keys.map((key, index) => {
-      const message = messages[key];
+      var msgObj = messages[key];
+      var conMsg = String(msgObj.text);
+      conMsg = conMsg.replace("</p>", "");
+      conMsg = conMsg.replace("<p>", "");
       const lastMsgKey = index === 0 ? null : keys[index - 1]; // helps the app to find the last message in continuation by the sender
-      const isSenderMsg = userName === message.sender.username; // identify the current msg is send by user or what holds boolean value
+      const isSenderMsg = userName === msgObj.sender.username; // identify the current msg is send by user or what holds boolean value
 
-      const checkMeet = message.text.split("@")[0] === "meet";
+      const checkMeet = msgObj.text.split("@")[0] === "meet";
 
       // render messages based on sender
       return (
         <div key={`msg_${index}`} style={{ width: "100%" }}>
           {checkMeet ? (
-            <MeetMsg message={message} isSenderMsg = {isSenderMsg}/>
+            <MeetMsg
+              msgObj={msgObj}
+              isSenderMsg={isSenderMsg}
+              chatId={activeChat}
+            />
           ) : (
             <div className="message-block">
               {isSenderMsg ? ( // conditional rendering of msg if send by currently logged user float it to right else left
-                <MyMsg message={message} />
+                <MyMsg msgObj={msgObj} conMsg={conMsg} />
               ) : (
                 <TheirMsg
-                  message={message}
+                  msgObj={msgObj}
                   lastMessage={messages[lastMsgKey]}
+                  conMsg={conMsg}
                 />
               )}
             </div>

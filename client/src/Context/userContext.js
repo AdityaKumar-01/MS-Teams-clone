@@ -19,8 +19,7 @@ const UserProvider = ({ children }) => {
   const [roomName, setRoomName] = useState(""); // holds name current meet room name i.e. a uuid
   const [room, setRoom] = useState(null); // holds room data of ongoing meet
   const [connecting, setConnecting] = useState(false); // holds status of connection before joining any meet
-  const [vidOn, setVidOn] = useState(true);
-  const [audOn, setAudOn] = useState(true);
+  
 
   let history = useHistory();
   const setUserName = (name) => {
@@ -43,13 +42,10 @@ const UserProvider = ({ children }) => {
 
     setConnecting(true);
     await axios.post("/video/token", info).then((data) => {
-      console.log(roomName);
       Video.connect(data.data.token, {
         name: localStorage.getItem("roomName"),
       })
         .then((room) => {
-          console.log(roomName);
-          console.log(room);
           setConnecting(false);
           setRoom(room);
         })
@@ -85,10 +81,7 @@ const UserProvider = ({ children }) => {
     room,
     roomName,
     setRoomName,
-    vidOn,
-    setVidOn,
-    audOn,
-    setAudOn,
+   
   };
   return <UserContext.Provider value={value}>{children}</UserContext.Provider>;
 };

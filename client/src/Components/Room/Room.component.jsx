@@ -8,12 +8,16 @@ import MeetController from "./../MeetController/MeetController.component";
 import ForumSharpIcon from "@material-ui/icons/ForumSharp";
 
 // External CSS
-import "./room.styles.css";
+import "./Room.styles.css";
+import ChatInMeet from './../ChatInMeet/ChatInMeet.component';
+import ChatArea from './../../Pages/ChatArea/ChatArea.component';
+
 const Room = ({ roomName, room, handleLogOut }) => {
   const [participants, setParticipants] = useState([]);
-
+  const [showChat, setShowChat] = useState(false);
   useEffect(() => {
-     console.log(room.localParticipant.audioTracks);
+    
+    //  console.log(room.localParticipant.audioTracks);
     const participantConnected = (participant) => {
      
       setParticipants((prevParticipants) => [...prevParticipants, participant]);
@@ -53,8 +57,10 @@ const Room = ({ roomName, room, handleLogOut }) => {
         </div>
         <MeetController handleLogOut={handleLogOut} roomName={roomName} />
       </div>
-      <div className="room-right-panel">chat section</div>
-      <ForumSharpIcon />
+      <div className="room-right-panel">{showChat ? <ChatInMeet /> : null}</div>
+      <span className="msg-in-meet-btn">
+        <ForumSharpIcon onClick={() => setShowChat(!showChat)} />
+      </span>
     </div>
   );
 };

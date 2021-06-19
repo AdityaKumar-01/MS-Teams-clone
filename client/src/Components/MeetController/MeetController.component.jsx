@@ -1,7 +1,7 @@
 import React, {useContext} from 'react';
 
 // Context
-import {UserContext} from "../../Context/userContext";
+import { MeetContext } from "../../Context/meetContext";
 
 // Micro animations and Icon
 import CallEndSharpIcon from "@material-ui/icons/CallEndSharp";
@@ -13,7 +13,7 @@ import video from "react-useanimations/lib/video";
 import "./MeetController.styles.css";
 
 const MeetController= ({handleLogOut, roomName}) => {
-    const { vidOn, setVidOn, audOn, setAudOn } = useContext(UserContext);
+    const { vidOn, setVidOn, audOn, setAudOn } = useContext(MeetContext);
 
     const toggleVidOn = () =>{
         setVidOn(!vidOn);

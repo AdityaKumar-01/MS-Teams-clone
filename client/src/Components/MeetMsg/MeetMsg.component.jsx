@@ -4,17 +4,19 @@ import "./MeetMsg.styles.css";
 import { useHistory } from "react-router-dom";
 
 import { UserContext } from "../../Context/userContext";
-const MeetMsg = ({ message, isSenderMsg }) => {
+const MeetMsg = ({ msgObj, isSenderMsg, chatId }) => {
   // {message.text.split("-")[1]}
   const { handleSubmit, setRoomName } = useContext(UserContext);
   let history = useHistory();
   const startMeet = () => {
-    console.log(message.text.split("@")[1]);
-    setRoomName(message.text.split("@")[1]);
-    localStorage.setItem("roomName", message.text.split("@")[1]);
+    console.log(chatId);
+    localStorage.setItem("chatId",chatId)
+    setRoomName(msgObj.text.split("@")[1]);
+    localStorage.setItem("roomName", msgObj.text.split("@")[1]);
     history.push("/meet");
     handleSubmit();
   };
+
   return (
     <div className="meet-msg">
       <div
@@ -26,7 +28,7 @@ const MeetMsg = ({ message, isSenderMsg }) => {
       >
         <span className="meet-row">
           <span className="meet-heading">
-            Meeting called by {message.sender.username}
+            Meeting called by {msgObj.sender.username}
           </span>
           <span>
             <VideoCallIcon style={{ color: "white", fontSize: 50 }} />

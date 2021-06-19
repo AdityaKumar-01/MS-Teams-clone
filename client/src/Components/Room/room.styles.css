@@ -3,10 +3,7 @@
     height:100vh;
     background-color: #343F56;
     color:#F54748;
-    display:flex;
-    flex-direction: row;
-    justify-content:space-around;
-    align-items:center;
+   
 }
 
 .room-left-panel{
@@ -25,4 +22,35 @@
     justify-content:space-evenly;
     align-items:center;
     width:100%;
+}
+
+.room-right-panel{
+    max-width:350px;
+    position: fixed;
+    right:10px;
+    top:10px;
+    overflow:hidden;
+}
+.ce-chat-feed-container{
+    min-height: 500px !important ;
+    max-height:500px !important;
+    
+}
+.ce-avatar, .ce-their-message-sender, .ce-avatar-dot{
+    display: none;
+}
+.ce-message-bubble.ce-their-message-bubble{
+    margin-left:-20px !important;
+    background-color: #F54748 !important;
+}
+.ce-message-bubble.ce-my-message-bubble{
+     background-color: #343F56 !important;
+}
+.ce-chat-title-text{
+    color:#F54748
+}
+.msg-in-meet-btn{
+position: fixed;
+bottom:10px;
+right:20px;
 }

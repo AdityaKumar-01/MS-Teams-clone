@@ -5,14 +5,21 @@ import Avatar from "react-avatar";
 
 // context
 import { UserContext } from "../../Context/userContext";
+import { MeetContext } from "../../Context/meetContext";
 
 // External CSS
 import "./Attendees.styles.css";
 const Attendees = ({ participant }) => {
-  const { vidOn,audOn,name } = useContext(UserContext);
-  const [videoTracks, setVideoTracks] = useState([]);
-  const [audioTracks, setAudioTracks] = useState([]);
-
+  const { name } = useContext(UserContext);
+  const {
+    vidOn,
+    audOn,
+    
+    
+  } = useContext(MeetContext);
+  
+const [videoTracks, setVideoTracks] = useState([]);
+const [audioTracks, setAudioTracks] = useState([]);
   const videoRef = useRef();
   const audioRef = useRef();
 
@@ -48,7 +55,7 @@ const Attendees = ({ participant }) => {
       setAudioTracks([]);
       participant.removeAllListeners();
     };
-  }, [participant]);
+  }, [participant, vidOn]);
 
   useEffect(() => {
     const videoTrack = videoTracks[0];
@@ -70,9 +77,9 @@ const Attendees = ({ participant }) => {
     }
   }, [audioTracks]);
   return (
-    <div className="meet-frame">
+    <div>
       {participant.identity === name ? (
-        <div>
+        <div className="meet-frame">
           <span className="frame-title">{participant.identity}</span>
           {vidOn ? (
             <video ref={videoRef} autoPlay />
@@ -86,12 +93,11 @@ const Attendees = ({ participant }) => {
           )}
         </div>
       ) : (
-        <div>
+        <div className="meet-frame">
           <span className="frame-title">{participant.identity}</span>
-          
-            <video ref={videoRef} autoPlay />
-            <audio ref={audioRef} autoPlay />
-          
+
+          <video ref={videoRef} autoPlay />
+          <audio ref={audioRef} autoPlay />
         </div>
       )}
     </div>
