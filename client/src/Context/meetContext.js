@@ -8,16 +8,16 @@ const MeetContext = React.createContext();
 // Provider contains all the states and funcions which can be required by other components
 
 const MeetProvider = ({ children }) => {
-  const [vidOn, setVidOn] = useState(true);
-  const [audOn, setAudOn] = useState(true);
+  const [vidState, setVidState] = useState(true);
+  const [audState, setAudState] = useState(true);
   
   
   // values holds functions and states to be shared
   const value = {
-    vidOn,
-    setVidOn,
-    audOn,
-    setAudOn,
+    vidState,
+    setVidState,
+    audState,
+    setAudState,
   };
   return <MeetContext.Provider value={value}>{children}</MeetContext.Provider>;
 };

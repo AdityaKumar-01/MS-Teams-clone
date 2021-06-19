@@ -17,6 +17,9 @@
     align-items: center;
     justify-content:center;
 }
+.control-icon{
+    cursor:pointer;
+}
 
 .control-panel span:hover{
    background-color:rgba(128, 128, 128, 0.404)

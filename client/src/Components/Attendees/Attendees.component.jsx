@@ -11,24 +11,20 @@ import { MeetContext } from "../../Context/meetContext";
 import "./Attendees.styles.css";
 const Attendees = ({ participant }) => {
   const { name } = useContext(UserContext);
-  const {
-    vidOn,
-    audOn,
-    
-    
-  } = useContext(MeetContext);
+  const { vidState, audState } = useContext(MeetContext);
   
 const [videoTracks, setVideoTracks] = useState([]);
 const [audioTracks, setAudioTracks] = useState([]);
   const videoRef = useRef();
   const audioRef = useRef();
-
+  
   const trackpubsToTracks = (trackMap) =>
     Array.from(trackMap.values())
       .map((publication) => publication.track)
       .filter((track) => track !== null);
 
   useEffect(() => {
+   
     setVideoTracks(trackpubsToTracks(participant.videoTracks));
     setAudioTracks(trackpubsToTracks(participant.audioTracks));
 
@@ -55,7 +51,7 @@ const [audioTracks, setAudioTracks] = useState([]);
       setAudioTracks([]);
       participant.removeAllListeners();
     };
-  }, [participant, vidOn]);
+  }, [participant, vidState, audState]);
 
   useEffect(() => {
     const videoTrack = videoTracks[0];
@@ -76,17 +72,19 @@ const [audioTracks, setAudioTracks] = useState([]);
       };
     }
   }, [audioTracks]);
+
+  
   return (
     <div>
       {participant.identity === name ? (
         <div className="meet-frame">
           <span className="frame-title">{participant.identity}</span>
-          {vidOn ? (
+          {vidState ? (
             <video ref={videoRef} autoPlay />
           ) : (
-            <Avatar name={name} size="80" className="card-avatar" />
+            <Avatar name={name} size="300" className="card-avatar" />
           )}
-          {audOn ? (
+          {audState ? (
             <audio ref={audioRef} autoPlay />
           ) : (
             <audio ref={audioRef} muted />

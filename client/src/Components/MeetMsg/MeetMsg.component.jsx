@@ -9,7 +9,7 @@ const MeetMsg = ({ msgObj, isSenderMsg, chatId }) => {
   const { handleSubmit, setRoomName } = useContext(UserContext);
   let history = useHistory();
   const startMeet = () => {
-    console.log(chatId);
+    console.log(msgObj);
     localStorage.setItem("chatId",chatId)
     setRoomName(msgObj.text.split("@")[1]);
     localStorage.setItem("roomName", msgObj.text.split("@")[1]);
