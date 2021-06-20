@@ -63,7 +63,11 @@ const MsgForm = (props) => {
       />
       <label htmlFor="upload-button">
         <span className="image-button">
-          <ImageIcon className="picture-icon" style={{ color: "#F54748" }} />
+          <ImageIcon
+            className="picture-icon"
+            style={{ color: "#F54748" }}
+            aria-label="send-pic"
+          />
         </span>
       </label>
       <input
@@ -73,13 +77,13 @@ const MsgForm = (props) => {
         style={{ display: "none" }}
         onChange={handleAttach.bind(this)}
       />
-      <button className="meet-button">
+      <button className="meet-button" aria-label="meet-button">
         <VideoCallIcon
           onClick={() => handleMeet()}
-          style={{ color: "#F54748", fontSize: 30, cursor:"pointer" }}
+          style={{ color: "#F54748", fontSize: 30, cursor: "pointer" }}
         />
       </button>
-      <button type="submit" className="send-button">
+      <button type="submit" className="send-button" aria-label="send-button">
         <SendIcon className="send-icon" style={{ color: "#F54748" }} />
       </button>
     </form>

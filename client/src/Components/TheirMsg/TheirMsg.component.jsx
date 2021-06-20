@@ -36,7 +36,9 @@ const TheirMsg = ({ lastMessage, msgObj, conMsg }) => {
             marginLeft: isFirstMsgByUser ? "4px" : "8px", // if the avatar is to be displayed then give more margin on left
           }}
         >
-          <span className="sender-name">{msgObj.sender.username}</span>
+          <span className="sender-name">
+            <em>{msgObj.sender.username}</em>
+          </span>
           <span className="sender-text">{conMsg}</span>
         </div>
       )}

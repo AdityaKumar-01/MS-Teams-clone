@@ -1,5 +1,5 @@
 // React libraries
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState } from "react";
 
 // USerContext that will help to fetch values
 const MeetContext = React.createContext();
