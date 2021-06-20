@@ -9,7 +9,7 @@ import ForumSharpIcon from "@material-ui/icons/ForumSharp";
 
 // External CSS
 import "./Room.styles.css";
-import ChatInMeet from './../ChatInMeet/ChatInMeet.component';
+import ChatInMeet from "./../ChatInMeet/ChatInMeet.component";
 
 import { MeetContext } from "../../Context/meetContext";
 const Room = ({ roomName, room, handleLogOut }) => {
@@ -18,19 +18,19 @@ const Room = ({ roomName, room, handleLogOut }) => {
   const { vidState, audState, setVidState, setAudState } =
     useContext(MeetContext);
   useEffect(() => {
-    
-    //  console.log(room.localParticipant.audioTracks);
+    // add new participant in the room state
     const participantConnected = (participant) => {
-     
       setParticipants((prevParticipants) => [...prevParticipants, participant]);
-     
     };
+
+    // filter out the participant on leaving meet
     const participantDisConnected = (participant) => {
       setParticipants((prevParticipants) =>
         prevParticipants.filter((p) => p !== participant)
       );
     };
 
+    // twilio functtion listening on new participant or leaving participant
     room.on("participantConnected", participantConnected);
     room.on("participantDisconnected", participantDisConnected);
 
@@ -39,12 +39,18 @@ const Room = ({ roomName, room, handleLogOut }) => {
       room.off("participantConnected", participantConnected);
       room.off("participantDisConnected", participantDisConnected);
     };
-   
   }, [room]);
 
+  // create components for remote participants
   const remoteParticipants = participants.map((participant) => (
-    <Attendees key={participant.sid} participant={participant} isLocal = {false} />
+    <Attendees
+      key={participant.sid}
+      participant={participant}
+      isLocal={false}
+    />
   ));
+
+  // function handle state of local participant video
   const handleToggleVideo = () => {
     // setVidState(!vidState);
     room.localParticipant.videoTracks.forEach((publication) =>
@@ -53,11 +59,13 @@ const Room = ({ roomName, room, handleLogOut }) => {
         : publication.track.enable()
     );
   };
-  const handleToggleAudio= () => {
+
+  // function handle state of local participant audio
+  const handleToggleAudio = () => {
     // setAudState(!audState);
     room.localParticipant.audioTracks.forEach((publication) =>
       publication.track.isEnabled
-        ? (publication.track.disable())
+        ? publication.track.disable()
         : publication.track.enable()
     );
   };
@@ -65,13 +73,14 @@ const Room = ({ roomName, room, handleLogOut }) => {
     <div className="room-wrapper">
       <div className="room-left-panel">
         <div className="participants-frames">
-          {room && (
+          {room && ( // render local participant
             <Attendees
               key={room.localParticipant.sid}
               participant={room.localParticipant}
               isLocal={true}
             />
           )}
+          {/* render remote participant in the room */}
           {remoteParticipants}
         </div>
         <MeetController
@@ -81,10 +90,11 @@ const Room = ({ roomName, room, handleLogOut }) => {
           handleToggleAudio={handleToggleAudio}
         />
       </div>
+      {/* conditional rendering of chat in meet toggled using chat icon */}
       <div className="room-right-panel">{showChat ? <ChatInMeet /> : null}</div>
       <span className="msg-in-meet-btn">
         <ForumSharpIcon
-          style={{ fontSize: 40, cursor:"pointer" }}
+          style={{ fontSize: 40, cursor: "pointer" }}
           onClick={() => setShowChat(!showChat)}
         />
       </span>

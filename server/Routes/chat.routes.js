@@ -95,6 +95,7 @@ router.post("/createChat", (req, res) => {
   // Make the call
   axios(config)
     .then(function (response) {
+      console.log(response.status);
       isDM
         ? res.json({
             status: 201,
@@ -109,9 +110,13 @@ router.post("/createChat", (req, res) => {
       // Notify the frontend that the chat is being created
     })
     .catch(function (error) {
-      console.log(error);
+      console.log("error");
       // if any error occurred send 400 status and error msg to be displayd
-      res.json({ status: 400, msg: "Cannot Create Team" });
+     res.json({
+       status: 400,
+       msg: isDM ? "Check UserName" : "Cannot Create Team",
+       isDM: isDM,
+     });
     });
 });
 

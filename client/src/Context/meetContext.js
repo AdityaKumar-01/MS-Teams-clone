@@ -8,10 +8,9 @@ const MeetContext = React.createContext();
 // Provider contains all the states and funcions which can be required by other components
 
 const MeetProvider = ({ children }) => {
-  const [vidState, setVidState] = useState(true);
-  const [audState, setAudState] = useState(true);
-  
-  
+  const [vidState, setVidState] = useState(true); // holds state for camera is on or not
+  const [audState, setAudState] = useState(true); // holds state for mic is on or not
+
   // values holds functions and states to be shared
   const value = {
     vidState,
