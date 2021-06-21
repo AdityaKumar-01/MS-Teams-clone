@@ -76,8 +76,11 @@ router.post("/updateUserName", (req, res) => {
       var data = {
         username: req.body.newName,
       };
-
+      const filter = { userName: req.body.name };
+      const update = { userName: req.body.newName };
+      user.findOneAndUpdate(filter, update, (err, doc) => {});
       // config object with API call meth0d and header
+
       var config = {
         method: "patch",
         url: "https://api.chatengine.io/users/me/",
@@ -96,13 +99,45 @@ router.post("/updateUserName", (req, res) => {
           res.json({ status: 200, msg: "User name updated" });
         })
         .catch(function (error) {
-          console.log(error);
           // if any error occurred send 400 status and error msg to be displayd
           // res.json({ status: 403, msg: "User Already Exists" });
           console.log(error);
         });
     }
   });
+});
+
+router.post("/updateUserPwd", (req, res) => {
+  var data = {
+    "user-secret": req.body.newPwd,
+  };
+  const filter = { userName: req.body.name };
+  const update = { password: sha256(req.body.newPwd) };
+  user.findOneAndUpdate(filter, update, (err, doc) => {console.log(err);});
+  // config object with API call meth0d and header
+
+  var config = {
+    method: "patch",
+    url: "https://api.chatengine.io/users/me/",
+    headers: {
+      "Project-ID": process.env.CHAT_ENGINE_PROJECT_ID,
+      "User-Name": req.body.name,
+      "User-Secret": req.body.password,
+    },
+    data: data,
+  };
+
+  // Make the call
+  axios(config)
+    .then(function (response) {
+      // Notify the frontend that the user is being created
+      res.json({ status: 200, msg: "Password updated" });
+    })
+    .catch(function (error) {
+      // if any error occurred send 400 status and error msg to be displayd
+      // res.json({ status: 403, msg: "User Already Exists" });
+      console.log(error);
+    });
 });
 
 module.exports = router; // export the module

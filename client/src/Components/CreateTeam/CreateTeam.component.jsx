@@ -62,6 +62,7 @@ const CreateTeam = ({ showHide }) => {
             required
             type="text"
             ref={titleRef}
+            spellCheck={false}
           />
           <button className="create-chat-btn">Create</button>
         </form>
@@ -82,6 +83,7 @@ const CreateTeam = ({ showHide }) => {
             required
             type="text"
             ref={dmRef}
+            spellCheck={false}
           />
           <button className="create-chat-btn">Make</button>
         </form>
