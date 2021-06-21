@@ -31,7 +31,7 @@ router.post("/signUp", (req, res) => {
         secret: req.body.password,
       };
 
-      // config object with API call methid and header
+      // config object with API call method and header
       var config = {
         method: "post",
         url: "https://api.chatengine.io/users/",
@@ -49,6 +49,7 @@ router.post("/signUp", (req, res) => {
         })
         .catch(function (error) {
           console.log(error);
+
           // if any error occurred send 400 status and error msg to be displayd
           res.json({ status: 400, msg: "User Already Exists" });
         });
@@ -58,12 +59,49 @@ router.post("/signUp", (req, res) => {
 
 router.post("/signIn", (req, res) => {
   // check user exist with same username or not
+
   user.find({ userName: req.body.name }, (err, data) => {
     // if you get 1 document then there exist a user with this name
     if (data.length >= 1 && sha256(req.body.password) === data[0].password) {
       // Notify the frontend that the user is signedIn
       res.json({ status: 201, msg: "User Found" });
     } else res.json({ status: 404, msg: "Check your credentials" }); // if any error occurred send 404 status and error msg to be displayd
+  });
+});
+
+router.post("/updateUserName", (req, res) => {
+  user.find({ userName: req.body.newName }, (err, data) => {
+    if (data.length >= 1) res.json({ status: 403, msg: "User name taken" });
+    else {
+      var data = {
+        username: req.body.newName,
+      };
+
+      // config object with API call meth0d and header
+      var config = {
+        method: "patch",
+        url: "https://api.chatengine.io/users/me/",
+        headers: {
+          "Project-ID": process.env.CHAT_ENGINE_PROJECT_ID,
+          "User-Name": req.body.name,
+          "User-Secret": req.body.password,
+        },
+        data: data,
+      };
+
+      // Make the call
+      axios(config)
+        .then(function (response) {
+          // Notify the frontend that the user is being created
+          res.json({ status: 200, msg: "User name updated" });
+        })
+        .catch(function (error) {
+          console.log(error);
+          // if any error occurred send 400 status and error msg to be displayd
+          // res.json({ status: 403, msg: "User Already Exists" });
+          console.log(error);
+        });
+    }
   });
 });
 
