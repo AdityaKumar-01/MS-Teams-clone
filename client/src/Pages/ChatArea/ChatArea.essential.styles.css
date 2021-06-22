@@ -106,6 +106,9 @@
 .ce-avatar, .ce-their-message-sender, .ce-avatar-dot{
     display: none;
 }
+.ce-autocomplete-option .ce-avatar{
+  display: block
+}
 .ce-message-bubble.ce-their-message-bubble{
     margin-left:-20px !important;
     background-color: #F54748 !important;

@@ -10,3 +10,13 @@
     width:400px;
     margin-top:10px
 }
+
+
+@media (max-width: 650px) {
+ .meet-frame video{
+    border-radius: 10px;
+    height:200px;
+    width:350px;
+    margin-top:10px
+}
+}

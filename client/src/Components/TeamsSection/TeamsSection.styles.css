@@ -95,3 +95,9 @@
     margin-top: 0;
   }
 }
+
+@media (max-width: 500px) {
+  .teams-section-wrapper{
+    padding-left:10%;
+  }
+}

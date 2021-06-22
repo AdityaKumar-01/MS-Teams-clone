@@ -24,11 +24,10 @@ const prepareChatList = (data, isDM) => {
   };
   if (isDM) {
     data.forEach((item) => {
-     
-        if (item.is_direct_chat)
-          item.people.forEach((pObj) => {
-            res.info.push({ title: pObj.person.username, id: 000 });
-          });
+      if (item.is_direct_chat)
+        item.people.forEach((pObj) => {
+          res.info.push({ title: pObj.person.username, id: 000 });
+        });
     });
   } else {
     data.forEach((item) => {
@@ -36,7 +35,8 @@ const prepareChatList = (data, isDM) => {
         res.info.push({ title: item.title, id: item.id }); // storing titles to chat room
     });
   }
-
+  if(isDM)
+    res.info =[...new Set(res.info)];
   return res;
 };
 
@@ -56,7 +56,6 @@ router.post("/getChat", (req, res) => {
         headers: authObject,
       })
       .then((data) => {
-        
         res.json(prepareChatList(data.data, isDM)); // send JSON obj return from the function to frontend
       })
       .catch((err) => {
@@ -79,7 +78,7 @@ router.post("/createChat", (req, res) => {
   if (isDM) {
     var data = {
       usernames: userNames,
-      is_direct_chat: isDM,
+      is_direct_chat: true,
     };
   } else {
     var data = {
@@ -102,7 +101,7 @@ router.post("/createChat", (req, res) => {
       isDM
         ? res.json({
             status: 201,
-            msg: "Team Created Successfully",
+            msg: "DM Created Successfully",
             isDM: true,
           })
         : res.json({
@@ -115,11 +114,11 @@ router.post("/createChat", (req, res) => {
     .catch(function (error) {
       console.log("error");
       // if any error occurred send 400 status and error msg to be displayd
-     res.json({
-       status: 400,
-       msg: isDM ? "Check UserName" : "Cannot Create Team",
-       isDM: isDM,
-     });
+      res.json({
+        status: 400,
+        msg: isDM ? "Check UserName" : "Cannot Create Team",
+        isDM: isDM,
+      });
     });
 });
 

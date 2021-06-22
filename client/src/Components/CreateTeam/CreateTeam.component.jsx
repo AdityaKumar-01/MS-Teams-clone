@@ -44,6 +44,7 @@ const CreateTeam = ({ showHide }) => {
         data.data.status === 400 && data.data.isDM
           ? setDmErr(data.data.msg)
           : setTeamErr(data.data.msg);
+        
       })
       .catch((error) => {
         console.log(error);

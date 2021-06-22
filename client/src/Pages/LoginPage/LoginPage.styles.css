@@ -107,7 +107,15 @@
 @media (max-width: 500px) {
   .form-content {
     flex-direction: column-reverse;
+    height: 60vh;
+    width: 180%;
+  }
+}
+
+@media (max-width: 400px) {
+  .form-content {
+    flex-direction: column-reverse;
     height: 50vh;
-    width: 160%;
+    width: 180%;
   }
 }

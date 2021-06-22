@@ -24,3 +24,15 @@
 .control-panel span:hover{
    background-color:rgba(128, 128, 128, 0.404)
 }
+
+@media (max-width: 650px) {
+ .control-panel{
+    width:60%;
+    background-color: white;
+    border-radius:10px;
+    height:60px;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+}
+}

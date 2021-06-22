@@ -56,3 +56,17 @@
    
 }
 }
+
+@media (max-width: 500px) {
+  .form input{
+    width:80%;
+   
+}
+}
+
+@media (max-width: 400px) {
+  .form input{
+    width:50%;
+   
+}
+}

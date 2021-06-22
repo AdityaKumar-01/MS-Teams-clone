@@ -5,7 +5,7 @@
   align-items: center;
   width: 100%;
   height: 100vh;
-  padding-left:10%;
+  padding-left: 10%;
 }
 .create-chat-col {
   display: flex;
@@ -17,6 +17,7 @@
 .create-chat-title {
   font-size: 40px;
   color: #343f56;
+  text-align: center;
 }
 .create-chat-col form {
   display: flex;
@@ -39,16 +40,41 @@
   color: #f54748;
 }
 .create-chat-or-col {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
   font-size: 40px;
   color: #f54748;
 }
+
 .vertical {
   border-left: 6px solid black;
   height: 200px;
   position: absolute;
   left: 50%;
+}
+
+@media (max-width: 700px) {
+  .team-create-wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    width: 100%;
+    height: 100vh;
+    padding-left: 10%;
+  }
+  .create-chat-or-col hr {
+    display: none;
+  }
+}
+@media (max-width: 400px) {
+  .create-chat-title {
+  font-size: 25px;
+}
+.create-chat-col form input {
+  height: 40px;
+  width: 200px;
+}
 }

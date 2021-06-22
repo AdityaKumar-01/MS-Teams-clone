@@ -51,6 +51,64 @@
     width:50%;
     flex-direction: column;
 }
-.update-user-name, .update-user-pwd{
+@media (max-width: 700px) {
+  .team-create-wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    width: 100%;
+    height: 100vh;
+    padding-left: 10%;
+  }
+  .create-chat-or-col hr {
+    display: none;
+  }
+}
 
+@media (max-width: 1000px) {
+  .profile-settings{
+    justify-content: center;
+  }
+}
+
+@media (max-width: 750px) {
+  .profile-settings{
+    align-items: space-around;
+    height:95vh;
+  }
+  .update-form-container {
+  height: 100%;
+  flex-direction: column;
+  align-items: center;
+  margin-top:3%;
+}
+.update-form input {
+  height: 35px;
+  margin: 3%;
+  width:80%;
+}
+}
+
+@media (max-width: 500px) {
+ .profile-update-title {
+  font-size: 23px;
+  text-align: center;
+}
+.update-form input {
+  height: 40px;
+  margin: 3%;
+  width:80%;
+}
+}
+
+@media (max-width: 400px) {
+ 
+.update-form input {
+
+  width:110%;
+}
+.profile-settings{
+    padding-left: 10%;
+  }
 }
