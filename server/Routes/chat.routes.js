@@ -24,9 +24,11 @@ const prepareChatList = (data, isDM) => {
   };
   if (isDM) {
     data.forEach((item) => {
-      item.people.forEach((pObj) => {
-        res.info.push({ title: pObj.person.username, id: 000 });
-      });
+     
+        if (item.is_direct_chat)
+          item.people.forEach((pObj) => {
+            res.info.push({ title: pObj.person.username, id: 000 });
+          });
     });
   } else {
     data.forEach((item) => {
@@ -54,6 +56,7 @@ router.post("/getChat", (req, res) => {
         headers: authObject,
       })
       .then((data) => {
+        
         res.json(prepareChatList(data.data, isDM)); // send JSON obj return from the function to frontend
       })
       .catch((err) => {
