@@ -39,8 +39,10 @@ app.use("/user", userRoute);
 // Routes module to handle any activity related to meet
 const videoRoute = require("./Routes/video.routes");
 app.use("/video", videoRoute);
-
+app.get("/", (req, res) =>{
+  res.send("Backend for MS teams clone");
+})
 // Server to run express app
-app.listen(5000, (req, res) => {
+app.listen(process.env.PORT || 5000, (req, res) => {
   console.log("server started");
 });

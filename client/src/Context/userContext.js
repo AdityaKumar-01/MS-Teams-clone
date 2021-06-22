@@ -43,7 +43,7 @@ const UserProvider = ({ children }) => {
     setConnecting(true);
     await axios.post(`${process.env.REACT_APP_BACKEND_URL}/video/token`, info).then((data) => {
       Video.connect(data.data.token, {
-        name: localStorage.getItem("roomName"),
+        name: localStorage.getItem("roomName"),dominantSpeaker: true,
       })
         .then((room) => {
           setConnecting(false);

@@ -15,6 +15,7 @@ import { MeetContext } from "../../Context/meetContext";
 const Room = ({ roomName, room, handleLogOut }) => {
   const [participants, setParticipants] = useState([]);
   const [showChat, setShowChat] = useState(false);
+  const [currentDomntSpeaker, setCurrentDomntSpeaker] = useState("");
   const { vidState, audState, setVidState, setAudState } =
     useContext(MeetContext);
   useEffect(() => {
@@ -35,6 +36,9 @@ const Room = ({ roomName, room, handleLogOut }) => {
     room.on("participantDisconnected", participantDisConnected);
 
     room.participants.forEach(participantConnected);
+    room.on("dominantSpeakerChanged", (participant) => {
+      handleDomntSpeaker(participant);
+    });
     return () => {
       room.off("participantConnected", participantConnected);
       room.off("participantDisConnected", participantDisConnected);
@@ -47,9 +51,16 @@ const Room = ({ roomName, room, handleLogOut }) => {
       key={participant.sid}
       participant={participant}
       isLocal={false}
+      dominantSpeaker = {currentDomntSpeaker === participant.sid ? true : false}
     />
   ));
 
+  const handleDomntSpeaker = (participant) => {
+    if (participant) {
+      console.log(participant.sid);
+      setCurrentDomntSpeaker(participant.sid);
+    }
+  };
   // function handle state of local participant video
   const handleToggleVideo = () => {
     // setVidState(!vidState);
@@ -78,6 +89,7 @@ const Room = ({ roomName, room, handleLogOut }) => {
               key={room.localParticipant.sid}
               participant={room.localParticipant}
               isLocal={true}
+              dominantSpeaker={currentDomntSpeaker === room.localParticipant.sid ? true : false}
             />
           )}
           {/* render remote participant in the room */}

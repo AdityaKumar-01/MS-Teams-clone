@@ -9,7 +9,7 @@ import { MeetContext } from "../../Context/meetContext";
 
 // External CSS
 import "./Attendees.styles.css";
-const Attendees = ({ participant }) => {
+const Attendees = ({ participant, dominantSpeaker }) => {
   const { name } = useContext(UserContext); // bring user name
   const { vidState, audState } = useContext(MeetContext); // bring camera and mic state
 
@@ -90,9 +90,15 @@ const Attendees = ({ participant }) => {
   return (
     <div>
       {participant.identity === name ? (
-        <div className="meet-frame">
-        {/* display name of participant */}
-          <span className="frame-title">{participant.identity}</span> 
+        <div className="meet-frame" style={{}}>
+          {/* display name of participant */}
+          <span
+            className={
+              dominantSpeaker ? "frame-title animated-title" : "frame-title"
+            }
+          >
+            {participant.identity}
+          </span>
           {vidState ? (
             <video ref={videoRef} autoPlay />
           ) : (
@@ -106,8 +112,13 @@ const Attendees = ({ participant }) => {
         </div>
       ) : (
         <div className="meet-frame">
-          <span className="frame-title">{participant.identity}</span>
-
+          <span
+            className={
+              dominantSpeaker ? "frame-title animated-title" : "frame-title"
+            }
+            >
+            {participant.identity}
+          </span>
           <video ref={videoRef} autoPlay />
           <audio ref={audioRef} autoPlay />
         </div>
