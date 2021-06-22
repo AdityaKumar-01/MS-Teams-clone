@@ -31,7 +31,7 @@ const SignUp = () => {
     };
     // Sending data to backend to check user exists else enroll the user
     axios
-      .post("/user/signUp", user)
+      .post(`${process.env.REACT_APP_BACKEND_URL}/user/signUp`, user)
       .then((data) => {
         if (data.data.status === 201){ 
           localStorage.setItem("userName", userNameRef.current.value); 

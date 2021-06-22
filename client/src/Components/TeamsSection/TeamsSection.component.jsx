@@ -14,7 +14,7 @@ const TeamsSection = ({ showHide }) => {
       isDM:false
     };
     axios
-      .post("/chat/getChat", user)
+      .post(`${process.env.REACT_APP_BACKEND_URL}/chat/getChat`, user)
       .then((response) => {
         setUserChats(response.data.info);
         setLoading(false);

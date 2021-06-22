@@ -36,7 +36,7 @@ const CreateTeam = ({ showHide }) => {
     }
 
     axios
-      .post("/chat/createChat", data)
+      .post(`${process.env.REACT_APP_BACKEND_URL}/chat/createChat`, data)
       .then((data) => {
         // on success call render the team selection area
         if (data.data.status === 201 && data.data.isDM) showHide(2);

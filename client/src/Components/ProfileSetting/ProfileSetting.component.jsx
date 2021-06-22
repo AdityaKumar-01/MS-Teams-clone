@@ -22,7 +22,7 @@ const ProfileSetting = ({ showHide }) => {
     };
     // Sending data to backend to check user exists else enroll the user
     axios
-      .post("/user/updateUserName", user)
+      .post(`${process.env.REACT_APP_BACKEND_URL}/user/updateUserName`, user)
       .then((data) => {
         setUserNameStatus(data.data.msg);
         if (data.data.status === 200) {
@@ -44,7 +44,7 @@ const ProfileSetting = ({ showHide }) => {
     if(pwd.current.value === conPwd.current.value)
     // Sending data to backend to check user exists else enroll the user
     {axios
-      .post("/user/updateUserPwd", user)
+      .post(`${process.env.REACT_APP_BACKEND_URL}/user/updateUserPwd`, user)
       .then((data) => {
         setPwdStaus(data.data.msg);
         if (data.data.status === 200) {

@@ -23,7 +23,7 @@ mongoose
 const app = express();
 
 // Cors config in order to remove any error while deployment
-app.use(cors());
+app.use(cors({ origin: "*" }));
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());

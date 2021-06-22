@@ -26,7 +26,7 @@ const DMChats = ({ showHide }) => {
       isDM: true, // differentiating factor
     };
     axios
-      .post("/chat/getChat", user)
+      .post(`${process.env.REACT_APP_BACKEND_URL}/chat/getChat`, user)
       .then((response) => {
         // Display names of user with whom you have DMs
         if (response.data.status === 200) {

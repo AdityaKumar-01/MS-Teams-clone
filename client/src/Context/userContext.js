@@ -41,7 +41,7 @@ const UserProvider = ({ children }) => {
     };
 
     setConnecting(true);
-    await axios.post("/video/token", info).then((data) => {
+    await axios.post(`${process.env.REACT_APP_BACKEND_URL}/video/token`, info).then((data) => {
       Video.connect(data.data.token, {
         name: localStorage.getItem("roomName"),
       })
