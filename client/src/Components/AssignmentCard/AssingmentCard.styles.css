@@ -1,0 +1,46 @@
+.assignment-card{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: space-around;
+    width: 100%;
+    height:100px;
+    border-radius: 5px;
+    background-color: #343F56;
+    margin:1%;
+}
+
+.assignment-card-btn, .assignment-card-detail{
+    display: flex;
+    align-items: center;
+    padding:2%;
+}
+.assignment-card-detail{
+    justify-content:space-between;
+    color:#F54748;
+}
+.assignment-card-title{
+    font-size: 20px;
+    color:white;
+}
+.assignment-card-deadline{
+    /* green 81B214 yellow FFCC29 red FA1E0E*/
+    color:#81B214;
+}
+.assignment-card-btn{
+    justify-content: flex-end;
+}
+.assignment-card-btn button{
+    background-color: #F54748;
+    color:white;
+    border-radius:5px;
+    outline:none;
+    border:none;
+    height:30px;
+    width:100px;
+    cursor:pointer;
+}
+
+.assignment-card-btn button:hover{
+    background-color: #d13b3b;
+}

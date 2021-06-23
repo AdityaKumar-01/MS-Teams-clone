@@ -2,7 +2,7 @@ import React, { useState, useRef, useEffect, useContext } from "react";
 
 // NPM packages
 import Avatar from "react-avatar";
-
+import SettingsVoiceIcon from '@material-ui/icons/SettingsVoice';
 // context
 import { UserContext } from "../../Context/userContext";
 import { MeetContext } from "../../Context/meetContext";
@@ -92,12 +92,8 @@ const Attendees = ({ participant, dominantSpeaker }) => {
       {participant.identity === name ? (
         <div className="meet-frame" style={{}}>
           {/* display name of participant */}
-          <span
-            className={
-              dominantSpeaker ? "frame-title animated-title" : "frame-title"
-            }
-          >
-            {participant.identity}
+          <span className="frame-title">
+            {dominantSpeaker ? (<SettingsVoiceIcon style={{color:"#F54748"}}/>):null}{participant.identity}
           </span>
           {vidState ? (
             <video ref={videoRef} autoPlay />
@@ -112,12 +108,8 @@ const Attendees = ({ participant, dominantSpeaker }) => {
         </div>
       ) : (
         <div className="meet-frame">
-          <span
-            className={
-              dominantSpeaker ? "frame-title animated-title" : "frame-title"
-            }
-            >
-            {participant.identity}
+          <span className="frame-title">
+            {dominantSpeaker ? (<SettingsVoiceIcon style={{color:"#F54748"}}/>):null}{participant.identity}
           </span>
           <video ref={videoRef} autoPlay />
           <audio ref={audioRef} autoPlay />

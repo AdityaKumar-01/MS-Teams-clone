@@ -3,7 +3,7 @@ import Avatar from "react-avatar";
 import axios from "axios";
 import { UserContext } from "../../Context/userContext";
 import "./ProfileSetting.styles.css";
-import { useHistory } from 'react-router-dom';
+import { useHistory } from "react-router-dom";
 const ProfileSetting = ({ showHide }) => {
   const { setUserName, setPwd } = useContext(UserContext);
   const [userNameStatus, setUserNameStatus] = useState("");
@@ -35,35 +35,34 @@ const ProfileSetting = ({ showHide }) => {
         console.log(err);
       });
   };
-  const updatePwd= () => {
+  const updatePwd = () => {
     const user = {
       newPwd: pwd.current.value,
       name: localStorage.getItem("userName"),
       password: localStorage.getItem("password"),
     };
-    if(pwd.current.value === conPwd.current.value)
-    // Sending data to backend to check user exists else enroll the user
-    {axios
-      .post(`${process.env.REACT_APP_BACKEND_URL}/user/updateUserPwd`, user)
-      .then((data) => {
-        setPwdStaus(data.data.msg);
-        if (data.data.status === 200) {
-          // Store the data to local storage to avoid user logging every time
-          localStorage.setItem("password", pwd.current.value);
-          setPwd(pwd.current.value);
-        }
-      })
-      .catch((err) => {
-        console.log(err);
-      });}
-      else
-        setPwdStaus("password don't match")
+    if (pwd.current.value === conPwd.current.value) {
+      // Sending data to backend to check user exists else enroll the user
+      axios
+        .post(`${process.env.REACT_APP_BACKEND_URL}/user/updateUserPwd`, user)
+        .then((data) => {
+          setPwdStaus(data.data.msg);
+          if (data.data.status === 200) {
+            // Store the data to local storage to avoid user logging every time
+            localStorage.setItem("password", pwd.current.value);
+            setPwd(pwd.current.value);
+          }
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    } else setPwdStaus("password don't match");
   };
 
-  const handleLogOut = () =>{
+  const handleLogOut = () => {
     localStorage.clear();
     history.push("/");
-  }
+  };
 
   const handleUpdate = (e) => {
     e.preventDefault();
@@ -95,7 +94,7 @@ const ProfileSetting = ({ showHide }) => {
               ref={userName}
               spellCheck={false}
             />
-            <button className="create-chat-btn">Update</button>
+            <button className="create-btn">Update</button>
           </form>
         </div>
         <div className="create-chat-or-col">
@@ -119,12 +118,14 @@ const ProfileSetting = ({ showHide }) => {
               required
               ref={conPwd}
             />
-            <button className="create-chat-btn">Update</button>
+            <button className="create-btn">Update</button>
           </form>
         </div>
       </div>
       <div>
-        <button className="create-chat-btn" onClick={() => handleLogOut()}>Log Out</button>
+        <button className="create-btn" onClick={() => handleLogOut()}>
+          Log Out
+        </button>
       </div>
     </div>
   );

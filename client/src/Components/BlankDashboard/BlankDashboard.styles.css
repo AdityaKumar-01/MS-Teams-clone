@@ -19,7 +19,7 @@
   margin-bottom: 20px;
 }
 
-.create-chat-btn {
+.create-btn {
   width: 100px;
   height: 40px;
   background-color: #343f56;
@@ -31,7 +31,7 @@
   cursor: pointer;
   transform: transition background-color 1s;
 }
-.create-chat-btn:hover {
+.create-btn:hover {
   background-color: transparent;
   transform: transition background-color 1s;
 }

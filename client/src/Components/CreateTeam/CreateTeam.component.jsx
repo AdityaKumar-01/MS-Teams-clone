@@ -44,7 +44,6 @@ const CreateTeam = ({ showHide }) => {
         data.data.status === 400 && data.data.isDM
           ? setDmErr(data.data.msg)
           : setTeamErr(data.data.msg);
-        
       })
       .catch((error) => {
         console.log(error);
@@ -65,7 +64,7 @@ const CreateTeam = ({ showHide }) => {
             ref={titleRef}
             spellCheck={false}
           />
-          <button className="create-chat-btn">Create</button>
+          <button className="create-btn">Create</button>
         </form>
       </div>
       {/* form separating column */}
@@ -86,7 +85,7 @@ const CreateTeam = ({ showHide }) => {
             ref={dmRef}
             spellCheck={false}
           />
-          <button className="create-chat-btn">Make</button>
+          <button className="create-btn">Make</button>
         </form>
       </div>
     </div>

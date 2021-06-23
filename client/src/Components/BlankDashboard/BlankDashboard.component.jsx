@@ -15,7 +15,7 @@ const BlankDashboard = ({ showHide }) => {
       </span>
       <span className="empty-msg">
         <p>Seems like you don't have any</p>
-        <button className="create-chat-btn" onClick={() => showHide(0)}>
+        <button className="create-btn" onClick={() => showHide(0)}>
           Create Now
         </button>
       </span>

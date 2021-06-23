@@ -1,0 +1,47 @@
+.assignment-wrapper,
+.assignment-title,
+.assignment-header,
+.assignment-type,
+.assignment-list,
+.assignment-list-items {
+  display: flex;
+  width: 100%;
+}
+.assignment-wrapper {
+  flex-direction: column;
+  height: 100vh;
+  padding-left: 10%;
+}
+.assignment-title {
+  font-size: 25px;
+  justify-content: center;
+  margin: 5% 0 5% 0;
+}
+.assignment-header {
+  justify-content: flex-end;
+}
+.assignment-type {
+  justify-content: flex-start;
+  font-size: 23px;
+}
+.assignment-list {
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 5%;
+}
+.assignment-status {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  font-size: 18px;
+}
+.assignment-list-items {
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: space-around;
+  width: 70%;
+  margin-top: 2%;
+  margin-bottom: 5%;
+}
