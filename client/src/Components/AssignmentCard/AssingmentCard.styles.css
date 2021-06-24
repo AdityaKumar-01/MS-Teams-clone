@@ -23,10 +23,6 @@
     font-size: 20px;
     color:white;
 }
-.assignment-card-deadline{
-    /* green 81B214 yellow FFCC29 red FA1E0E*/
-    color:#81B214;
-}
 .assignment-card-btn{
     justify-content: flex-end;
 }

@@ -39,6 +39,10 @@ app.use("/user", userRoute);
 // Routes module to handle any activity related to meet
 const videoRoute = require("./Routes/video.routes");
 app.use("/video", videoRoute);
+
+const assignmentRoute = require("./Routes/assignment.routes");
+app.use("/assignment", assignmentRoute);
+
 app.get("/", (req, res) =>{
   res.send("Backend for MS teams clone");
 })

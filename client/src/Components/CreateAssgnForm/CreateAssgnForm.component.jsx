@@ -1,20 +1,25 @@
 import React, { useState, useRef } from "react";
+
 import "./CreateAssgnForm.styles.css";
+
 const CreateAssgnForm = ({ toggleFormVisibility }) => {
+  
   const asgnName = useRef();
   const asgnDueDate = useRef();
   const asgnDueTime = useRef();
   const assgnFormLink = useRef();
   const [err, setError] = useState("");
+  
   const handleFormSubmission = (e) => {
     e.preventDefault();
     if(asgnName.current.value === "" || asgnDueDate.current.value === "" || asgnDueTime.current.value === "")
         setError("Enter all the details");
     else
         toggleFormVisibility();
+    
   };
   return (
-    <div className="assignment-form">
+    
       <form className="assignment-creation-form">
         {err}
         <span>
@@ -41,7 +46,7 @@ const CreateAssgnForm = ({ toggleFormVisibility }) => {
             onClick={(e) => handleFormSubmission(e)}
             className="create-btn"
           >
-            Submit
+            Create
           </button>
           <button
             onClick={() => toggleFormVisibility()}
@@ -51,7 +56,7 @@ const CreateAssgnForm = ({ toggleFormVisibility }) => {
           </button>
         </span>
       </form>
-    </div>
+    
   );
 };
 
