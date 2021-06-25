@@ -5,12 +5,12 @@ import { UserContext } from "../../Context/userContext";
 import "./ProfileSetting.styles.css";
 import { useHistory } from "react-router-dom";
 const ProfileSetting = ({ showHide }) => {
-  const { setUserName, setPwd } = useContext(UserContext);
-  const [userNameStatus, setUserNameStatus] = useState("");
-  const [pwdStatus, setPwdStaus] = useState("");
-  const userName = useRef();
-  const pwd = useRef();
-  const conPwd = useRef();
+  const { setUserName, setPwd } = useContext(UserContext); // brings data from user context
+  const [userNameStatus, setUserNameStatus] = useState(""); // state to hold data of update username form
+  const [pwdStatus, setPwdStaus] = useState(""); // state to hold data of password username form
+  const userName = useRef(); // ref to store username
+  const pwd = useRef(); // ref to store password
+  const conPwd = useRef(); // ref to store confirm password 
 
   let history = useHistory();
   useEffect(() => {}, [setUserName]);
