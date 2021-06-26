@@ -1,5 +1,5 @@
 // React libraries
-import React, {useState} from "react";
+import React, { useState, useEffect } from "react";
 
 // components
 import AssignmentCard from "./../AssignmentCard/AssignmentCard.component";
@@ -14,6 +14,8 @@ import DoneAllIcon from "@material-ui/icons/DoneAll";
 // External CSS
 import "./Assingment.styles.css";
 
+import axios from "axios";
+
 // Variant for assignment creation form
 const AssgnFormVar = {
   initialState: {
@@ -26,10 +28,26 @@ const AssgnFormVar = {
 
 const Assignment = () => {
   const [showPopUpForm, setShowPopUpForm] = useState(false);
-
-  const toggleFormVisibility = () =>{
+  const [asgnList, setAsgnList] = useState([]);
+  const toggleFormVisibility = () => {
     setShowPopUpForm(!showPopUpForm);
-  }
+  };
+
+  useEffect(() => {
+    getAssignmentList();
+  },[asgnList]);
+
+  const getAssignmentList = () => {
+    axios
+      .get(`${process.env.REACT_APP_BACKEND_URL}/assignment/getAssignment`)
+      .then((data) => {
+        console.log(data.data.list);
+        setAsgnList(data.data.list);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
   return (
     <div className="assignment-wrapper">
       <div className="assignment-title ">
@@ -41,14 +59,26 @@ const Assignment = () => {
       </div>
       <div className="assignment-list">
         <span className="assignment-status">
-          <UseAnimations
-            animation={alertCircle}
-            size={35}
-          />
+          {asgnList.length === 0 ? null : (
+            <UseAnimations animation={alertCircle} size={35} />
+          )}
           Pending
         </span>
         <div className="assignment-pending assignment-list-items">
-          <AssignmentCard date="31-06-2021" time="15:43" />
+          {asgnList.length === 0 ? (
+            <p>You are up to date</p>
+          ) : (
+            asgnList.map((assignment) => {
+              return (
+                <AssignmentCard
+                  id={assignment.assignmentId}
+                  title={assignment.title}
+                  date={assignment.dueDate}
+                  time={assignment.dueTime}
+                />
+              );
+            })
+          )}
         </div>
         <span className="assignment-status">
           <DoneAllIcon style={{ color: "#81B214", "margin-right": "10px" }} />
@@ -72,7 +102,10 @@ const Assignment = () => {
             initial="initialState"
             animate="finalState"
           >
-            <CreateAssgnForm toggleFormVisibility={toggleFormVisibility} />
+            <CreateAssgnForm
+              getAssignmentList={getAssignmentList}
+              toggleFormVisibility={toggleFormVisibility}
+            />
           </motion.div>
         ) : null}
       </div>

@@ -19,4 +19,11 @@ router.post("/create", (req, res) => {
   assignmentObj.save(); // save the data
 });
 
+router.get("/getAssignment", (req,res) => {
+  console.log("here in backend");
+  assignment.find({}, (err, data) => {
+    console.log(data);
+    res.send({ status: 200, list:data});
+  })
+})
 module.exports = router; // export the module

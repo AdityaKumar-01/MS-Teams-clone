@@ -1,12 +1,13 @@
 // React libraries
 import React, { useEffect, useState } from "react";
-
+import { useHistory } from "react-router-dom";
 // External CSS
 import "./AssingmentCard.styles.css";
 
-const AssignmentCard = ({ date, time }) => {
+const AssignmentCard = ({ id, title, date, time }) => {
   const [colorCode, setColorCode] = useState("");
 
+  let history = useHistory();
   useEffect(() => {
     handleDueStatus();
   });
@@ -15,7 +16,7 @@ const AssignmentCard = ({ date, time }) => {
   const handleDueStatus = () => {
     const currentDate = new Date(); // get current date and time
 
-    const dueDay = parseInt(date.split("-")[0]); // get due day and typecast to int
+    const dueDay = parseInt(date.split("-")[2]); // get due day and typecast to int
     const dueMonth = parseInt(date.split("-")[1]); // get due month and typecast to int
     const dueHr = parseInt(time.split(":")[0]); // get due hour and typecast to int
     const dueMin = parseInt(time.split(":")[1]); // get due minute and typecast to int
@@ -32,16 +33,23 @@ const AssignmentCard = ({ date, time }) => {
       else setColorCode("#FFCC29");
     } else setColorCode("#81B214");
   };
+
+  const showAssignment = () =>{
+    history.push(`/assignment/${id}`);
+  }
+
   return (
     <div className="assignment-card">
       <div className="assignment-card-detail">
-        <span className="assignment-card-title">Maths Quiz 1</span>
+        <span className="assignment-card-title">{title}</span>
         <span className="assignment-card-deadline" style={{ color: colorCode }}>
           Due: {date}, {time}
         </span>
       </div>
       <div className="assignment-card-btn">
-        <button>{colorCode === "#FA1E0E" ? "Open" : "Start"}</button>
+        <button onClick={() => showAssignment()}>
+          {colorCode === "#FA1E0E" ? "Open" : "Start"}
+        </button>
       </div>
     </div>
   );
