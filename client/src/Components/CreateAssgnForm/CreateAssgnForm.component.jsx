@@ -2,10 +2,11 @@
 import React, { useState, useRef } from "react";
 import { v4 as uuidv4 } from "uuid";
 import axios from "axios";
+
 // External CSS
 import "./CreateAssgnForm.styles.css";
 
-const CreateAssgnForm = ({getAssignmentList, toggleFormVisibility }) => {
+const CreateAssgnForm = ({getAssignmentList,  }) => {
   const asgnName = useRef(); // ref to handle assignment name
   const asgnDueDate = useRef(); // ref to handle assignment due date
   const asgnDueTime = useRef(); // ref to handle assignment due time
@@ -45,7 +46,7 @@ const CreateAssgnForm = ({getAssignmentList, toggleFormVisibility }) => {
         console.log(err);
       })
       getAssignmentList();
-        toggleFormVisibility();
+       
         
     }
   };
@@ -75,9 +76,7 @@ const CreateAssgnForm = ({getAssignmentList, toggleFormVisibility }) => {
         <button type="button" onClick={(e) => handleFormSubmission(e)} className="create-btn">
           Create
         </button>
-        <button onClick={() => toggleFormVisibility()} className="create-btn">
-          Cancel
-        </button>
+        
       </span>
     </form>
   );

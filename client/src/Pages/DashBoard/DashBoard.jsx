@@ -31,13 +31,11 @@ const DashBoard = () => {
 
   // function to toggle sections
   const showHide = (num) => {
-    if (num !== currentSection) {
-      var arr = showSection;
-      arr[currentSection] = false; // make the state of current displayed section to false
-      arr[num] = !arr[num]; // toggle the state of section to be displayed
-      setShowSection(arr);
-      setcurrentSection(num);
-    }
+    var arr = showSection;
+    arr[currentSection] = false; // make the state of current displayed section to false
+    arr[num] = !arr[num]; // toggle the state of section to be displayed
+    setShowSection(arr);
+    setcurrentSection(num);
   };
   return (
     <div className="dashboard-wrapper">

@@ -3,7 +3,8 @@
 .assignment-header,
 .assignment-type,
 .assignment-list,
-.assignment-list-items {
+.assignment-list-items,
+.form-area {
   display: flex;
   width: 100%;
 }
@@ -41,7 +42,23 @@
   flex-direction: column;
   justify-content: space-around;
   align-items: space-around;
-  width: 70%;
+  width: 80%;
   margin-top: 2%;
   margin-bottom: 5%;
+}
+.Collapsible {
+  width: 80%;
+  margin-top: 2%;
+}
+.Collapsible__trigger {
+  cursor: pointer;
+}
+
+.create-btn a {
+  text-decoration: none;
+  color: #f54748;
+}
+.form-area{
+  justify-content:center;
+  align-items:center;
 }

@@ -15,6 +15,10 @@ const userSchema = {
     type: String,
     require: [true],
   },
+  assignments:{
+    type:Array
+  }
+
 };
 
 // model for CRUD operations

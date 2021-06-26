@@ -10,32 +10,18 @@ import UseAnimations from "react-useanimations";
 import alertCircle from "react-useanimations/lib/alertCircle";
 import { motion } from "framer-motion";
 import DoneAllIcon from "@material-ui/icons/DoneAll";
-
 // External CSS
 import "./Assingment.styles.css";
 
 import axios from "axios";
-
-// Variant for assignment creation form
-const AssgnFormVar = {
-  initialState: {
-    scale: 3.8,
-  },
-  finalState: {
-    scale: 1,
-  },
-};
+import Collapsible from "react-collapsible";
 
 const Assignment = () => {
-  const [showPopUpForm, setShowPopUpForm] = useState(false);
   const [asgnList, setAsgnList] = useState([]);
-  const toggleFormVisibility = () => {
-    setShowPopUpForm(!showPopUpForm);
-  };
 
   useEffect(() => {
     getAssignmentList();
-  },[asgnList]);
+  }, []);
 
   const getAssignmentList = () => {
     axios
@@ -57,6 +43,7 @@ const Assignment = () => {
       <div className="assignment-type">
         <span>Assigned to You</span>
       </div>
+
       <div className="assignment-list">
         <span className="assignment-status">
           {asgnList.length === 0 ? null : (
@@ -64,7 +51,13 @@ const Assignment = () => {
           )}
           Pending
         </span>
-        <div className="assignment-pending assignment-list-items">
+        <Collapsible
+          trigger="Show >"
+          className="assignment-pending assignment-list-items"
+          open={true}
+          triggerWhenOpen="Hide"
+          transitionTime={300}
+        >
           {asgnList.length === 0 ? (
             <p>You are up to date</p>
           ) : (
@@ -79,40 +72,36 @@ const Assignment = () => {
               );
             })
           )}
-        </div>
+        </Collapsible>
+
         <span className="assignment-status">
           <DoneAllIcon style={{ color: "#81B214", "margin-right": "10px" }} />
           Completed
         </span>
-        <div className="assignment-done assignment-list-items">
+        <Collapsible
+          trigger="Show >"
+          className="assignment-done assignment-list-items"
+          triggerWhenOpen="Hide"
+          transitionTime={300}
+        >
           <AssignmentCard date="11-06-2021" time="12:03" />
-        </div>
+        </Collapsible>
       </div>
       <div className="assignment-type">
         <span>Created by You</span>
       </div>
-      <div className="assignment-header">
-        <button className="create-btn" onClick={() => toggleFormVisibility()}>
-          Create Assignment
-        </button>
-        {showPopUpForm ? (
-          <motion.div
-            className="assignment-form"
-            variants={AssgnFormVar}
-            initial="initialState"
-            animate="finalState"
-          >
-            <CreateAssgnForm
-              getAssignmentList={getAssignmentList}
-              toggleFormVisibility={toggleFormVisibility}
-            />
-          </motion.div>
-        ) : null}
-      </div>
       <div className="assignment-list">
-        <div className="assignment-pending assignment-list-items">
+        <Collapsible
+          trigger="Show >"
+          className="assignment-pending assignment-list-items"
+          triggerWhenOpen="Hide"
+          transitionTime={300}
+        >
           <AssignmentCard date="24-06-2021" time="20:03" />
-        </div>
+        </Collapsible>
+      </div>
+      <div id="form-creation" className="form-area">
+        <CreateAssgnForm getAssignmentList={getAssignmentList} />
       </div>
     </div>
   );
