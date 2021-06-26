@@ -2,7 +2,6 @@
 import React, { useState, useRef } from "react";
 import { v4 as uuidv4 } from "uuid";
 import axios from "axios";
-
 // External CSS
 import "./CreateAssignment.styles.css";
 
@@ -54,10 +53,11 @@ const CreateAssignment = () => {
       asgnDueDate.current.value = "";
       asgnDueTime.current.value = "";
       assgnFormLink.current.value = "";
+      
     }
   };
   return (
-    <div className="assignment-creation-form">
+    <div className = "assignment-creation-section">
       {currentSection === 1 ? (
         <AssignmentCreationForm
           asgnName={asgnName}

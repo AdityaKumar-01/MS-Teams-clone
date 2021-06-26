@@ -106,9 +106,12 @@ const Assignment = () => {
             </Collapsible>
           </div>
           <div className="form-area">
-            <div className="assgn-creation-header">Create Assignment</div>
+            <div className="assgn-creation-header header">
+              Create Assignment
+            </div>
             <CreateAssignment />
           </div>
+          <div className="form-area-pad"></div>
         </div>
       )}
     </div>

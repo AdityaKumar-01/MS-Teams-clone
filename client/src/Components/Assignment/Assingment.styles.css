@@ -62,8 +62,13 @@
 .form-area {
   justify-content: center;
   align-items: center;
+  margin-bottom:10%;
 }
-
+.form-area-pad{
+  content: "";
+  min-height:1px;
+  width:100%;
+}
 .assignment-outer-wrapper {
   width: 100%;
   margin: 0;
@@ -74,7 +79,7 @@
   align-items: center;
 }
 .assgn-creation-header {
-  font-size: 23px;
+  font-size: 28px;
 }
 .form-area {
   flex-direction: column;

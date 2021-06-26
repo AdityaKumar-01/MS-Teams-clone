@@ -1,5 +1,6 @@
 import React from "react";
 
+import "./AssignmentCreationForm.styles.css";
 const AssignmentCreationForm = ({
   asgnName,
   asgnDueDate,
@@ -9,7 +10,7 @@ const AssignmentCreationForm = ({
   handleToggleSection,
 }) => {
   return (
-    <form >
+    <form className="assignment-creation-form">
       {err}
       <span>
         Assignment Title <span style={{ color: "red" }}>*</span>
