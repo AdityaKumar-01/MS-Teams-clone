@@ -4,7 +4,8 @@
 .assignment-type,
 .assignment-list,
 .assignment-list-items,
-.form-area {
+.form-area,
+.assgn-form-container {
   display: flex;
   width: 100%;
 }
@@ -58,7 +59,23 @@
   text-decoration: none;
   color: #f54748;
 }
-.form-area{
-  justify-content:center;
-  align-items:center;
+.form-area {
+  justify-content: center;
+  align-items: center;
+}
+
+.assignment-outer-wrapper {
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.assgn-creation-header {
+  font-size: 23px;
+}
+.form-area {
+  flex-direction: column;
 }
