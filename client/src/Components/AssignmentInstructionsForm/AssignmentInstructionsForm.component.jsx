@@ -1,11 +1,31 @@
-import React from 'react'
+import React, { useContext, useState } from "react";
 import AddIcon from "@material-ui/icons/Add";
 import CloseIcon from "@material-ui/icons/Close";
 import "./AssignmentInstructionsForm.styles.css";
-const AssignmentInstructionsForm = ({
-  handleToggleSection,
-  handleFormSubmission,
-}) => {
+
+import { AssignmentContext } from "../../Context/assignmentContext";
+const AssignmentInstructionsForm = () => {
+  const {
+    handleToggleSection,
+    handleFormSubmission,
+    assignmentInstructions,
+    setAssignmentInstructions,
+  } = useContext(AssignmentContext);
+
+  const [currentInstructions, setCurrentInstructions] = useState("");
+  const addInstruction = () => {
+    setAssignmentInstructions([...assignmentInstructions, currentInstructions]);
+    setCurrentInstructions("");
+  };
+
+  const removeInstruction = (id) => {
+    console.log(id);
+    setAssignmentInstructions((prevAssignmentInstructions) => {
+      return prevAssignmentInstructions.filter((instruction, index) => {
+        return index !== id;
+      });
+    });
+  };
   return (
     <div className="assignent-assignees-form">
       <div className="assignment-assignees-left-panel">
@@ -16,10 +36,14 @@ const AssignmentInstructionsForm = ({
               className="assginees-input"
               type="text"
               placeholder="Write here ..."
+              value={currentInstructions}
+              onChange={(e) => setCurrentInstructions(e.target.value)}
+              spellCheck={false}
             />
           </span>
           <span className="add-assignees-btn">
             <AddIcon
+              onClick={() => addInstruction()}
               style={{ color: "f54748", cursor: "pointer", fontSize: 30 }}
             />
           </span>
@@ -42,73 +66,30 @@ const AssignmentInstructionsForm = ({
         </div>
       </div>
       <div className="assignment-instructions-right-panel">
-        <span className="assigness-bubble">
-          <p>Attempt All question each question carry 1 marks</p>
-          <span className="assign-remove">
-            <CloseIcon
-              style={{ fontSize: 20, color: "white", marginLeft: "10px" }}
-            />
-          </span>
-        </span>
-        <span className="assigness-bubble">
-          <p>Aditya</p>
-          <span className="assign-remove">
-            <CloseIcon
-              style={{ fontSize: 20, color: "white", marginLeft: "10px" }}
-            />
-          </span>
-        </span>
-        <span className="assigness-bubble">
-          <p>Aditya</p>
-          <span className="assign-remove">
-            <CloseIcon
-              style={{ fontSize: 20, color: "white", marginLeft: "10px" }}
-            />
-          </span>
-        </span>
-        <span className="assigness-bubble">
-          <p>Aditya</p>
-          <span className="assign-remove">
-            <CloseIcon
-              style={{ fontSize: 20, color: "white", marginLeft: "10px" }}
-            />
-          </span>
-        </span>
-        <span className="assigness-bubble">
-          <p>Aditya</p>
-          <span className="assign-remove">
-            <CloseIcon
-              style={{ fontSize: 20, color: "white", marginLeft: "10px" }}
-            />
-          </span>
-        </span>
-        <span className="assigness-bubble">
-          <p>Aditya</p>
-          <span className="assign-remove">
-            <CloseIcon
-              style={{ fontSize: 20, color: "white", marginLeft: "10px" }}
-            />
-          </span>
-        </span>
-        <span className="assigness-bubble">
-          <p>Aditya</p>
-          <span className="assign-remove">
-            <CloseIcon
-              style={{ fontSize: 20, color: "white", marginLeft: "10px" }}
-            />
-          </span>
-        </span>
-        <span className="assigness-bubble">
-          <p>Aditya</p>
-          <span className="assign-remove">
-            <CloseIcon
-              style={{ fontSize: 20, color: "white", marginLeft: "10px" }}
-            />
-          </span>
-        </span>
+        {assignmentInstructions.length !== 0 ? (
+          assignmentInstructions.map((obj, index) => {
+            return (
+              <span className="assigness-bubble" id={index} key={index}>
+                <p>{obj}</p>
+                <span className="assign-remove">
+                  <CloseIcon
+                    onClick={() => removeInstruction(index)}
+                    style={{
+                      fontSize: 20,
+                      color: "white",
+                      marginLeft: "10px",
+                    }}
+                  />
+                </span>
+              </span>
+            );
+          })
+        ) : (
+          <p>Instructions will appear here</p>
+        )}
       </div>
     </div>
   );
 };
 
-export default AssignmentInstructionsForm
+export default AssignmentInstructionsForm;

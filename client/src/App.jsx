@@ -13,6 +13,7 @@ import "./App.css";
 // Context API
 import { UserProvider } from "./Context/userContext";
 import { MeetProvider } from "./Context/meetContext";
+import { AssignmentProvider } from "./Context/assignmentContext";
 
 const App = () => {
   return (
@@ -20,10 +21,12 @@ const App = () => {
       <Switch>
         <UserProvider>
           <MeetProvider>
-            <Route path="/" exact component={LoginPage} />
-            <Route path="/dashboard" exact component={DashBoard} />
-            <Route path="/dashboard/chat" component={ChatArea} />
-            <Route path="/meet" exact component={MeetWindow} />
+            <AssignmentProvider>
+              <Route path="/" exact component={LoginPage} />
+              <Route path="/dashboard" exact component={DashBoard} />
+              <Route path="/dashboard/chat" component={ChatArea} />
+              <Route path="/meet" exact component={MeetWindow} />
+            </AssignmentProvider>
           </MeetProvider>
         </UserProvider>
       </Switch>
