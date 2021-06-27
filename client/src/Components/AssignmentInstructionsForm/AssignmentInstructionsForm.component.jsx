@@ -2,7 +2,7 @@ import React, { useContext, useState } from "react";
 import AddIcon from "@material-ui/icons/Add";
 import CloseIcon from "@material-ui/icons/Close";
 import "./AssignmentInstructionsForm.styles.css";
-
+import noInstructions from "../../Assets/instructions.png";
 import { AssignmentContext } from "../../Context/assignmentContext";
 const AssignmentInstructionsForm = () => {
   const {
@@ -14,6 +14,7 @@ const AssignmentInstructionsForm = () => {
 
   const [currentInstructions, setCurrentInstructions] = useState("");
   const addInstruction = () => {
+    if(currentInstructions !== "")
     setAssignmentInstructions([...assignmentInstructions, currentInstructions]);
     setCurrentInstructions("");
   };
@@ -85,7 +86,12 @@ const AssignmentInstructionsForm = () => {
             );
           })
         ) : (
-          <p>Instructions will appear here</p>
+          <div className="nothing-container">
+            <span className="nothing-img">
+              <img src={noInstructions} alt="no indtructions" />
+            </span>
+            <span className="nothing-msg">Instructions will appear here</span>
+          </div>
         )}
       </div>
     </div>

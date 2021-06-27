@@ -15,8 +15,11 @@ router.post("/create", (req, res) => {
     dueDate: req.body.date,
     dueTime: req.body.time,
     formLink: req.body.formLink,
+    assigneesName: req.body.assigneesName,
+    assignmentInstructions: req.body.assignmentInstructions,
   });
   assignmentObj.save(); // save the data
+  res.send({status:200, msg:"created"})
 });
 
 router.get("/getAssignment", (req,res) => {

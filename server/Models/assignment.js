@@ -25,6 +25,13 @@ const assignmentSchema = {
   formLink: {
     type: String,
   },
+  assigneesName: {
+    type: Array,
+    require: [true],
+  },
+  assignmentInstructions:{
+    type: Array,
+  }
 };
 
 // model for CRUD operations

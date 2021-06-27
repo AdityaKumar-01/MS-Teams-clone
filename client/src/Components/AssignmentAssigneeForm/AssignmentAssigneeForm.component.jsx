@@ -1,16 +1,20 @@
 import React, { useContext, useState } from "react";
 import AddIcon from "@material-ui/icons/Add";
 import CloseIcon from "@material-ui/icons/Close";
+
+import noAssignees from "../../Assets/assignees.png";
+
 import "./AssignmentAssigneeForm.styles.css";
 
 import { AssignmentContext } from "../../Context/assignmentContext";
 const AssignmentAssigneeForm = () => {
-  const { handleToggleSection, assigneesName, setAssigneesName } =
+  const { handleToggleSection, assigneesName, setAssigneesName, assigneesErr } =
     useContext(AssignmentContext);
 
   const [currentAssignee, setCurrentAssignee] = useState("");
   const addAssignee = () => {
-    setAssigneesName([...assigneesName, currentAssignee]);
+    if(currentAssignee !== "")
+      setAssigneesName([...assigneesName, currentAssignee]);
     setCurrentAssignee("");
   };
 
@@ -26,6 +30,7 @@ const AssignmentAssigneeForm = () => {
     <div className="assignent-assignees-form">
       <div className="assignment-assignees-left-panel">
         <span className="panel-title">Assign this to</span>
+        <span>{assigneesErr}</span>
         <div className="assign-form">
           <span>
             <input
@@ -81,7 +86,12 @@ const AssignmentAssigneeForm = () => {
             );
           })
         ) : (
-          <p>No one</p>
+          <div className="nothing-container">
+            <span className="nothing-img">
+              <img src={noAssignees} alt="no assignees" />
+            </span>
+            <span className="nothing-msg">Assignees name will appear here</span>
+          </div>
         )}
       </div>
     </div>

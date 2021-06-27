@@ -2,6 +2,7 @@
 import React, { useState } from "react";
 import { v4 as uuidv4 } from "uuid";
 import axios from "axios";
+import { useHistory } from "react-router-dom";
 // USerContext that will help to fetch values
 const AssignmentContext = React.createContext();
 
@@ -10,6 +11,7 @@ const AssignmentContext = React.createContext();
 
 const AssignmentProvider = ({ children }) => {
   const [err, setError] = useState(""); // state to handle if any error occur
+  const [assigneesErr, setAssigneesErr] = useState(""); // state to handle if any error occur
   const [currentSection, setCurrentSection] = useState(1);
   const [asgnName, setAsgnName] = useState("");
   const [asgnDueDate, setAsgnDueDate] = useState("");
@@ -17,50 +19,57 @@ const AssignmentProvider = ({ children }) => {
   const [assgnFormLink, setAssgnFormLink] = useState("");
   const [assigneesName, setAssigneesName] = useState([]);
   const [assignmentInstructions, setAssignmentInstructions] = useState([]);
+
+  let history = useHistory();
+
   const handleToggleSection = (num) => {
-    setCurrentSection(num);
-    console.log(asgnName);
+    if (
+      num === 2 &&
+      (asgnName === "" || asgnDueDate === "" || asgnDueTime === "")
+    ) {
+      setError("Enter all the details");
+    } else if (num === 3 && assigneesName.length === 0) {
+      setAssigneesErr("Enter atleast one assignee's name");
+    } else setCurrentSection(num);
   };
   const handleFormSubmission = (e) => {
     e.preventDefault();
+    const uid = uuidv4();
 
-    // set error if required fields are empty
-    if (
-      asgnName.current.value === "" ||
-      asgnDueDate.current.value === "" ||
-      asgnDueTime.current.value === ""
-    )
-      setError("Enter all the details");
-    else {
-      const uid = uuidv4();
-
-      var data = {
-        id: uid,
-        creator: localStorage.getItem("userName"),
-        title: asgnName.current.value,
-        date: asgnDueDate.current.value,
-        time: asgnDueTime.current.value,
-        formLink: assgnFormLink.current.value,
-      };
-      axios
-        .post(`${process.env.REACT_APP_BACKEND_URL}/assignment/create`, data)
-        .then((res) => {
-          // console.log(res.status);
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-      asgnName.current.value = "";
-      asgnDueDate.current.value = "";
-      asgnDueTime.current.value = "";
-      assgnFormLink.current.value = "";
-    }
+    var data = {
+      id: uid,
+      creator: localStorage.getItem("userName"),
+      title: asgnName,
+      date: asgnDueDate,
+      time: asgnDueTime,
+      formLink: assgnFormLink,
+      assigneesName: assigneesName,
+      assignmentInstructions: assignmentInstructions,
+    };
+    console.log(data);
+    axios
+      .post(`${process.env.REACT_APP_BACKEND_URL}/assignment/create`, data)
+      .then((res) => {
+        console.log(res.status);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+    history.push(`/assignment?id=${uid}`);
+    setAsgnName("");
+    setAsgnDueDate("");
+    setAsgnDueTime("");
+    setAssgnFormLink("");
+    setCurrentSection(1);
+    setAssigneesName([]);
+    setAssignmentInstructions([]);
   };
 
   // values holds functions and states to be shared
   const value = {
     err,
     setError,
+    assigneesErr,
     currentSection,
     setCurrentSection,
     asgnName,

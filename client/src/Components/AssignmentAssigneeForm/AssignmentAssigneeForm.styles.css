@@ -2,7 +2,8 @@
 .assignment-assignees-left-panel,
 .assignment-assignees-right-panel,
 .add-assignees-btn,
-.assigness-bubble {
+.assigness-bubble,
+.assignment-instructions-right-panel {
   display: flex;
   width: 100%;
   height: 400px;
@@ -15,7 +16,7 @@
 }
 .assignment-assignees-right-panel {
   flex-wrap: wrap;
-  height: 150px;
+  height: 400px;
 }
 .assign-form {
   display: flex;
@@ -60,4 +61,20 @@
 }
 .assign-remove {
   cursor: pointer;
+}
+.nothing-container,.nothing-img{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.nothing-img{
+  padding:5%;
+}
+.nothing-img img{
+  width:250px;
+  height:300px;
+}
+.nothing-msg{
+  font-size:20px;
 }
