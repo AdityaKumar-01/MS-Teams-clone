@@ -44,7 +44,9 @@ const AssignmentPage = () => {
           <DisplayAssignment assignmentObj={assignmentObj} creator={true} />
         </div>
       ) : (
-        <DisplayAssignment assignmentObj={assignmentObj} creator={false}/>
+        <div className="assignment-container">
+          <DisplayAssignment assignmentObj={assignmentObj} creator={false} />
+        </div>
       )}
     </div>
   );
