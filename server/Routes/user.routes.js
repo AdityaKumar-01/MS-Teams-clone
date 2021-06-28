@@ -22,6 +22,7 @@ router.post("/signUp", (req, res) => {
         email: req.body.email,
         userName: req.body.name,
         password: sha256(req.body.password),
+        assignments:[]
       });
       userObj.save(); // save the data
 

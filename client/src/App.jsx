@@ -6,7 +6,8 @@ import LoginPage from "./Pages/LoginPage/LoginPage";
 import DashBoard from "./Pages/DashBoard/DashBoard";
 import ChatArea from "./Pages/ChatArea/ChatArea.component";
 import MeetWindow from "./Pages/MeetWindow/MeetWindow.component";
-import DisplayAssignment from "./Pages/DisplayAssignment/DisplayAssignment.component";
+import AssignmentPage from "./Pages/AssignmentPage/AssignmentPage";
+
 // CSS
 import "./App.css";
 
@@ -26,7 +27,7 @@ const App = () => {
               <Route path="/dashboard" exact component={DashBoard} />
               <Route path="/dashboard/chat" component={ChatArea} />
               <Route path="/meet" exact component={MeetWindow} />
-              <Route path="/assignment" component={DisplayAssignment} />
+              <Route path="/assignment" component={AssignmentPage} />
             </AssignmentProvider>
           </MeetProvider>
         </UserProvider>

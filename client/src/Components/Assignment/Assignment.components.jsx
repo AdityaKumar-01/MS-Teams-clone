@@ -25,9 +25,14 @@ const Assignment = () => {
 
   const getAssignmentList = () => {
     axios
-      .get(`${process.env.REACT_APP_BACKEND_URL}/assignment/getAssignment`)
+      .get(`${process.env.REACT_APP_BACKEND_URL}/assignment/getAssignment`, {
+        params: {
+          userName: localStorage.getItem("userName"),
+        },
+      })
       .then((data) => {
-        setAsgnList(data.data.list);
+        // setAsgnList(data.data.list);
+        console.log(data.data);
         setLoading(false);
       })
       .catch((err) => {
