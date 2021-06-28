@@ -4,7 +4,7 @@ import queryString from "query-string";
 import axios from "axios";
 import DisplayAssignment from "../../Components/DisplayAssignment/DisplayAssignment.component";
 import AssignmentResponse from './../../Components/AssignmentResponse/AssignmentResponse.component';
-
+import "./AssignmentPage.styles.css";
 const AssignmentPage = () => {
   const [loading, setLoading] = useState(true);
   const [assignmentObj, setAssignmentObj] = useState("");
@@ -41,10 +41,10 @@ const AssignmentPage = () => {
       ) : isCreator ? (
         <div className="assignment-container">
           <AssignmentResponse assignmentObj={assignmentObj} />
-          <DisplayAssignment assignmentObj={assignmentObj} />
+          <DisplayAssignment assignmentObj={assignmentObj} creator={true} />
         </div>
       ) : (
-        <DisplayAssignment assignmentObj={assignmentObj} />
+        <DisplayAssignment assignmentObj={assignmentObj} creator={false}/>
       )}
     </div>
   );

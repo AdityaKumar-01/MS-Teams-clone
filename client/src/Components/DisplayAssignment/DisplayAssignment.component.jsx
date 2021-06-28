@@ -1,6 +1,7 @@
-import React from 'react'
+import React from 'react';
 
-const DisplayAssignment = ({ assignmentObj }) => {
+import "./DisplayAssignment.css";
+const DisplayAssignment = ({ assignmentObj, creator }) => {
     console.log(assignmentObj);
     var myObj = JSON.parse(assignmentObj); 
     console.log(myObj);
