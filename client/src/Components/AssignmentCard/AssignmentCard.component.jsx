@@ -6,7 +6,7 @@ import "./AssingmentCard.styles.css";
 
 const AssignmentCard = ({ id, title, date, time }) => {
   const [colorCode, setColorCode] = useState("");
-  id = "cf789667-e829-4860-af0b-e03da5d60551";
+ 
   let history = useHistory();
   useEffect(() => {
     handleDueStatus();

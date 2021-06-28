@@ -22,7 +22,6 @@ const Assignment = () => {
   useEffect(() => {
     getAssignmentList();
   }, []);
-
   const getAssignmentList = () => {
     axios
       .get(`${process.env.REACT_APP_BACKEND_URL}/assignment/getAssignment`, {
@@ -31,8 +30,8 @@ const Assignment = () => {
         },
       })
       .then((data) => {
-        // setAsgnList(data.data.list);
-        console.log(data.data);
+        setAsgnList(data.data.list);
+        console.log(data.data.list);
         setLoading(false);
       })
       .catch((err) => {
@@ -71,15 +70,19 @@ const Assignment = () => {
                 <p>You are up to date</p>
               ) : (
                 asgnList.map((assignment) => {
-                  return (
-                    <AssignmentCard
-                      id={assignment.assignmentId}
-                      title={assignment.title}
-                      date={assignment.dueDate}
-                      time={assignment.dueTime}
-                      key={assignment.assignmentId}
-                    />
-                  );
+                  if (
+                    assignment.creator !== localStorage.getItem("userName") &&
+                    !assignment.turnedIn
+                  )
+                    return (
+                      <AssignmentCard
+                        id={assignment.assignmentId}
+                        title={assignment.title}
+                        date={assignment.dueDate}
+                        time={assignment.dueTime}
+                        key={assignment.assignmentId}
+                      />
+                    );
                 })
               )}
             </Collapsible>
@@ -94,7 +97,21 @@ const Assignment = () => {
               triggerWhenOpen="Hide"
               transitionTime={300}
             >
-              <AssignmentCard date="11-06-2021" time="12:03" />
+              {asgnList.map((assignment) => {
+                if (
+                  assignment.creator !== localStorage.getItem("userName") &&
+                  assignment.turnedIn
+                )
+                  return (
+                    <AssignmentCard
+                      id={assignment.assignmentId}
+                      title={assignment.title}
+                      date={assignment.dueDate}
+                      time={assignment.dueTime}
+                      key={assignment.assignmentId}
+                    />
+                  );
+              })}
             </Collapsible>
           </div>
           <div className="assignment-type">
@@ -107,7 +124,22 @@ const Assignment = () => {
               triggerWhenOpen="Hide"
               transitionTime={300}
             >
-              <AssignmentCard date="24-06-2021" time="20:03" />
+              {asgnList.length === 0 ? (
+                <p>You are up to date</p>
+              ) : (
+                asgnList.map((assignment) => {
+                  if (assignment.creator === localStorage.getItem("userName"))
+                    return (
+                      <AssignmentCard
+                        id={assignment.assignmentId}
+                        title={assignment.title}
+                        date={assignment.dueDate}
+                        time={assignment.dueTime}
+                        key={assignment.assignmentId}
+                      />
+                    );
+                })
+              )}
             </Collapsible>
           </div>
           <div className="form-area">

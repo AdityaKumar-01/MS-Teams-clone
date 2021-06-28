@@ -11,7 +11,7 @@ const DisplayAssignment = ({ assignmentObj }) => {
       <span>{myObj.dueDate}</span>
       <span>{myObj.dueTime}</span>
       <span>{myObj.formLink}</span>
-      <span>{myObj.assigneesName}</span>
+     
       <span>{myObj.assignmentInstructions}</span>
     </div>
   );

@@ -5,31 +5,63 @@ const router = express.Router();
 const assignment = require("../Models/assignment.js");
 const user = require("../Models/user.js");
 
-const prepareAssignment =  (data) => {
-  var assgnList = [];
-   data.forEach((obj) => {
-    asgnObj = assignment.find({ assignmentId: obj.id });
-    console.log("====================================");
-    console.log("====================================");
-    console.log("====================================");
-    console.log("====================================");
-    console.log(asgnObj);
-    // var element = {
-    //   assignmentId: asgnObj[0].assignmentId,
-    //   creator: asgnObj[0].creator,
-    //   title: asgnObj[0].title,
-    //   dueDate: asgnObj[0].dueDate,
-    //   dueTime: asgnObj[0].dueTime,
-    //   turnedIn: obj.turnedIn,
-    // };
-    // console.log("element");
-    // console.log(element);
-    // assgnList.push(element);
-  });
-  console.log("list");
-  console.log(assgnList);
+const demo = async (obj) => {
+  asgnObj = await assignment.find({ assignmentId: obj.id });
+  if (asgnObj[0]) {
+    var element = {
+      assignmentId: asgnObj[0].assignmentId,
+      creator: asgnObj[0].creator,
+      title: asgnObj[0].title,
+      dueDate: asgnObj[0].dueDate,
+      dueTime: asgnObj[0].dueTime,
+      turnedIn: obj.turnedIn,
+    };
+    return element;
+  }
+
+  return null;
+};
+
+// const prepareAssignment = async (data) => {
+//   assgnList = await Promise.all(
+//     data.map(async (obj) => {
+//       element = await demo(obj);
+//       return element;
+//     })
+//   );
+//   console.log("assgnList inside prepare function");
+//   console.log(assgnList);
+//   return assgnList;
+// };
+const assignmentInfo = async (obj) => {
+  asgnObj = await assignment.find({ assignmentId: obj.id });
+  if (asgnObj[0]) {
+    var element = {
+      assignmentId: asgnObj[0].assignmentId,
+      creator: asgnObj[0].creator,
+      title: asgnObj[0].title,
+      dueDate: asgnObj[0].dueDate,
+      dueTime: asgnObj[0].dueTime,
+      turnedIn: obj.turnedIn,
+    };
+    console.log("here in info");
+    console.log(element);
+    return element;
+  }
+
+  return null;
+};
+const prepareAssignment = async (data) => {
+  assgnList = await Promise.all(
+    data.map(async (obj) => {
+      element = await assignmentInfo(obj);
+      return element;
+    })
+  );
+
   return assgnList;
 };
+
 router.post("/create", (req, res) => {
   const assignees = req.body.assigneesName;
   const uid = req.body.id;
@@ -58,20 +90,18 @@ router.post("/create", (req, res) => {
   res.send({ status: 200, msg: "created" });
 });
 
-router.get("/getAssignment", (req, res) => {
-  console.log("here in backend ", req.query.userName);
-  user.find({ userName: req.query.userName }, (err, data) => {
-    // console.log(data[0].assignments);
-    var assgnList = prepareAssignment(data[0].assignments);
-    res.send({ status: 200, list: assgnList });
-  });
+router.get("/getAssignment", async (req, res) => {
+  var assgnList = [];
+  assgnList = await user.find({ userName: req.query.userName });
+  assgnList = await prepareAssignment(assgnList[0].assignments);
+  console.log("here in route");
+  console.log(assgnList);
+  
+  res.send({ status: 200, list: assgnList });
 });
 
 router.get("/getAssignmentDetails", (req, res) => {
-  console.log("here in backend ", req.query.id);
   assignment.find({ assignmentId: req.query.id }, (err, data) => {
-    // console.log(data[0].assignments);
-    // var assgnList = prepareAssignment(data[0].assignments);
     res.send({ status: 200, list: data[0] });
   });
 });
