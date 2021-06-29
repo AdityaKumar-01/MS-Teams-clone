@@ -4,7 +4,7 @@ import { useHistory } from "react-router-dom";
 // External CSS
 import "./AssingmentCard.styles.css";
 
-const AssignmentCard = ({ id, title, date, time }) => {
+const AssignmentCard = ({ id, title, date, time, mine }) => {
   const [colorCode, setColorCode] = useState("");
 
   let history = useHistory();
@@ -56,7 +56,7 @@ const AssignmentCard = ({ id, title, date, time }) => {
       </div>
       <div className="assignment-card-btn">
         <button onClick={() => showAssignment()}>
-          {colorCode === "#FA1E0E" ? "Open" : "Start"}
+          {mine ? "Open": colorCode === "#FA1E0E" ? "Open" : "Start"}
         </button>
       </div>
     </div>

@@ -1,32 +1,50 @@
 import React, { useRef, useState, useEffect } from "react";
-import {useHistory} from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import ArrowBackIcon from "@material-ui/icons/ArrowBack";
 import "./DisplayAssignment.css";
-
+import axios from "axios";
 const DisplayAssignment = ({ assignmentObj, creator }) => {
+  var myObj = JSON.parse(assignmentObj);
   const fileRef = useRef();
   const [submitted, setSubmitted] = useState(false);
   const [frameId, setFrameId] = useState(13837);
   const [frameLink, setFrameLink] = useState("");
-  const frameArray = [65868,66723,66619];
-
+  const frameArray = [65868, 66723, 66619];
   let history = useHistory();
   useEffect(() => {
-    setFrameLink(`https://embed.lottiefiles.com/animation/${frameId}`)
-  }, [frameId])
-  const handleFrame = () =>{
-    setSubmitted(!submitted);
-    setFrameId(frameArray[Math.floor(Math.random() * frameArray.length)]);
-  }
-  
-  const goHome = () =>{
-    history.push("/dashboard")
-  }
-  var myObj = JSON.parse(assignmentObj);
+    setFrameLink(`https://embed.lottiefiles.com/animation/${frameId}`);
+  }, [frameId]);
+  const handleFrame = () => {
+    axios({
+      method: "post",
+      url: `${process.env.REACT_APP_BACKEND_URL}/assignment/turnInAssignment`,
+      data: {
+        id: myObj.assignmentId,
+        userName: localStorage.getItem("userName"),
+      },
+    })
+      .then((info) => {
+        setSubmitted(!submitted);
+        setFrameId(frameArray[Math.floor(Math.random() * frameArray.length)]);
+      })
+      .catch((err) => {
+        console.log("error");
+      });
+  };
+
+  const goHome = () => {
+    history.push("/dashboard");
+  };
+
   return (
     <div className="display-assignment">
       <div className="display-panel-left">
-      {!creator ?(<span className="home-icon" onClick={() => goHome()} ><ArrowBackIcon/>Back</span>):null }
+        {!creator ? (
+          <span className="home-icon" onClick={() => goHome()}>
+            <ArrowBackIcon />
+            Back
+          </span>
+        ) : null}
         <span className="display-title display-assignment-section">
           {myObj.title}
         </span>
@@ -48,7 +66,7 @@ const DisplayAssignment = ({ assignmentObj, creator }) => {
           </span>
           {myObj.assignmentInstructions.map((instruction, index) => {
             return (
-              <div className="display-instruction-tile">
+              <div className="display-instruction-tile" key={index}>
                 {index + 1}. {instruction}
               </div>
             );
@@ -79,7 +97,7 @@ const DisplayAssignment = ({ assignmentObj, creator }) => {
           className="test-link create-btn"
           onClick={() => handleFrame()}
         >
-          {submitted ? ("Turned In"):("Turn In")}
+          {submitted ? "Turned In" : "Turn In"}
         </button>
       </div>
       <div className="display-panel-right">
@@ -87,7 +105,6 @@ const DisplayAssignment = ({ assignmentObj, creator }) => {
         <span>
           {submitted ? <span className="btn-shine">Submitted !!!</span> : null}
         </span>
-        
       </div>
     </div>
   );

@@ -1,10 +1,30 @@
-import React from "react";
-
+import React, { useEffect, useState } from "react";
+import axios from "axios";
 import "./AssignmentResponse.styles.css";
 
 const AssignmentResponse = ({ assignmentObj }) => {
   var myObj = JSON.parse(assignmentObj);
-  console.log(myObj.assigneesName);
+  const [assigneeStatus, setAssigneeStatus] = useState([]);
+  useEffect(() => {
+    const getStatus = () => {
+      axios.get(
+        `${process.env.REACT_APP_BACKEND_URL}/assignment/assignmentStatus`,
+        {
+          params: {
+            id: myObj.assignmentId,
+            asgineesName: myObj.assigneesName,
+          },
+        }
+      ).then((data) =>{
+        console.log(data.data.info);
+        setAssigneeStatus(data.data.info)
+      });
+      
+      // setAssigneeStatus([...assigneeStatus, info]);
+    };
+    getStatus();
+  }, []);
+
   return (
     <div className="assignment-response">
       <div className="assignment-response-header">
@@ -18,17 +38,31 @@ const AssignmentResponse = ({ assignmentObj }) => {
         <div className="assignment-status-list">
           <span className="status-title">Yet to Turn In</span>
           <div className="assinees-list">
-            {myObj.assigneesName.map((name, key) => {
-              return <span className="assignee-tile">{name}</span>;
-            })}
+            {assigneeStatus.length !== 0
+              ? assigneeStatus.map((obj, key) => {
+                  if (!obj.status)
+                    return (
+                      <span className="assignee-tile" key={key}>
+                        {obj.name}
+                      </span>
+                    );
+                })
+              : null}
           </div>
         </div>
         <div className="assignment-status-list">
           <span className="status-title">Already Turned In</span>
           <div className="assinees-list">
-            {myObj.assigneesName.map((name, key) => {
-              return <span className="assignee-tile">{name}</span>;
-            })}
+            {assigneeStatus.length !== 0
+              ? assigneeStatus.map((obj, key) => {
+                  if (obj.status)
+                    return (
+                      <span className="assignee-tile" key={key}>
+                        {obj.name} at {obj.timeStamp}
+                      </span>
+                    );
+                })
+              : null}
           </div>
         </div>
       </div>

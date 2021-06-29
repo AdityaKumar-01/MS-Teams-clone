@@ -80,6 +80,7 @@ const Assignment = () => {
                         date={assignment.dueDate}
                         time={assignment.dueTime}
                         key={assignment.assignmentId}
+                        mine={false}
                       />
                     );
                 })
@@ -108,6 +109,7 @@ const Assignment = () => {
                       date={assignment.dueDate}
                       time={assignment.dueTime}
                       key={assignment.assignmentId}
+                      mine={false}
                     />
                   );
               })}
@@ -124,7 +126,7 @@ const Assignment = () => {
               transitionTime={300}
             >
               {asgnList.length === 0 ? (
-                <p>You are up to date</p>
+                <p>Ypu haven't created any assignment</p>
               ) : (
                 asgnList.map((assignment) => {
                   if (assignment.creator === localStorage.getItem("userName"))
@@ -135,6 +137,7 @@ const Assignment = () => {
                         date={assignment.dueDate}
                         time={assignment.dueTime}
                         key={assignment.assignmentId}
+                        mine={true}
                       />
                     );
                 })
