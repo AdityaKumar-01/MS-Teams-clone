@@ -66,7 +66,7 @@ const Assignment = () => {
               transitionTime={300}
             >
               {asgnList.length === 0 ? (
-                <p>You are up to date</p>
+                <p className="work-msg">You are up to date</p>
               ) : (
                 asgnList.map((assignment) => {
                   if (

@@ -38,3 +38,9 @@
     border-radius: 5px;
     margin:1%;
 }
+@media (max-width: 500px) {
+  .display-tab{
+      font-size:14px;
+
+  }
+}

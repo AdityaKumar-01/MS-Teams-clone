@@ -19,7 +19,7 @@
   margin: 0 5%;
   border: none;
   outline: none;
-  border-radius: 10px;
+  border-radius: 5px;
   height: 40px;
   width: 80%;
   text-align: center;
@@ -37,4 +37,31 @@
 }
 .btns button {
   margin: 1%;
+}
+@media (max-width: 750px) {
+  .assignment-creation-form {
+    justify-content: space-around;
+    align-items: center;
+    width: 60%;
+    margin-top: 5%;
+    height: 70vh;
+    background-color: white;
+    border-radius: 5px;
+    border: 1px solid black;
+  }
+}
+@media (max-width: 450px) {
+  .assignment-creation-form span {
+    font-size: 14px;
+  }
+  .assignment-creation-form input {
+    height: 30px;
+    width: 80%;
+    border-radius: 5px;
+    font-size: 12px;
+  }
+  .btns button {
+    height:30px;
+    width:60px
+  }
 }

@@ -42,14 +42,14 @@ const MeetWindow = () => {
   } else {
     render = (
       <div>
-      {/* contional rendering while page is loading */}
+        {/* contional rendering while page is loading */}
         {connecting ? (
           <div className="loading-container">
-            <h1 className="linear-wipe">Connecting ...</h1>
+            <h1 className="btn-shine connection-status">Connecting ...</h1>
           </div>
         ) : (
           <div className="loading-container">
-            <h1 className="linear-wipe">Connected</h1>{" "}
+            <h1 className="btn-shine connection-status">Connected</h1>{" "}
           </div>
         )}
       </div>

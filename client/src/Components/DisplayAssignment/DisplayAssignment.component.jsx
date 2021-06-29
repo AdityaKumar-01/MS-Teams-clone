@@ -103,7 +103,7 @@ const DisplayAssignment = ({ assignmentObj, creator }) => {
       <div className="display-panel-right">
         <iframe src={frameLink}></iframe>
         <span>
-          {submitted ? <span className="btn-shine">Submitted !!!</span> : null}
+          {submitted ? <span className="btn-shine submission-status">Submitted !!!</span> : null}
         </span>
       </div>
     </div>

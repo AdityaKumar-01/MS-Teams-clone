@@ -1,16 +1,21 @@
-.loading-container{
-    height:100vh;
-    width:100vw;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-
+.loading-container {
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 h1 {
   font-size: 30px;
 }
-.linear-wipe {
-  background: linear-gradient(to right, #343F56 20%, #F54748 40%, #F54748 60%, #343F56 80%);
+/* .linear-wipe {
+  background: linear-gradient(
+    to right,
+    #343f56 20%,
+    #f54748 40%,
+    #f54748 60%,
+    #343f56 80%
+  );
   background-size: 200% auto;
   background-clip: text;
   text-fill-color: transparent;
@@ -20,7 +25,34 @@ h1 {
   animation: shine 1s linear infinite;
 }
 @keyframes shine {
-    to {
-      background-position: 200% center;
-    }
+  to {
+    background-position: 200% center;
   }
+} */
+.btn-shine
+  {
+  padding: 12px 48px;
+  color: #ffffff;
+  background: linear-gradient(to right, #F54748 0, white 10%, #F54748 20%);
+  background-position: 0;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: shine 3s infinite linear;
+  animation-fill-mode: forwards;
+  -webkit-text-size-adjust: none;
+  font-weight: 600;
+  font-size: 23px;
+  text-decoration: none;
+  white-space: nowrap;}
+    
+@keyframes shine{
+  0%
+   { background-position: 0}
+  60%
+    {background-position: 180px}
+  100%
+    {background-position: 180px}}
+
+    .connection-status{
+      font-size:30px
+    }

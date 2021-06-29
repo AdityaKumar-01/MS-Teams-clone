@@ -62,12 +62,12 @@
 .form-area {
   justify-content: center;
   align-items: center;
-  margin-bottom:10%;
+  margin-bottom: 10%;
 }
-.form-area-pad{
+.form-area-pad {
   content: "";
-  min-height:1px;
-  width:100%;
+  min-height: 1px;
+  width: 100%;
 }
 .assignment-outer-wrapper {
   width: 100%;
@@ -83,4 +83,36 @@
 }
 .form-area {
   flex-direction: column;
+}
+.work-msg {
+  margin-top: 5%;
+}
+
+@media (max-width: 650px) {
+  .assignment-wrapper {
+    width: 85%;
+  }
+  .assignment-type {
+    font-size: 18px;
+  }
+  .assignment-status {
+    font-size: 15px;
+  }
+  .header {
+    font-size: 26px;
+  }
+  .assgn-creation-header {
+    font-size: 23px;
+  }
+}
+@media (max-width: 450px) {
+  .assignment-wrapper {
+    width: 90%;
+  }
+  .assignment-type {
+    font-size: 15px;
+  }
+  .assignment-status {
+    font-size: 14px;
+  }
 }

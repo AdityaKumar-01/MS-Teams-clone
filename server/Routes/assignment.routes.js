@@ -110,7 +110,6 @@ router.post("/turnInAssignment", async (req, res) => {
 const prepareStatus = async (data, name, id) => {
   info = await data.map((asgnObj) => {
     if (id === asgnObj.id) {
-      
       return {
         name: name,
         status: asgnObj.turnedIn,
@@ -118,39 +117,31 @@ const prepareStatus = async (data, name, id) => {
       };
     }
   });
-  console.log("info in prepare status");
-  console.log(info);
 
   return info;
 };
 const formatData = (data) => {
-  console.log("data received in formmating");
-  console.log(data);
-  var info = []
-  data.forEach(obj =>{
-      obj.forEach(asgn => {
-        if(asgn != null){
-          info.push(asgn)
-        }
-      })
-  })
+  var info = [];
+  data.forEach((obj) => {
+    obj.forEach((asgn) => {
+      if (asgn != null) {
+        info.push(asgn);
+      }
+    });
+  });
   return info;
-}
+};
 router.get("/assignmentStatus", async (req, res) => {
-  
   info = await Promise.all(
     req.query.asgineesName.map(async (name) => {
       userDoc = await user.find({ userName: name });
-      console.log("data recieved as userDoc");
-      console.log(userDoc);
-      return prepareStatus(userDoc[0].assignments, name, req.query.id)
+
+      return prepareStatus(userDoc[0].assignments, name, req.query.id);
     })
   );
-  console.log("info before formatting");
-  console.log(info);
+
   info = formatData(info);
-  console.log("info after formatting");
-  console.log(info);
-  res.json({ info: info});
+
+  res.json({ info: info });
 });
 module.exports = router; // export the module

@@ -41,7 +41,7 @@
   width: 140%;
   border-radius: 5px;
   margin: 1%;
-  font-size:16px;
+  font-size: 16px;
 }
 
 .add-assignees-btn {
@@ -51,7 +51,7 @@
   background-color: #343f56;
 }
 .add-assignees-btn:hover {
- background-color: #202736;
+  background-color: #202736;
 }
 .assigness-bubble {
   width: max-content;
@@ -65,19 +65,93 @@
 .assign-remove {
   cursor: pointer;
 }
-.nothing-container,.nothing-img{
+.nothing-container,
+.nothing-img {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
 }
-.nothing-img{
-  padding:5%;
+.nothing-img {
+  padding: 5%;
 }
-.nothing-img img{
-  width:250px;
-  height:300px;
+.nothing-img img {
+  width: 250px;
+  height: 300px;
 }
-.nothing-msg{
-  font-size:20px;
+.nothing-msg {
+  font-size: 20px;
+}
+
+@media (max-width: 1100px) {
+  .assignment-assignees-left-panel {
+    width: 80%;
+  }
+  .assginees-input {
+    height: 40px;
+    width: 80%;
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 800px) {
+  .assignment-assignees-right-panel {
+    width: 80%;
+  }
+  .assginees-input {
+    height: 40px;
+    width: 80%;
+    font-size: 14px;
+  }
+}
+@media (max-width: 700px) {
+  .assignent-assignees-form {
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: space-around;
+  }
+  .assignment-assignees-left-panel {
+    margin-top: 10%;
+    min-height: 250px;
+    width: 100%;
+  }
+}
+
+@media (max-width: 800px) {
+  .assignment-assignees-right-panel {
+    width: 80%;
+  }
+  .assginees-input {
+    height: 40px;
+    width: 80%;
+    font-size: 14px;
+  }
+}
+@media (max-width: 450px) {
+  .add-assignees-btn {
+    height: 40px;
+    width: 40px;
+  }
+  .assigness-bubble {
+    height: 30px;
+    border-radius: 5px;
+    color: #f54748;
+    margin: 1%;
+  }
+}
+
+@media (max-width: 380px) {
+  .assignment-assignees-right-panel {
+    width: 100%;
+  }
+  .add-assignees-btn {
+    height: 35px;
+    width: 35px;
+  }
+  .assigness-bubble {
+    height: 30px;
+    border-radius: 5px;
+    color: #f54748;
+    margin: 1%;
+  }
 }

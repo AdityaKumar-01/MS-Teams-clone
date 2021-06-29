@@ -91,15 +91,15 @@ iframe{
 .btn-shine{
   
   color: #ffffff;
-  background: linear-gradient(to right, #F54748 0, #343F56 10%, #F54748 20%);
+  background: linear-gradient(to right, #F54748 0, #343F56 30%, #F54748 45%);
   background-position: 0;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-  animation: shine 3s infinite linear;
+  animation: shine 1s infinite linear;
   animation-fill-mode: forwards;
   -webkit-text-size-adjust: none;
   font-weight: 600;
-  font-size: 20px;
+  font-size: 30px;
   text-decoration: none;
   white-space: nowrap;
     }
@@ -110,3 +110,7 @@ iframe{
     {background-position: 200px;}
   100%
     {background-position: 200px;}}
+
+    .submission-status{
+        font-size:18px;
+    }
