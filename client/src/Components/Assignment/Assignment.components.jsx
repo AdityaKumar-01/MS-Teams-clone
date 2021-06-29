@@ -31,7 +31,6 @@ const Assignment = () => {
       })
       .then((data) => {
         setAsgnList(data.data.list);
-        console.log(data.data.list);
         setLoading(false);
       })
       .catch((err) => {

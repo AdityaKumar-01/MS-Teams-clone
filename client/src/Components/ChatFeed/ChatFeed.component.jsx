@@ -1,6 +1,6 @@
 // react libraries
 import React from "react";
-
+import {useHistory} from "react-router-dom"
 // components
 import MyMsg from "../MyMsg/MyMsg.component";
 import TheirMsg from "../TheirMsg/TheirMsg.component";
@@ -10,7 +10,10 @@ import MeetMsg from "./../MeetMsg/MeetMsg.component";
 // External CSS
 import "./ChatFeed.styles.css";
 
+import HomeIcon from "@material-ui/icons/Home";
 const ChatFeed = (props) => {
+
+  let history = useHistory();
   // props send by react chat engine
   // cannot alter the name
   const { chats, activeChat, userName, messages } = props;
@@ -64,12 +67,18 @@ const ChatFeed = (props) => {
     });
   };
 
+  const goHome = () =>{
+    history.push("/dashboard");
+  }
   if (!chat) return <div />;
 
   return (
     <div className="chatFeed">
       <div className="chatTitleContainer">
-        <div className="chatTitle">{chat?.title}</div>
+        <div className="chatTitle">
+          <HomeIcon onClick={() => goHome()} style={{ fontSize: 35, cursor:"pointer" }} />
+          {chat?.title}
+        </div>
       </div>
       {renderMsg()}
       <div style={{ height: "100px" }} />

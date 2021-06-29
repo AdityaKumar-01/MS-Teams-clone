@@ -17,6 +17,9 @@
 .assignment-assignees-right-panel {
   flex-wrap: wrap;
   height: 400px;
+  justify-content: flex-start;
+  align-items: center;
+  align-content: center;
 }
 .assign-form {
   display: flex;

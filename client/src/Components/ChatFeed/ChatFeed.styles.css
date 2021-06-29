@@ -16,5 +16,9 @@
     color: #F54748;
     font-weight: 800;
     font-size: 30px;
+    display: flex;
+    align-items: center;
+    justify-content:space-between;
+    width:60%;
   }
   

@@ -1,5 +1,6 @@
 import React, { useRef, useState, useEffect } from "react";
-
+import {useHistory} from "react-router-dom";
+import ArrowBackIcon from "@material-ui/icons/ArrowBack";
 import "./DisplayAssignment.css";
 
 const DisplayAssignment = ({ assignmentObj, creator }) => {
@@ -8,6 +9,8 @@ const DisplayAssignment = ({ assignmentObj, creator }) => {
   const [frameId, setFrameId] = useState(13837);
   const [frameLink, setFrameLink] = useState("");
   const frameArray = [65868,66723,66619];
+
+  let history = useHistory();
   useEffect(() => {
     setFrameLink(`https://embed.lottiefiles.com/animation/${frameId}`)
   }, [frameId])
@@ -16,18 +19,22 @@ const DisplayAssignment = ({ assignmentObj, creator }) => {
     setFrameId(frameArray[Math.floor(Math.random() * frameArray.length)]);
   }
   
+  const goHome = () =>{
+    history.push("/dashboard")
+  }
   var myObj = JSON.parse(assignmentObj);
   return (
     <div className="display-assignment">
       <div className="display-panel-left">
+      {!creator ?(<span className="home-icon" onClick={() => goHome()} ><ArrowBackIcon/>Back</span>):null }
         <span className="display-title display-assignment-section">
           {myObj.title}
         </span>
-        <span className="display-creator display-assignment-section">
+        <span className="display-assignment-section">
           <span className="display-tab">Cerated By:</span> {myObj.creator}
         </span>
 
-        <span className="display-due display-assignment-section">
+        <span className="display-assignment-section">
           <span className="display-tab">Due on:</span>
           <span>
             {myObj.dueDate}, {myObj.dueTime}
@@ -48,15 +55,13 @@ const DisplayAssignment = ({ assignmentObj, creator }) => {
           })}
         </div>
         {myObj.formLink === "" ? (
-          <span className="display-due display-assignment-section">
-            <span className="display-tab instruction-tab">
-              Your Work
-              <em>(Note: This form accept link of your uploaded work)</em>
-            </span>
+          <span className="link-section display-assignment-section">
+            <span className="display-tab">Your Work</span>
             <input
               ref={fileRef}
               type="text"
               placeholder="Paste the link here"
+              className="work-link"
             />
           </span>
         ) : (
@@ -74,7 +79,7 @@ const DisplayAssignment = ({ assignmentObj, creator }) => {
           className="test-link create-btn"
           onClick={() => handleFrame()}
         >
-          Turn In
+          {submitted ? ("Turned In"):("Turn In")}
         </button>
       </div>
       <div className="display-panel-right">
@@ -82,6 +87,7 @@ const DisplayAssignment = ({ assignmentObj, creator }) => {
         <span>
           {submitted ? <span className="btn-shine">Submitted !!!</span> : null}
         </span>
+        
       </div>
     </div>
   );
