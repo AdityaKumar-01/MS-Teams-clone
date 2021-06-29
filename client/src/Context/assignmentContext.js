@@ -51,11 +51,12 @@ const AssignmentProvider = ({ children }) => {
       .post(`${process.env.REACT_APP_BACKEND_URL}/assignment/create`, data)
       .then((res) => {
         console.log(res.status);
+        history.push(`/assignment?id=${uid}`);
       })
       .catch((err) => {
         console.log(err);
       });
-    history.push(`/assignment?id=${uid}`);
+    
     setAsgnName("");
     setAsgnDueDate("");
     setAsgnDueTime("");

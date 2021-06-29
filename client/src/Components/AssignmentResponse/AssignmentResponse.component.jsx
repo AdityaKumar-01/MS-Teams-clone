@@ -7,20 +7,20 @@ const AssignmentResponse = ({ assignmentObj }) => {
   const [assigneeStatus, setAssigneeStatus] = useState([]);
   useEffect(() => {
     const getStatus = () => {
-      axios.get(
-        `${process.env.REACT_APP_BACKEND_URL}/assignment/assignmentStatus`,
-        {
-          params: {
-            id: myObj.assignmentId,
-            asgineesName: myObj.assigneesName,
-          },
-        }
-      ).then((data) =>{
-        console.log(data.data.info);
-        setAssigneeStatus(data.data.info)
-      });
-      
-      // setAssigneeStatus([...assigneeStatus, info]);
+      axios
+        .get(
+          `${process.env.REACT_APP_BACKEND_URL}/assignment/assignmentStatus`,
+          {
+            params: {
+              id: myObj.assignmentId,
+              asgineesName: myObj.assigneesName,
+            },
+          }
+        )
+        .then((data) => {
+          console.log(data.data.info);
+          setAssigneeStatus(data.data.info);
+        });
     };
     getStatus();
   }, []);
@@ -31,7 +31,7 @@ const AssignmentResponse = ({ assignmentObj }) => {
         <span className="header">{myObj.title} Responses</span>
         <span className="response-count">
           Assigned to {myObj.assigneesName.length}
-          {myObj.assigneesName.length > 1 ? "people" : "person"}
+          {myObj.assigneesName.length > 1 ? " people" : " person"}
         </span>
       </div>
       <div className="response-response-list">
@@ -40,14 +40,14 @@ const AssignmentResponse = ({ assignmentObj }) => {
           <div className="assinees-list">
             {assigneeStatus.length !== 0
               ? assigneeStatus.map((obj, key) => {
-                  if (!obj.status)
+                  if (obj !== null && !obj.status)
                     return (
                       <span className="assignee-tile" key={key}>
                         {obj.name}
                       </span>
                     );
                 })
-              : null}
+              : "No one"}
           </div>
         </div>
         <div className="assignment-status-list">
@@ -55,14 +55,14 @@ const AssignmentResponse = ({ assignmentObj }) => {
           <div className="assinees-list">
             {assigneeStatus.length !== 0
               ? assigneeStatus.map((obj, key) => {
-                  if (obj.status)
+                  if (obj !== null && obj.status)
                     return (
                       <span className="assignee-tile" key={key}>
                         {obj.name} at {obj.timeStamp}
                       </span>
                     );
                 })
-              : null}
+              : ("No one")}
           </div>
         </div>
       </div>

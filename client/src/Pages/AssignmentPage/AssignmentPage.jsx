@@ -27,9 +27,11 @@ const AssignmentPage = () => {
         }
       )
       .then((data) => {
-        data.data.list.creator === localStorage.getItem("userName")
-          ? setIsCreator(true)
-          : setIsCreator(false)
+        console.log(data.data);
+        if (data.data.list.creator)
+          data.data.list.creator === localStorage.getItem("userName")
+            ? setIsCreator(true)
+            : setIsCreator(false);
         setAssignmentObj(JSON.stringify(data.data.list));
         setLoading(false);
       });
@@ -41,6 +43,7 @@ const AssignmentPage = () => {
       ) : isCreator ? (
         <div className="assignment-container">
           <AssignmentResponse assignmentObj={assignmentObj} />
+          <span className="assignment-preview"><em>What assginee will see</em></span>
           <DisplayAssignment assignmentObj={assignmentObj} creator={true} />
         </div>
       ) : (

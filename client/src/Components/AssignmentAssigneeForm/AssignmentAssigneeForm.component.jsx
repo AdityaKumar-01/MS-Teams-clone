@@ -1,19 +1,25 @@
 import React, { useContext, useState } from "react";
+
+// Material Icons
 import AddIcon from "@material-ui/icons/Add";
 import CloseIcon from "@material-ui/icons/Close";
 
+// Images
 import noAssignees from "../../Assets/assignees.png";
 
+// External CSS
 import "./AssignmentAssigneeForm.styles.css";
 
+// Context
 import { AssignmentContext } from "../../Context/assignmentContext";
+
 const AssignmentAssigneeForm = () => {
   const { handleToggleSection, assigneesName, setAssigneesName, assigneesErr } =
     useContext(AssignmentContext);
 
   const [currentAssignee, setCurrentAssignee] = useState("");
   const addAssignee = () => {
-    if(currentAssignee !== "")
+    if (currentAssignee !== "")
       setAssigneesName([...assigneesName, currentAssignee]);
     setCurrentAssignee("");
   };
