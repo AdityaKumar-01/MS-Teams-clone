@@ -4,7 +4,8 @@ import React,{ useState } from "react";
 import ImageIcon from "@material-ui/icons/Image";
 import SendIcon from "@material-ui/icons/Send";
 import VideoCallIcon from "@material-ui/icons/VideoCall";
-
+import Tooltip from "@material-ui/core/Tooltip";
+import Zoom from "@material-ui/core/Zoom";
 // React engine library
 import { sendMessage } from "react-chat-engine";
 
@@ -63,11 +64,17 @@ const MsgForm = (props) => {
       />
       <label htmlFor="upload-button">
         <span className="image-button">
-          <ImageIcon
-            className="picture-icon"
-            style={{ color: "#F54748" }}
-            aria-label="send-pic"
-          />
+          <Tooltip
+            title="Send Images"
+            TransitionComponent={Zoom}
+            placement="top"
+          >
+            <ImageIcon
+              className="picture-icon"
+              style={{ color: "#F54748" }}
+              aria-label="send-pic"
+            />
+          </Tooltip>
         </span>
       </label>
       <input
@@ -78,13 +85,25 @@ const MsgForm = (props) => {
         onChange={handleAttach.bind(this)}
       />
       <button className="meet-button" aria-label="meet-button">
-        <VideoCallIcon
-          onClick={() => handleMeet()}
-          style={{ color: "#F54748", fontSize: 30, cursor: "pointer" }}
-        />
+        <Tooltip
+          title="Start Meeting"
+          TransitionComponent={Zoom}
+          placement="top"
+        >
+          <VideoCallIcon
+            onClick={() => handleMeet()}
+            style={{ color: "#F54748", fontSize: 30, cursor: "pointer" }}
+          />
+        </Tooltip>
       </button>
       <button type="submit" className="send-button" aria-label="send-button">
-        <SendIcon className="send-icon" style={{ color: "#F54748" }} />
+        <Tooltip
+          title="Send Message"
+          TransitionComponent={Zoom}
+          placement="top"
+        >
+          <SendIcon className="send-icon" style={{ color: "#F54748" }} />
+        </Tooltip>
       </button>
     </form>
   );

@@ -6,7 +6,8 @@ import MeetController from "./../MeetController/MeetController.component";
 
 // Icons
 import ForumSharpIcon from "@material-ui/icons/ForumSharp";
-
+import Tooltip from "@material-ui/core/Tooltip";
+import Zoom from "@material-ui/core/Zoom";
 // External CSS
 import "./Room.styles.css";
 import ChatInMeet from "./../ChatInMeet/ChatInMeet.component";
@@ -89,7 +90,9 @@ const Room = ({ roomName, room, handleLogOut }) => {
               key={room.localParticipant.sid}
               participant={room.localParticipant}
               isLocal={true}
-              dominantSpeaker={currentDomntSpeaker === room.localParticipant.sid ? true : false}
+              dominantSpeaker={
+                currentDomntSpeaker === room.localParticipant.sid ? true : false
+              }
             />
           )}
           {/* render remote participant in the room */}
@@ -105,10 +108,12 @@ const Room = ({ roomName, room, handleLogOut }) => {
       {/* conditional rendering of chat in meet toggled using chat icon */}
       <div className="room-right-panel">{showChat ? <ChatInMeet /> : null}</div>
       <span className="msg-in-meet-btn">
-        <ForumSharpIcon
-          style={{ fontSize: 40, cursor: "pointer" }}
-          onClick={() => setShowChat(!showChat)}
-        />
+        <Tooltip title="Chat in Meet" TransitionComponent={Zoom} placement="left">
+          <ForumSharpIcon
+            style={{ fontSize: 40, cursor: "pointer" }}
+            onClick={() => setShowChat(!showChat)}
+          />
+        </Tooltip>
       </span>
     </div>
   );

@@ -6,7 +6,8 @@ import UseAnimations from "react-useanimations";
 import microphone from "react-useanimations/lib/microphone";
 import video from "react-useanimations/lib/video";
 import { MeetContext } from "../../Context/meetContext";
-
+import Tooltip from "@material-ui/core/Tooltip";
+import Zoom from "@material-ui/core/Zoom";
 // External CSS
 import "./MeetController.styles.css";
 
@@ -20,29 +21,39 @@ const MeetController = ({
   return (
     <div className="control-panel">
       <span>
-        <UseAnimations
-          animation={microphone}
-          onClick={handleToggleAudio}
-          reverse={!audState}
-          size={30}
-          className="control-icon"
-        />
+        <Tooltip
+          title="Mute/Unmute Mic"
+          TransitionComponent={Zoom}
+          placement="top"
+        >
+          <UseAnimations
+            animation={microphone}
+            onClick={handleToggleAudio}
+            reverse={!audState}
+            size={30}
+            className="control-icon"
+          />
+        </Tooltip>
       </span>
       <span>
-        <CallEndSharpIcon
-          onClick={() => handleLogOut()}
-          style={{ color: "red" }}
-          className="control-icon"
-        />
+        <Tooltip title="End Call" TransitionComponent={Zoom} placement="top">
+          <CallEndSharpIcon
+            onClick={() => handleLogOut()}
+            style={{ color: "red" }}
+            className="control-icon"
+          />
+        </Tooltip>
       </span>
       <span>
-        <UseAnimations
-          animation={video}
-          onClick={handleToggleVideo}
-          reverse={!vidState}
-          size={30}
-          className="control-icon"
-        />
+        <Tooltip title="Mute/Unmute Video" TransitionComponent={Zoom} placement="top">
+          <UseAnimations
+            animation={video}
+            onClick={handleToggleVideo}
+            reverse={!vidState}
+            size={30}
+            className="control-icon"
+          />
+        </Tooltip>
       </span>
     </div>
   );

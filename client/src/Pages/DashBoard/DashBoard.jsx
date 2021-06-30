@@ -17,7 +17,8 @@ import GroupRoundedIcon from "@material-ui/icons/GroupRounded";
 import SettingsRoundedIcon from "@material-ui/icons/SettingsRounded";
 import AssignmentTurnedInRoundedIcon from "@material-ui/icons/AssignmentTurnedInRounded";
 import PersonSharpIcon from "@material-ui/icons/PersonSharp";
-
+import Tooltip from "@material-ui/core/Tooltip";
+import Zoom from "@material-ui/core/Zoom";
 const DashBoard = () => {
   // React hooks to handle local states
   const [showSection, setShowSection] = useState([
@@ -43,29 +44,59 @@ const DashBoard = () => {
       <div className="nav-bar-list">
         <ul>
           <li onClick={() => showHide(0)}>
-            <AddCircleRoundedIcon
-              style={{ color: "f54748", fontSize: 35, cursor: "pointer" }}
-            />
+            <Tooltip
+              title="Cerate Team/DM"
+              TransitionComponent={Zoom}
+              placement="right"
+            >
+              <AddCircleRoundedIcon
+                style={{ color: "f54748", fontSize: 35, cursor: "pointer" }}
+              />
+            </Tooltip>
           </li>
           <li onClick={() => showHide(1)}>
-            <GroupRoundedIcon
-              style={{ color: "f54748", fontSize: 35, cursor: "pointer" }}
-            />
+            <Tooltip
+              title="Your Teams"
+              TransitionComponent={Zoom}
+              placement="right"
+            >
+              <GroupRoundedIcon
+                style={{ color: "f54748", fontSize: 35, cursor: "pointer" }}
+              />
+            </Tooltip>
           </li>
           <li onClick={() => showHide(2)}>
-            <PersonSharpIcon
-              style={{ color: "f54748", fontSize: 35, cursor: "pointer" }}
-            />
+            <Tooltip
+              title="Your DMs"
+              TransitionComponent={Zoom}
+              placement="right"
+            >
+              <PersonSharpIcon
+                style={{ color: "f54748", fontSize: 35, cursor: "pointer" }}
+              />
+            </Tooltip>
           </li>
           <li onClick={() => showHide(3)}>
-            <AssignmentTurnedInRoundedIcon
-              style={{ color: "f54748", fontSize: 35, cursor: "pointer" }}
-            />
+            <Tooltip
+              title="Your Assignments"
+              TransitionComponent={Zoom}
+              placement="right"
+            >
+              <AssignmentTurnedInRoundedIcon
+                style={{ color: "f54748", fontSize: 35, cursor: "pointer" }}
+              />
+            </Tooltip>
           </li>
           <li onClick={() => showHide(4)}>
-            <SettingsRoundedIcon
-              style={{ color: "f54748", fontSize: 35, cursor: "pointer" }}
-            />
+            <Tooltip
+              title="Profile Settings"
+              TransitionComponent={Zoom}
+              placement="right"
+            >
+              <SettingsRoundedIcon
+                style={{ color: "f54748", fontSize: 35, cursor: "pointer" }}
+              />
+            </Tooltip>
           </li>
         </ul>
       </div>

@@ -11,6 +11,8 @@ import MeetMsg from "./../MeetMsg/MeetMsg.component";
 import "./ChatFeed.styles.css";
 
 import HomeIcon from "@material-ui/icons/Home";
+import Tooltip from "@material-ui/core/Tooltip";
+import Zoom from "@material-ui/core/Zoom";
 const ChatFeed = (props) => {
 
   let history = useHistory();
@@ -76,7 +78,17 @@ const ChatFeed = (props) => {
     <div className="chatFeed">
       <div className="chatTitleContainer">
         <div className="chatTitle">
-          <HomeIcon onClick={() => goHome()} style={{ fontSize: 35, cursor:"pointer" }} />
+          <Tooltip
+            title="Go To Dashboard"
+            TransitionComponent={Zoom}
+            placement="right"
+          >
+            <HomeIcon
+              onClick={() => goHome()}
+              style={{ fontSize: 35, cursor: "pointer" }}
+            />
+          </Tooltip>
+
           {chat?.title}
         </div>
       </div>
