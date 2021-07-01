@@ -29,7 +29,7 @@
     font-size:17px;
     margin-bottom:5%;
 }
-.assignee-tile{
+.assignee-tile,.mail-btn{
     background-color: #343F56;
     color:#F54748;
     width:max-content;
@@ -37,6 +37,21 @@
     padding:1%;
     border-radius: 5px;
     margin:1%;
+}
+
+.mail-section{
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    width:50%;
+    
+}
+
+.mail-btn{
+    outline:none;
+    border:none;
+    cursor:pointer;
 }
 @media (max-width: 500px) {
   .display-tab{

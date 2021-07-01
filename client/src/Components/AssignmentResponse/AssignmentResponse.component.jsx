@@ -4,7 +4,9 @@ import "./AssignmentResponse.styles.css";
 
 const AssignmentResponse = ({ assignmentObj }) => {
   var myObj = JSON.parse(assignmentObj);
+  console.log(myObj);
   const [assigneeStatus, setAssigneeStatus] = useState([]);
+  const [mailStatus, setMailStatus] = useState("");
   useEffect(() => {
     const getStatus = () => {
       axios
@@ -25,6 +27,23 @@ const AssignmentResponse = ({ assignmentObj }) => {
     getStatus();
   }, []);
 
+  const sendMail = () =>{
+    const obj = {
+      sender: myObj.creator,
+      receiver: myObj.assigneesName,
+      title:myObj.title,
+      dueDay:myObj.dueDate,
+      dueTime:myObj.dueTime,
+      instructions:myObj.assignmentInstructions
+    };
+    axios.post(`${process.env.REACT_APP_BACKEND_URL}/mail/send`, obj)
+    .then((data) =>{
+      setMailStatus(data.data.msg);
+    })
+    .catch((err) =>{
+      console.log(err);
+    })
+  }
   return (
     <div className="assignment-response">
       <div className="assignment-response-header">
@@ -62,9 +81,16 @@ const AssignmentResponse = ({ assignmentObj }) => {
                       </span>
                     );
                 })
-              : ("No one")}
+              : "No one"}
           </div>
         </div>
+      </div>
+      <div className="mail-section">
+        <p>Notify assignees about Assignment</p>
+        <button onClick = {() =>{
+          sendMail();
+        }} className="mail-btn">Send Mail</button>
+        <p>{mailStatus}</p>
       </div>
     </div>
   );
