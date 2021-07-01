@@ -19,14 +19,6 @@ const sendTknRes= (token, res) => {
   );
 };
 
-// // request for a token
-// router.get("/token", (req, res) => {
-//   const identity = req.query.identity;
-//   const room = req.query.room;
-//   const token = vidTkn(identity, room, config);
-//   sendTknRes(token, res);
-// });
-
 // for joining a room
 router.post("/token", (req, res) => {
   const identity = req.body.identity;

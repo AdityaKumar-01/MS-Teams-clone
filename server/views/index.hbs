@@ -20,30 +20,21 @@
       body {
         font-family: "Ubuntu", sans-serif;
         width: 100%;
+        background-color: rgb(237, 237, 237);
       }
       .mail-wrapper {
         padding: 0 3%;
       }
       .mail-wrapper,
       .mail-container {
-        display: flex;
-        flex-direction: column;
-        justify-content: space-around;
-        align-items: center;
         width: 100%;
-        align-self: center;
       }
       .mail-container {
-        justify-content: space-around;
-        width: 70%;
+        width: 100%;
         border-radius: 5px;
         background-color: rgb(237, 237, 237);
       }
       .header {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: flex-end;
         width: 100%;
         height: 100px;
         padding: 1%;
@@ -59,43 +50,36 @@
         margin-bottom: 10px;
       }
       .title {
+        text-align: center;
         font-size: 28px;
       }
       .details {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: space-around;
+        text-align:center;
         height: 100%;
       }
       .receiver {
-        font-size: 23px;
-        margin-bottom: 5%;
+        font-size: 25px;
+        margin-bottom: 2%;
       }
       .instruction-title {
         font-size: 23px;
+        text-align: center;
       }
-      .instruction-container,
-      .instruction-list {
-        display: flex;
-        flex-direction: column;
-        justify-content: space-around;
-        align-items: center;
-      }
+      
       .instruction-container {
-        padding-top: 5%;
+        padding-top: 2%;
       }
       .instruction-list {
-        margin-top: 10%;
+        margin-top: 3%;
       }
       .btn {
         height: 30px;
-        width: 80%;
+        width: 50%;
         background-color: #343f56;
         outline: none;
         border: none;
         border-radius: 5px;
-        margin: 10%;
+        margin: 3%;
       }
       .btn a,
       .footer p a {
@@ -103,7 +87,13 @@
         color: #f54748;
       }
       .footer {
+        text-align: center;
         margin: 3%;
+      }
+      
+      .head-img img {
+
+        width: 100%;
       }
     </style>
   </head>
@@ -111,8 +101,8 @@
     <div class="mail-wrapper">
       <div class="mail-container">
         <div class="header">
-          <span class="header-text">Assignment Update</span>
-          <span class="header-time">23rd June, 2021 | 10:30 AM</span>
+          <div class="header-text">Assignment Update</div>
+          <div class="header-time">23rd June, 2021 | 10:30 AM</div>
         </div>
         <div class="title">You have a new Assignment on MS Teams Clone</div>
         <div class="head-img">
@@ -122,61 +112,51 @@
           />
         </div>
         <div class="details">
-          <span class="receiver">Hey Adam !!!</span
-          ><span class="instruction-title"
-            >You have a new Assignment by Aditya</span
-          ><span class="instruction-container"
-            ><span>Instructions for Maths test</span>
-            <span class="instruction-list">
-              <span
+          <div class="receiver">Hey Adam !!!</div
+          ><div class="instruction-title">Assignment by Aditya</div
+          ><div class="instruction-container"
+            ><div>Instructions for Maths test</div>
+            <div class="instruction-list">
+              <div
                 ><img
                   src="https://tlr.stripocdn.email/content/guids/cab_pub_7cbbc409ec990f19c78c75bd1e06f215/images/Check_Mark_Black5.png"
                   alt
                   width="16"
-                /> Attemp all</span
+                />
+                Attemp all</div
               >
-              <span
+              <div
                 ><img
                   src="https://tlr.stripocdn.email/content/guids/cab_pub_7cbbc409ec990f19c78c75bd1e06f215/images/Check_Mark_Black5.png"
                   alt
                   width="16"
-                /> Attemp all</span
+                />
+                Attemp all</div
               >
-              <span
+              <div
                 ><img
                   src="https://tlr.stripocdn.email/content/guids/cab_pub_7cbbc409ec990f19c78c75bd1e06f215/images/Check_Mark_Black5.png"
                   alt
                   width="16"
-                /> Attemp all</span
+                />
+                Attemp all</div
               >
-              <span
+              <div
                 ><img
                   src="https://tlr.stripocdn.email/content/guids/cab_pub_7cbbc409ec990f19c78c75bd1e06f215/images/Check_Mark_Black5.png"
                   alt
                   width="16"
-                /> Attemp all</span
+                />
+                Attemp all</div
               >
-              <span
-                ><img
-                  src="https://tlr.stripocdn.email/content/guids/cab_pub_7cbbc409ec990f19c78c75bd1e06f215/images/Check_Mark_Black5.png"
-                  alt
-                  width="16"
-                /> Attemp all</span
-              >
-              <span
-                ><img
-                  src="https://tlr.stripocdn.email/content/guids/cab_pub_7cbbc409ec990f19c78c75bd1e06f215/images/Check_Mark_Black5.png"
-                  alt
-                  width="16"
-                /> Attemp all</span
-              >
-            </span>
+             
+            </div>
             <button class="btn">
               <a href="https://ms-teams-clone.netlify.app/" target="_blank"
                 >Open Assignment</a
               >
             </button>
-          </span>
+          </div>
         </div>
         <div class="footer">
           <p>
