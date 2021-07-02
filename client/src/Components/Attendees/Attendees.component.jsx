@@ -1,17 +1,18 @@
 import React, { useState, useRef, useEffect, useContext } from "react";
 
 // NPM packages
-import Avatar from "react-avatar";
+// import Avatar from "react-avatar";
 import SettingsVoiceIcon from "@material-ui/icons/SettingsVoice";
 // context
-import { UserContext } from "../../Context/userContext";
+// import { UserContext } from "../../Context/userContext";
 import { MeetContext } from "../../Context/meetContext";
 
 // External CSS
 import "./Attendees.styles.css";
 const Attendees = ({ participant, dominantSpeaker }) => {
-  const { name } = useContext(UserContext); // bring user name
-  const { vidState, audState } = useContext(MeetContext); // bring camera and mic state
+  // const { name } = useContext(UserContext); // bring user name
+  const { vidState, audState, screenTrack, setScreenTrack } =
+    useContext(MeetContext); // bring camera and mic state
 
   const [videoTracks, setVideoTracks] = useState([]); // holds all the video track published by attendees of the meet
   const [audioTracks, setAudioTracks] = useState([]); // holds all the audio track published by attendees of the meet
@@ -67,8 +68,6 @@ const Attendees = ({ participant, dominantSpeaker }) => {
   //  and update its status i.e. video on or off
   useEffect(() => {
     const videoTrack = videoTracks[0];
-    console.log(videoTrack);
-
     if (videoTrack) {
       videoTrack.attach(videoRef.current);
       return () => {
@@ -76,26 +75,28 @@ const Attendees = ({ participant, dominantSpeaker }) => {
       };
     }
     const screenTrack = videoTracks[0];
-    console.log(videoTrack);
 
     if (screenTrack) {
+      console.log("started");
       screenTrack.attach(screenRef.current);
+
       return () => {
         screenTrack.detach();
       };
     }
-  }, [videoTracks]);
+  }, [videoTracks, screenTrack]);
   useEffect(() => {
     const videoTrack = videoTracks[1];
-    console.log(videoTracks);
+    console.log("video started");
     if (videoTrack) {
       console.log("here", videoTrack);
+      setScreenTrack(true);
       videoTrack.attach(screenRef.current);
       return () => {
         videoTrack.detach();
       };
     }
-  }, [videoTracks]);
+  }, [videoTracks, screenTrack]);
 
   // any updates in local attendee the use effect will render
   //  and update its status i.e. video on or off
@@ -120,7 +121,7 @@ const Attendees = ({ participant, dominantSpeaker }) => {
         </span>
         <video ref={videoRef} autoPlay />
         <audio ref={audioRef} autoPlay />
-        {screenRef.current.value ? (<video ref={screenRef} autoPlay />):("nothing") }
+        {screenTrack ? (<video ref={screenRef} autoPlay />) : null}
       </div>
     </div>
   );

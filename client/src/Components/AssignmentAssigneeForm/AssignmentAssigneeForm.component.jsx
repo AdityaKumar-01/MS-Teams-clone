@@ -25,7 +25,7 @@ const AssignmentAssigneeForm = () => {
   };
 
   const removeAssignee = (id) => {
-    console.log(id);
+   
     setAssigneesName((prevAssigneesName) => {
       return prevAssigneesName.filter((assignee, index) => {
         return index !== id;

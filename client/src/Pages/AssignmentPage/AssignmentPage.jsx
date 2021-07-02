@@ -27,7 +27,7 @@ const AssignmentPage = () => {
         }
       )
       .then((data) => {
-        console.log(data.data);
+       
         if (data.data.list.creator)
           data.data.list.creator === localStorage.getItem("userName")
             ? setIsCreator(true)

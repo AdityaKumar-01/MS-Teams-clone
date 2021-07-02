@@ -143,7 +143,7 @@ router.post("/updateUserPwd", (req, res) => {
 
 router.get("/getUser", (req, res) => {
   user.find({}, (err, data) => {
-    console.log(data);
+    
     var nameList = [];
     data.forEach(obj =>{
       nameList.push({ id: obj.userName, label: obj.userName });

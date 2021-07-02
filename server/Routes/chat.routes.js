@@ -97,7 +97,7 @@ router.post("/createChat", (req, res) => {
   // Make the call
   axios(config)
     .then(function (response) {
-      console.log(response.status);
+      
       isDM
         ? res.json({
             status: 201,

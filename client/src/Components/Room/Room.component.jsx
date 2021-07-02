@@ -13,19 +13,16 @@ import Zoom from "@material-ui/core/Zoom";
 // External CSS
 import "./Room.styles.css";
 import Video from "twilio-video";
-import LocalVideoTrack from "twilio-video"
-import { isEmpty, first } from "lodash";
 import { MeetContext } from "../../Context/meetContext";
 const Room = ({ roomName, room, handleLogOut }) => {
   const [participants, setParticipants] = useState([]);
   const [showChat, setShowChat] = useState(false);
   const [currentDomntSpeaker, setCurrentDomntSpeaker] = useState("");
-
+  //vidState,
+    // audState,
+    // setVidState,
+    // setAudState,
   const {
-    vidState,
-    audState,
-    setVidState,
-    setAudState,
     screenTrack,
     setScreenTrack,
   } = useContext(MeetContext);
@@ -98,13 +95,9 @@ const Room = ({ roomName, room, handleLogOut }) => {
       navigator.mediaDevices
         .getDisplayMedia()
         .then((stream) => {
-        
-          var track =  new Video.LocalVideoTrack(stream.getTracks()[0]);
-          // setScreenTrack(track)
-          
+          var track = new Video.LocalVideoTrack(stream.getTracks()[0]);
           room.localParticipant.publishTrack(track);
           
-          // shareScreen.innerHTML = "Stop sharing";
           track.mediaStreamTrack.onended = () => {
             handleScreenSharing();
           };
@@ -115,8 +108,7 @@ const Room = ({ roomName, room, handleLogOut }) => {
     } else {
       room.localParticipant.unpublishTrack(screenTrack);
       screenTrack.stop();
-      setScreenTrack(null);
-      // shareScreen.innerHTML = "Share screen";
+      setScreenTrack(false);
     }
   };
   return (

@@ -4,7 +4,7 @@ import "./AssignmentResponse.styles.css";
 
 const AssignmentResponse = ({ assignmentObj }) => {
   var myObj = JSON.parse(assignmentObj);
-  console.log(myObj);
+  
   const [assigneeStatus, setAssigneeStatus] = useState([]);
   const [mailStatus, setMailStatus] = useState("");
   useEffect(() => {
@@ -20,7 +20,7 @@ const AssignmentResponse = ({ assignmentObj }) => {
           }
         )
         .then((data) => {
-          console.log(data.data.info);
+          
           setAssigneeStatus(data.data.info);
         });
     };

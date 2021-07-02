@@ -22,7 +22,7 @@ const MsgForm = (props) => {
   };
   const handleMeet = () => {
     const uid = uuidv4();
-    console.log(uid);
+   
     const text = `meet@${uid}`;
     sendMessage(authObject, chatId, { text });
   }

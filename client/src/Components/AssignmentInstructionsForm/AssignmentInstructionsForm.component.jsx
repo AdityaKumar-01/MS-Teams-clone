@@ -20,7 +20,7 @@ const AssignmentInstructionsForm = () => {
   };
 
   const removeInstruction = (id) => {
-    console.log(id);
+    
     setAssignmentInstructions((prevAssignmentInstructions) => {
       return prevAssignmentInstructions.filter((instruction, index) => {
         return index !== id;
