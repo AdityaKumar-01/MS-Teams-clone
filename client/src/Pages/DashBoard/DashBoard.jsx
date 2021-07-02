@@ -1,6 +1,6 @@
 // React libraries
 import React, { useState } from "react";
-
+import { Helmet } from "react-helmet";
 // External CSS
 import "./Dashboard.styles.css";
 
@@ -40,6 +40,10 @@ const DashBoard = () => {
   };
   return (
     <div className="dashboard-wrapper">
+      <Helmet>
+        <meta charSet="utf-8" />
+        <title>MS TEAM CLONE | DASHBOARD</title>
+      </Helmet>
       {/* Navbar items */}
       <div className="nav-bar-list">
         <ul>

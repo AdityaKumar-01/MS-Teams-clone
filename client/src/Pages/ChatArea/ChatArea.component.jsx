@@ -1,6 +1,6 @@
 // react libraries
 import React from "react";
-
+import { Helmet } from "react-helmet";
 // React chat engine components
 import { ChatEngine,} from "react-chat-engine";
 
@@ -16,6 +16,10 @@ const ChatArea = () => {
   return (
     // Chat engine parent element from react chatengine to render chat area
     <div className="chat-in-meet">
+      <Helmet>
+        <meta charSet="utf-8" />
+        <title>MS TEAMS CLONE | CHAT</title>
+      </Helmet>
       <ChatEngine
         height="100vh"
         projectID={process.env.REACT_APP_PROJECT_ID}

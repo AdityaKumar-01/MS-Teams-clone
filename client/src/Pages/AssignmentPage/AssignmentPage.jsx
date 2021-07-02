@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
 import queryString from "query-string";
 import axios from "axios";
+import { Helmet } from "react-helmet";
+
 import DisplayAssignment from "../../Components/DisplayAssignment/DisplayAssignment.component";
 import AssignmentResponse from './../../Components/AssignmentResponse/AssignmentResponse.component';
 import "./AssignmentPage.styles.css";
@@ -38,12 +40,18 @@ const AssignmentPage = () => {
   };
   return (
     <div className="assignment-page">
+      <Helmet>
+        <meta charSet="utf-8" />
+        <title>MS TEAM CLONE | ASSIGNMENT</title>
+      </Helmet>
       {loading ? (
         <div className="loader"></div>
       ) : isCreator ? (
         <div className="assignment-container">
           <AssignmentResponse assignmentObj={assignmentObj} />
-          <span className="assignment-preview"><em>What assginee will see</em></span>
+          <span className="assignment-preview">
+            <em>What assginee will see</em>
+          </span>
           <DisplayAssignment assignmentObj={assignmentObj} creator={true} />
         </div>
       ) : (

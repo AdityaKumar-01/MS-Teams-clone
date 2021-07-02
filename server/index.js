@@ -3,6 +3,7 @@ const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
 const bodyParser = require("body-parser");
+const axios = require("axios");
 
 const dotenv = require("dotenv");
 dotenv.config();
@@ -50,6 +51,13 @@ app.use("/mail", mailRoute);
 app.get("/", (req, res) => {
   res.send("Backend for MS teams clone");
 });
+
+
+// keepUpBackend(function() {
+//     axios.get("https://ms-teams-clone-backend.herokuapp.com/");
+// }, 300000); // every 5 minutes (300000)
+
+
 // Server to run express app
 app.listen(process.env.PORT || 5000, (req, res) => {
   console.log("server started");

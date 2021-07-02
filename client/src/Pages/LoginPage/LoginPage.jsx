@@ -1,5 +1,5 @@
 import React,{useState} from 'react';
-
+import { Helmet } from "react-helmet";
 // Components
 import SignUp from './../../Components/SignUp/SignUp.component';
 import SignIn from './../../Components/SignIn/SignIn.component';
@@ -21,6 +21,10 @@ const LoginPage = () => {
    
     return (
       <div className="form-wrapper" id="form-section">
+        <Helmet>
+          <meta charSet="utf-8" />
+          <title>MS TEAMS CLONE | LOGIN</title>
+        </Helmet>
         <div className="form-header header">Get Started</div>
         <div className="form-content">
           <div className="form-img">

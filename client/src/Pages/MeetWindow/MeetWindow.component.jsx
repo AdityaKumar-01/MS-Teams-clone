@@ -1,5 +1,5 @@
 import React, { useEffect, useContext } from "react";
-
+import { Helmet } from "react-helmet";
 // Context
 import { UserContext } from "../../Context/userContext";
 
@@ -42,6 +42,10 @@ const MeetWindow = () => {
   } else {
     render = (
       <div>
+        <Helmet>
+          <meta charSet="utf-8" />
+          <title>MS TEAM CLONE | MEET</title>
+        </Helmet>
         {/* contional rendering while page is loading */}
         {connecting ? (
           <div className="loading-container">
