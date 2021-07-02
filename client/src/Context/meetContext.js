@@ -12,6 +12,8 @@ const MeetProvider = ({ children }) => {
   const [audState, setAudState] = useState(true); // holds state for mic is on or not
 
   // values holds functions and states to be shared
+
+  
   const value = {
     vidState,
     setVidState,

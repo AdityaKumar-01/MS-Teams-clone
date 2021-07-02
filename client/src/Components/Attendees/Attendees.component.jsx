@@ -2,7 +2,7 @@ import React, { useState, useRef, useEffect, useContext } from "react";
 
 // NPM packages
 import Avatar from "react-avatar";
-import SettingsVoiceIcon from '@material-ui/icons/SettingsVoice';
+import SettingsVoiceIcon from "@material-ui/icons/SettingsVoice";
 // context
 import { UserContext } from "../../Context/userContext";
 import { MeetContext } from "../../Context/meetContext";
@@ -18,7 +18,7 @@ const Attendees = ({ participant, dominantSpeaker }) => {
 
   const videoRef = useRef(); // ref to display hold video content
   const audioRef = useRef(); // ref to display hold audio content
-
+  const screenRef = useRef(); // ref to display
   // filter tracks which are not null i.e. we are receiving tracks
   const trackPubsToTracks = (trackMap) =>
     Array.from(trackMap.values())
@@ -67,8 +67,30 @@ const Attendees = ({ participant, dominantSpeaker }) => {
   //  and update its status i.e. video on or off
   useEffect(() => {
     const videoTrack = videoTracks[0];
+    console.log(videoTrack);
+
     if (videoTrack) {
       videoTrack.attach(videoRef.current);
+      return () => {
+        videoTrack.detach();
+      };
+    }
+    const screenTrack = videoTracks[0];
+    console.log(videoTrack);
+
+    if (screenTrack) {
+      screenTrack.attach(screenRef.current);
+      return () => {
+        screenTrack.detach();
+      };
+    }
+  }, [videoTracks]);
+  useEffect(() => {
+    const videoTrack = videoTracks[1];
+    console.log(videoTracks);
+    if (videoTrack) {
+      console.log("here", videoTrack);
+      videoTrack.attach(screenRef.current);
       return () => {
         videoTrack.detach();
       };
@@ -89,32 +111,17 @@ const Attendees = ({ participant, dominantSpeaker }) => {
 
   return (
     <div>
-      {participant.identity === name ? (
-        <div className="meet-frame" style={{}}>
-          {/* display name of participant */}
-          <span className="frame-title">
-            {dominantSpeaker ? (<SettingsVoiceIcon style={{color:"#F54748"}}/>):null}{participant.identity}
-          </span>
-          {vidState ? (
-            <video ref={videoRef} autoPlay />
-          ) : (
-            <Avatar name={name} size="300" className="card-avatar" />
-          )}
-          {audState ? (
-            <audio ref={audioRef} autoPlay />
-          ) : (
-            <audio ref={audioRef} muted />
-          )}
-        </div>
-      ) : (
-        <div className="meet-frame">
-          <span className="frame-title">
-            {dominantSpeaker ? (<SettingsVoiceIcon style={{color:"#F54748"}}/>):null}{participant.identity}
-          </span>
-          <video ref={videoRef} autoPlay />
-          <audio ref={audioRef} autoPlay />
-        </div>
-      )}
+      <div className="meet-frame">
+        <span className="frame-title">
+          {dominantSpeaker ? (
+            <SettingsVoiceIcon style={{ color: "#F54748" }} />
+          ) : null}
+          {participant.identity}
+        </span>
+        <video ref={videoRef} autoPlay />
+        <audio ref={audioRef} autoPlay />
+        {screenRef.current.value ? (<video ref={screenRef} autoPlay />):("nothing") }
+      </div>
     </div>
   );
 };

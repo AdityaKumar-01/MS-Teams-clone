@@ -19,7 +19,7 @@ const UserProvider = ({ children }) => {
   const [roomName, setRoomName] = useState(""); // holds name current meet room name i.e. a uuid
   const [room, setRoom] = useState(null); // holds room data of ongoing meet
   const [connecting, setConnecting] = useState(false); // holds status of connection before joining any meet
-  
+  const [screenTrack, setScreenTrack] = useState(null);
 
   let history = useHistory();
   const setUserName = (name) => {
@@ -67,6 +67,8 @@ const UserProvider = ({ children }) => {
       }
     });
   }, []);
+
+  
   // values holds functions and states to be shared
   const value = {
     setUserName,
