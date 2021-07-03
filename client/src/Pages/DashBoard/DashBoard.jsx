@@ -1,15 +1,8 @@
 // React libraries
-import React, { useState } from "react";
+import React, { useState, lazy, Suspense } from "react";
 import { Helmet } from "react-helmet";
 // External CSS
 import "./Dashboard.styles.css";
-
-// Components
-import CreateTeam from "./../../Components/CreateTeam/CreateTeam.component";
-import TeamsSection from "./../../Components/TeamsSection/TeamsSection.component";
-import DMChats from "./../../Components/DMChats/DMChats.component";
-import ProfileSetting from "./../../Components/ProfileSetting/ProfileSetting.component";
-import Assignment from "./../../Components/Assignment/Assignment.components";
 
 // Material UI Icons
 import AddCircleRoundedIcon from "@material-ui/icons/AddCircleRounded";
@@ -19,6 +12,15 @@ import AssignmentTurnedInRoundedIcon from "@material-ui/icons/AssignmentTurnedIn
 import PersonSharpIcon from "@material-ui/icons/PersonSharp";
 import Tooltip from "@material-ui/core/Tooltip";
 import Zoom from "@material-ui/core/Zoom";
+
+// Components
+import TeamsSection from "./../../Components/TeamsSection/TeamsSection.component";
+const CreateTeam  =  lazy(() => import("./../../Components/CreateTeam/CreateTeam.component"));
+const DMChats  =  lazy(() => import("./../../Components/DMChats/DMChats.component"));
+const ProfileSetting  =  lazy(() => import("./../../Components/ProfileSetting/ProfileSetting.component"));
+const Assignment  =  lazy(() => import("./../../Components/Assignment/Assignment.components"));
+
+
 const DashBoard = () => {
   // React hooks to handle local states
   const [showSection, setShowSection] = useState([
@@ -107,11 +109,27 @@ const DashBoard = () => {
 
       {/* conditional rendering of sections  */}
       <div className="display-section">
-        {showSection[0] ? <CreateTeam showHide={showHide} /> : null}
+        {showSection[0] ? (
+          <Suspense fallback={<p></p>}>
+            <CreateTeam showHide={showHide} />
+          </Suspense>
+        ) : null}
         {showSection[1] ? <TeamsSection showHide={showHide} /> : null}
-        {showSection[2] ? <DMChats showHide={showHide} /> : null}
-        {showSection[3] ? <Assignment /> : null}
-        {showSection[4] ? <ProfileSetting showHide={showHide} /> : null}
+        {showSection[2] ? (
+          <Suspense fallback={<p></p>}>
+            <DMChats showHide={showHide} />
+          </Suspense>
+        ) : null}
+        {showSection[3] ? (
+          <Suspense fallback={<p></p>}>
+            <Assignment showHide={showHide} />
+          </Suspense>
+        ) : null}
+        {showSection[4] ? (
+          <Suspense fallback={<p></p>}>
+            <ProfileSetting showHide={showHide} />
+          </Suspense>
+        ) : null}
       </div>
     </div>
   );

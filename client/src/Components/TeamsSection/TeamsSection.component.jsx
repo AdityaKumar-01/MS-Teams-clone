@@ -18,13 +18,13 @@ const TeamsSection = ({ showHide }) => {
       .then((response) => {
         setUserChats(response.data.info);
         setLoading(false);
-        console.log("done", loading); // setting data to hooks received from backend
+        
       })
       .catch((err) => console.log(err));
   };
   // useEffect to get data from backend at page loading
   useEffect(() => {
-    console.log("call1 ", loading);
+   
     getUserChat();
   }, []);
   return (

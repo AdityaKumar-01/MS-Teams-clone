@@ -53,9 +53,7 @@ app.get("/", (req, res) => {
 });
 
 
-// keepUpBackend(function() {
-//     axios.get("https://ms-teams-clone-backend.herokuapp.com/");
-// }, 300000); // every 5 minutes (300000)
+
 
 
 // Server to run express app

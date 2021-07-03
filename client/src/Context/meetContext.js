@@ -10,11 +10,9 @@ const MeetContext = React.createContext();
 const MeetProvider = ({ children }) => {
   const [vidState, setVidState] = useState(true); // holds state for camera is on or not
   const [audState, setAudState] = useState(true); // holds state for mic is on or not
-  const [screenTrack,
-    setScreenTrack] = useState(false); // holds state for
+  const [screenTrack, setScreenTrack] = useState(false); // holds state for
   // values holds functions and states to be shared
 
-  
   const value = {
     vidState,
     setVidState,

@@ -13,19 +13,17 @@ import Zoom from "@material-ui/core/Zoom";
 // External CSS
 import "./Room.styles.css";
 import Video from "twilio-video";
+
 import { MeetContext } from "../../Context/meetContext";
 const Room = ({ roomName, room, handleLogOut }) => {
   const [participants, setParticipants] = useState([]);
   const [showChat, setShowChat] = useState(false);
   const [currentDomntSpeaker, setCurrentDomntSpeaker] = useState("");
   //vidState,
-    // audState,
-    // setVidState,
-    // setAudState,
-  const {
-    screenTrack,
-    setScreenTrack,
-  } = useContext(MeetContext);
+  // audState,
+  // setVidState,
+  // setAudState,
+  const { screenTrack, setScreenTrack } = useContext(MeetContext);
 
   useEffect(() => {
     // add new participant in the room state
@@ -91,20 +89,20 @@ const Room = ({ roomName, room, handleLogOut }) => {
   };
 
   const handleScreenSharing = () => {
+    console.log(room.localParticipant.videoTracks);
+    if (participants) console.log(room.remoteParticipant.videoTracks);
     if (!screenTrack) {
       navigator.mediaDevices
         .getDisplayMedia()
         .then((stream) => {
           var track = new Video.LocalVideoTrack(stream.getTracks()[0]);
           room.localParticipant.publishTrack(track);
-          
+
           track.mediaStreamTrack.onended = () => {
-            handleScreenSharing();
+            setScreenTrack(false);
           };
         })
-        .catch(() => {
-          alert("Could not share the screen.");
-        });
+        .catch(() => {});
     } else {
       room.localParticipant.unpublishTrack(screenTrack);
       screenTrack.stop();

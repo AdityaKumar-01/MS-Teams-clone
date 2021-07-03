@@ -111,7 +111,12 @@ const Attendees = ({ participant, dominantSpeaker }) => {
   }, [audioTracks]);
 
   return (
-    <div>
+    <div className="attendee-wrapper">
+      {screenTrack ? (
+        <span className="screen-frame meet-frame">
+          <video ref={screenRef} autoPlay />
+        </span>
+      ) : null}
       <div className="meet-frame">
         <span className="frame-title">
           {dominantSpeaker ? (
@@ -121,7 +126,6 @@ const Attendees = ({ participant, dominantSpeaker }) => {
         </span>
         <video ref={videoRef} autoPlay />
         <audio ref={audioRef} autoPlay />
-        {screenTrack ? (<video ref={screenRef} autoPlay />) : null}
       </div>
     </div>
   );

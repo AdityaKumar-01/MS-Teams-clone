@@ -6,6 +6,8 @@
     display:flex;
     justify-content: center;
     align-items: center;
+    position:fixed;
+    bottom:20px;
 }
 
 .control-panel span{
@@ -21,9 +23,6 @@
     cursor:pointer;
 }
 
-.control-panel span:hover{
-   background-color:rgba(128, 128, 128, 0.404)
-}
 
 @media (max-width: 650px) {
  .control-panel{
