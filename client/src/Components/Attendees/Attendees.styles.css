@@ -4,8 +4,13 @@
     /* justify-content: flex-start;
     align-items: center; */
 }
-.screen-frame{
 
+.screen-frame video{
+    position: fixed;
+    top: 0;
+    left:0;
+    height:80vh;
+    width:100vw;
 }
 .meet-frame{
     display: flex;

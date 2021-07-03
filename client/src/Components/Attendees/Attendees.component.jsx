@@ -74,22 +74,22 @@ const Attendees = ({ participant, dominantSpeaker }) => {
         videoTrack.detach();
       };
     }
-    const screenTrack = videoTracks[0];
+    const screenShareTrack = videoTracks[0];
 
-    if (screenTrack) {
-      console.log("started");
-      screenTrack.attach(screenRef.current);
+    if (screenShareTrack) {
+      
+      screenShareTrack.attach(screenRef.current);
 
       return () => {
-        screenTrack.detach();
+        screenShareTrack.detach();
       };
     }
   }, [videoTracks, screenTrack]);
   useEffect(() => {
     const videoTrack = videoTracks[1];
-    console.log("video started");
+   
     if (videoTrack) {
-      console.log("here", videoTrack);
+     
       setScreenTrack(true);
       videoTrack.attach(screenRef.current);
       return () => {
@@ -113,7 +113,7 @@ const Attendees = ({ participant, dominantSpeaker }) => {
   return (
     <div className="attendee-wrapper">
       {screenTrack ? (
-        <span className="screen-frame meet-frame">
+        <span className="screen-frame">
           <video ref={screenRef} autoPlay />
         </span>
       ) : null}

@@ -89,9 +89,7 @@ const Room = ({ roomName, room, handleLogOut }) => {
   };
 
   const handleScreenSharing = () => {
-    console.log(room.localParticipant.videoTracks);
-    if (participants) console.log(room.remoteParticipant.videoTracks);
-    if (!screenTrack) {
+   if (!screenTrack) {
       navigator.mediaDevices
         .getDisplayMedia()
         .then((stream) => {
@@ -105,7 +103,7 @@ const Room = ({ roomName, room, handleLogOut }) => {
         .catch(() => {});
     } else {
       room.localParticipant.unpublishTrack(screenTrack);
-      screenTrack.stop();
+      // screenTrack.stop();
       setScreenTrack(false);
     }
   };

@@ -7,6 +7,7 @@ const AssignmentResponse = ({ assignmentObj }) => {
   
   const [assigneeStatus, setAssigneeStatus] = useState([]);
   const [mailStatus, setMailStatus] = useState("");
+  
   useEffect(() => {
     const getStatus = () => {
       axios
