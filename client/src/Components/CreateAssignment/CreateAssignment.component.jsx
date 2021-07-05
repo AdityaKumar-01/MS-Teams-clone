@@ -4,6 +4,7 @@ import React, { useContext } from "react";
 // External CSS
 import "./CreateAssignment.styles.css";
 
+// Components i.e. 3 sections of assignment form
 import AssignmentCreationForm from "../AssignmentCreationForm/AssignmentCreationForm.component";
 import AssignmentAssigneeForm from "./../AssignmentAssigneeForm/AssignmentAssigneeForm.component";
 import AssignmentInstructionsForm from "./../AssignmentInstructionsForm/AssignmentInstructionsForm.component";

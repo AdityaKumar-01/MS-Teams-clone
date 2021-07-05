@@ -1,23 +1,36 @@
+// REact libraries
 import React, { useEffect, useState } from "react";
+
+// NPM Packages
 import { useHistory } from "react-router-dom";
 import queryString from "query-string";
 import axios from "axios";
 import { Helmet } from "react-helmet";
 
+// Components
 import DisplayAssignment from "../../Components/DisplayAssignment/DisplayAssignment.component";
 import AssignmentResponse from './../../Components/AssignmentResponse/AssignmentResponse.component';
+
+// Extenal CSS
 import "./AssignmentPage.styles.css";
+
 const AssignmentPage = () => {
+  // This page is reponsible to show assignmnt and its response
+  // If the user is creator then will show response too else only assignment 
   const [loading, setLoading] = useState(true);
   const [assignmentObj, setAssignmentObj] = useState("");
   const [isCreator, setIsCreator] = useState(false);
+
   let history = useHistory();
+  
   useEffect(() => {
+    // get assignment Id from URL
     const { id } = queryString.parse(history.location.search);
     getAssignmentDetails(id);
     setLoading(true);
   }, [history.location.search]);
 
+  // get the details of assignment from backend based on id fetched from URL
   const getAssignmentDetails = (id) => {
     axios
       .get(

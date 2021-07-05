@@ -97,18 +97,24 @@
 
 .ce-chat-feed-container{
   margin-right:5% !important;
-    min-height: 500px !important ;
+    min-height: 80vh !important ;
     max-height:80vh !important;
     
 }
 .ce-person-avatar .ce-avatar{
     display: block
 }
-.ce-avatar, .ce-their-message-sender, .ce-avatar-dot{
+.ce-avatar, .ce-avatar-dot{
     display: none;
 }
 .ce-autocomplete-option .ce-avatar{
   display: block
+}
+.ce-their-message-avatar{
+  display:none !important; 
+}
+.ce-their-message-sender{
+  padding: 5px 0px;
 }
 .ce-message-bubble.ce-their-message-bubble{
     margin-left:-20px !important;

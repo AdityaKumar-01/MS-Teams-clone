@@ -19,14 +19,18 @@ const MsgForm = (props) => {
 
   const authObject = {
     projectID: process.env.REACT_APP_PROJECT_ID,
-    "User-Name": localStorage.getItem("userName"),
-    "User-Secret": localStorage.getItem("password"),
+    userName: localStorage.getItem("userName"),
+    userSecret: localStorage.getItem("password"),
+    'sender_username': localStorage.getItem("userName"),
   };
 
   const handleMeet = () => {
     const uid = uuidv4();
     const text = `meet@${uid}`;
-    sendMessage(creds, chatId, { text });
+    sendMessage(authObject, chatId, {
+      text: text,
+      sender_username: localStorage.getItem("userName"),
+    });
   };
 
   // function to update state on writing anything in the msg box
@@ -38,12 +42,17 @@ const MsgForm = (props) => {
   const handleSubmit = (event) => {
     event.preventDefault();
     console.log(creds);
-    // remmove extra spaces from the msg
+    // remove extra spaces from the msg
     const text = msg.trim();
 
     // sendMessage is a function provided by react chat engine to send msg in the feed
     if (text.length > 0) {
-      sendMessage(creds, chatId, { text }); //call the function with the text
+      sendMessage(
+        authObject,
+        chatId,
+        { text:text,
+         'sender_username': localStorage.getItem("userName") }
+      ); //call the function with the text
     }
 
     setMsg(""); // clear the input

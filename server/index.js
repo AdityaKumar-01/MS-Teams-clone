@@ -44,6 +44,7 @@ app.use("/video", videoRoute);
 const assignmentRoute = require("./Routes/assignment.routes");
 app.use("/assignment", assignmentRoute);
 
+// Routes module to handle any activity related to mail
 const mailRoute = require("./Routes/mail.routes");
 app.use("/mail", mailRoute);
 
@@ -51,10 +52,6 @@ app.use("/mail", mailRoute);
 app.get("/", (req, res) => {
   res.send("Backend for MS teams clone");
 });
-
-
-
-
 
 // Server to run express app
 app.listen(process.env.PORT || 5000, (req, res) => {

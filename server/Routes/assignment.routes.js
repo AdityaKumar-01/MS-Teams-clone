@@ -2,12 +2,15 @@
 const express = require("express");
 const router = express.Router();
 
+//  required mongo MODELS
 const assignment = require("../Models/assignment.js");
 const user = require("../Models/user.js");
 
+// get assignment info from database based on assignment id
 const assignmentInfo = async (obj) => {
   asgnObj = await assignment.find({ assignmentId: obj.id });
   if (asgnObj[0]) {
+    // prepare JSON object of assignement details
     var element = {
       assignmentId: asgnObj[0].assignmentId,
       creator: asgnObj[0].creator,
@@ -21,6 +24,8 @@ const assignmentInfo = async (obj) => {
   }
 };
 
+// get details of all the assignment from the given list
+// and send the list of details
 const prepareAssignment = async (data) => {
   assgnList = await Promise.all(
     data.map(async (obj) => {
@@ -31,6 +36,7 @@ const prepareAssignment = async (data) => {
   return assgnList;
 };
 
+// format date to set as timestamp in database of ceration of assignment
 const formatDate = () => {
   const currentDate = new Date(); // get current date and time
 
@@ -44,10 +50,13 @@ const formatDate = () => {
   return formattedDate;
 };
 
+// route to hanle ceration of assignement
 router.post("/create", (req, res) => {
   const assignees = req.body.assigneesName;
   const uid = req.body.id;
   const creator = req.body.creator;
+
+  // add all the details of assignment recieved from frontend
   const assignmentObj = new assignment({
     assignmentId: uid,
     creator: creator,
@@ -61,6 +70,8 @@ router.post("/create", (req, res) => {
   assignmentObj.save(); // save the data
   assignees.push(creator);
 
+  // update user that they have recieved assignment
+  // set the timestamp and put turnedIn status to false
   assignees.forEach((obj) => {
     user.findOneAndUpdate(
       { userName: obj },
@@ -77,6 +88,7 @@ router.post("/create", (req, res) => {
   res.send({ status: 200, msg: "created" });
 });
 
+// route to send assignment details assgined to current user
 router.get("/getAssignment", async (req, res) => {
   var assgnList = [];
   assgnList = await user.find({ userName: req.query.userName });
@@ -85,12 +97,15 @@ router.get("/getAssignment", async (req, res) => {
   res.send({ status: 200, list: assgnList });
 });
 
+// get details of any particular assignment
 router.get("/getAssignmentDetails", (req, res) => {
   assignment.find({ assignmentId: req.query.id }, (err, data) => {
     res.send({ status: 200, list: data[0] });
   });
 });
 
+// route to handle assginment submission
+// this will update status of assignment for particular user to turndIn with timestamp
 router.post("/turnInAssignment", async (req, res) => {
   userDoc = await user.find({ userName: req.body.userName });
   updateAsgn = userDoc[0].assignments.map((asgnObj) => {
@@ -107,6 +122,7 @@ router.post("/turnInAssignment", async (req, res) => {
   res.send({ status: 200 });
 });
 
+// function to get status of assignment wrto one user
 const prepareStatus = async (data, name, id) => {
   info = await data.map((asgnObj) => {
     if (id === asgnObj.id) {
@@ -120,6 +136,8 @@ const prepareStatus = async (data, name, id) => {
 
   return info;
 };
+
+// format data to be send to frontend
 const formatData = (data) => {
   var info = [];
   data.forEach((obj) => {
@@ -131,6 +149,9 @@ const formatData = (data) => {
   });
   return info;
 };
+
+// route to handle request of reponse of an assignment
+// this will send the list of all assignees and their status wrto assginment
 router.get("/assignmentStatus", async (req, res) => {
   info = await Promise.all(
     req.query.asgineesName.map(async (name) => {

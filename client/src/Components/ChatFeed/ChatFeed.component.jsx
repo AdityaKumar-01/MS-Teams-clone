@@ -1,6 +1,7 @@
 // react libraries
 import React from "react";
-import {useHistory} from "react-router-dom"
+import { useHistory } from "react-router-dom";
+
 // components
 import MyMsg from "../MyMsg/MyMsg.component";
 import TheirMsg from "../TheirMsg/TheirMsg.component";
@@ -14,7 +15,6 @@ import HomeIcon from "@material-ui/icons/Home";
 import Tooltip from "@material-ui/core/Tooltip";
 import Zoom from "@material-ui/core/Zoom";
 const ChatFeed = (props) => {
-
   let history = useHistory();
   // props send by react chat engine
   // cannot alter the name
@@ -31,14 +31,17 @@ const ChatFeed = (props) => {
     return keys.map((key, index) => {
       // create 2 var one for object of meesage and other to format text from msgObj
       var msgObj = messages[key];
-      
+
       // remove <p> and </p> tag from text
       var conMsg = String(msgObj.text);
       conMsg = conMsg.replace("</p>", "");
       conMsg = conMsg.replace("<p>", "");
-      
-      const lastMsgKey = index === 0 ? null : keys[index - 1]; // helps the app to find the last message in continuation by the sender
-      const isSenderMsg = userName === msgObj.sender.username; // identify the current msg is send by user or what holds boolean value
+
+      // helps the app to find the last message in continuation by the sender
+      const lastMsgKey = index === 0 ? null : keys[index - 1];
+
+      // identify the current msg is send by user or what holds boolean value
+      const isSenderMsg = userName === msgObj.sender.username;
 
       const checkMeet = msgObj.text.split("@")[0] === "meet";
 
@@ -69,9 +72,9 @@ const ChatFeed = (props) => {
     });
   };
 
-  const goHome = () =>{
+  const goHome = () => {
     history.push("/dashboard");
-  }
+  };
   if (!chat) return <div />;
 
   return (

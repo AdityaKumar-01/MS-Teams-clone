@@ -6,12 +6,15 @@ var dateFormat = require("dateformat");
 
 require("dotenv").config();
 
+// NPM packagesto send mail
 const nodemailer = require("nodemailer");
 const hbs = require("nodemailer-handlebars");
 
+// User model to get emial addresses of assignees
 const user = require("../Models/user.js");
 
-// Step 1
+// instantiate nodemailer
+// requires user email and pwd to send mail and service to be used
 let transporter = nodemailer.createTransport({
   service: "gmail",
   auth: {
@@ -20,7 +23,6 @@ let transporter = nodemailer.createTransport({
   },
 });
 
-// Step 2
 transporter.use(
   "compile",
   hbs({
@@ -29,6 +31,7 @@ transporter.use(
   })
 );
 
+// function to format script based ona ssignment and reciever
 const scriptFormatter = (data, name) => {
   var now = new Date();
 
@@ -189,7 +192,9 @@ const scriptFormatter = (data, name) => {
   return topSection + lowerSection;
 };
 
-router.post("/send",  (req, res) => {
+// route to send email
+// will iterate through all the assignees and send mail one by one
+router.post("/send", (req, res) => {
   var data = {
     sender: req.body.sender,
     receiver: req.body.receiver,
@@ -201,8 +206,7 @@ router.post("/send",  (req, res) => {
   data.receiver.forEach(async (name) => {
     var script = scriptFormatter(data, name);
     userObj = await user.find({ userName: name });
-    if(userObj[0]){
-      
+    if (userObj[0]) {
       let mailOptions = {
         from: "MS Teams Clone", // TODO: email sender
         to: userObj[0].email, // TODO: email receiver
@@ -218,7 +222,7 @@ router.post("/send",  (req, res) => {
         return console.log("Email sent!!!");
       });
     }
-    res.json({ status: 200, msg:"Mail sent successfully!" });
+    res.json({ status: 200, msg: "Mail sent successfully!" });
   });
 });
 module.exports = router; // export the module

@@ -1,10 +1,16 @@
+// REact libraries
 import React, { useState, useEffect } from "react";
-import ReactAutocomplete from "react-autocomplete";
 
+// NPM packages
+import ReactAutocomplete from "react-autocomplete";
 import axios from "axios";
+
+// This component will let user to pick user from exiting users list for making DM
 const AutoComplete = ({ input, setInput }) => {
   
-  const [userNames, setUserNames] = useState([]);
+  const [userNames, setUserNames] = useState([]); // holds name of current user list
+  
+  // call the backend to get all users names
   useEffect(() => {
     axios
       .get(`${process.env.REACT_APP_BACKEND_URL}/user/getUser`)
@@ -17,6 +23,7 @@ const AutoComplete = ({ input, setInput }) => {
       items={userNames}
       shouldItemRender={(item, value) => item.label.indexOf(value) > -1}
       getItemValue={(item) => item.label}
+      // list of user and its styling
       renderItem={(item, highlighted) => (
         <div
           key={item.id}

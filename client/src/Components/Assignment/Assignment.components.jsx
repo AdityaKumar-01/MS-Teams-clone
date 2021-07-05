@@ -13,15 +13,20 @@ import DoneAllIcon from "@material-ui/icons/DoneAll";
 // External CSS
 import "./Assingment.styles.css";
 
+// NPM packages
 import axios from "axios";
 import Collapsible from "react-collapsible";
 
 const Assignment = () => {
-  const [asgnList, setAsgnList] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const [asgnList, setAsgnList] = useState([]); // holds the assignment list 
+  const [loading, setLoading] = useState(true); // for the status of loader
+  
+  // useEffect to call backend and get the list of current assignment
   useEffect(() => {
     getAssignmentList();
   }, []);
+
+  // function to get data and update hooks state
   const getAssignmentList = () => {
     axios
       .get(`${process.env.REACT_APP_BACKEND_URL}/assignment/getAssignment`, {
@@ -30,8 +35,8 @@ const Assignment = () => {
         },
       })
       .then((data) => {
-        setAsgnList(data.data.list);
-        setLoading(false);
+        setAsgnList(data.data.list); // update hooks state
+        setLoading(false); // remove loader
       })
       .catch((err) => {
         console.log(err);
@@ -68,7 +73,7 @@ const Assignment = () => {
               {asgnList.length === 0 ? (
                 <p className="work-msg">You are up to date</p>
               ) : (
-                asgnList.map((assignment) => {
+                asgnList.map((assignment) => { // map those assignment that has a status of false in turnedIn
                   if (
                     assignment.creator !== localStorage.getItem("userName") &&
                     !assignment.turnedIn
@@ -98,6 +103,7 @@ const Assignment = () => {
               transitionTime={300}
             >
               {asgnList.map((assignment) => {
+                // map those assignment that has a status of true in turnedIn
                 if (
                   assignment.creator !== localStorage.getItem("userName") &&
                   assignment.turnedIn
@@ -129,6 +135,7 @@ const Assignment = () => {
                 <p>Ypu haven't created any assignment</p>
               ) : (
                 asgnList.map((assignment) => {
+                  // map those assignment that has creator same as currently logged in user
                   if (assignment.creator === localStorage.getItem("userName"))
                     return (
                       <AssignmentCard

@@ -14,18 +14,21 @@ import "./AssignmentAssigneeForm.styles.css";
 import { AssignmentContext } from "../../Context/assignmentContext";
 
 const AssignmentAssigneeForm = () => {
+  // bring all the hook state from context to
+  // let user assign this assignment to others
   const { handleToggleSection, assigneesName, setAssigneesName, assigneesErr } =
     useContext(AssignmentContext);
 
+  // holds data of form currentAssignee name
   const [currentAssignee, setCurrentAssignee] = useState("");
   const addAssignee = () => {
     if (currentAssignee !== "")
-      setAssigneesName([...assigneesName, currentAssignee]);
+      setAssigneesName([...assigneesName, currentAssignee]); // update assinees list
     setCurrentAssignee("");
   };
 
+  // function to remove any assignee from the list
   const removeAssignee = (id) => {
-   
     setAssigneesName((prevAssigneesName) => {
       return prevAssigneesName.filter((assignee, index) => {
         return index !== id;

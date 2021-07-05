@@ -68,7 +68,7 @@ router.post("/getChat", (req, res) => {
 
 router.post("/createChat", (req, res) => {
   const isDM = req.body.isDM;
-  const userNames = [req.body.userName, req.body.name];
+  const userNames = [req.body.name, req.body.userName];
   const authObject = {
     "Project-ID": process.env.CHAT_ENGINE_PROJECT_ID,
     "User-Name": req.body.name,
@@ -78,7 +78,7 @@ router.post("/createChat", (req, res) => {
   if (isDM) {
     var data = {
       usernames: userNames,
-      is_direct_chat: true,
+      is_direct_chat: isDM,
     };
   } else {
     var data = {
@@ -97,11 +97,11 @@ router.post("/createChat", (req, res) => {
   // Make the call
   axios(config)
     .then(function (response) {
-      
+      console.log(response.status);
       isDM
         ? res.json({
             status: 201,
-            msg: "DM Created Successfully",
+            msg: "Team Created Successfully",
             isDM: true,
           })
         : res.json({

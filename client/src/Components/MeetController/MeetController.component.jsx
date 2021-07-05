@@ -5,11 +5,16 @@ import CallEndSharpIcon from "@material-ui/icons/CallEndSharp";
 import UseAnimations from "react-useanimations";
 import microphone from "react-useanimations/lib/microphone";
 import video from "react-useanimations/lib/video";
-import { MeetContext } from "../../Context/meetContext";
-import Tooltip from "@material-ui/core/Tooltip";
-import Zoom from "@material-ui/core/Zoom";
 import ScreenShareIcon from "@material-ui/icons/ScreenShare";
 import StopScreenShareIcon from "@material-ui/icons/StopScreenShare";
+
+// Tooltip
+import Tooltip from "@material-ui/core/Tooltip";
+import Zoom from "@material-ui/core/Zoom";
+
+// Context API
+import { MeetContext } from "../../Context/meetContext";
+
 // External CSS
 import "./MeetController.styles.css";
 
@@ -19,6 +24,7 @@ const MeetController = ({
   handleToggleVideo,
   handleScreenSharing,
 }) => {
+  // This component is reponsible for muting unmuting video audio cut call and share screen
   const { vidState, audState, screenTrack,  } =
     useContext(MeetContext);
 

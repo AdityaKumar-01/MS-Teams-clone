@@ -1,19 +1,36 @@
+// React libraries
 import React, { useRef, useState, useEffect } from "react";
-import { useHistory } from "react-router-dom";
+
+// Material UI Icons
 import ArrowBackIcon from "@material-ui/icons/ArrowBack";
+
+// Extenal CSS
 import "./DisplayAssignment.css";
+
+// NPM Packages
 import axios from "axios";
+import { useHistory } from "react-router-dom";
+
 const DisplayAssignment = ({ assignmentObj, creator }) => {
+  // This component is reponsible to show assignment form 
+
+  // parse the object containing info of assignment 
+  // like name instructions due 
   var myObj = JSON.parse(assignmentObj);
+
+  // ref to hold the link of answer
   const fileRef = useRef();
-  const [submitted, setSubmitted] = useState(false);
-  const [frameId, setFrameId] = useState(13837);
-  const [frameLink, setFrameLink] = useState("");
-  const frameArray = [65868, 66723, 66619];
+
+  const [submitted, setSubmitted] = useState(false); // status of submission
+  const [frameId, setFrameId] = useState(13837); // iframe id
+  const [frameLink, setFrameLink] = useState(""); // link for iframe animation
+  const frameArray = [65868, 66723, 66619]; // different iframe animations
   let history = useHistory();
   useEffect(() => {
     setFrameLink(`https://embed.lottiefiles.com/animation/${frameId}`);
   }, [frameId]);
+
+  // Change the animation on submission
   const handleFrame = () => {
     axios({
       method: "post",
@@ -32,6 +49,7 @@ const DisplayAssignment = ({ assignmentObj, creator }) => {
       });
   };
 
+  // link to go back to dashboard
   const goHome = () => {
     history.push("/dashboard");
   };

@@ -1,8 +1,15 @@
+// React libraries
 import React, {useContext} from "react";
 
+// Extenal CSS
 import "./AssignmentCreationForm.styles.css";
+
+// Context API
 import { AssignmentContext } from "../../Context/assignmentContext";
+
 const AssignmentCreationForm = () => {
+  // bring all the hook state from context to 
+  // let user create first section of assignment form
   const {
     err,
     asgnName,

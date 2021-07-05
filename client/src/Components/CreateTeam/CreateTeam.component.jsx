@@ -6,15 +6,17 @@ import axios from "axios";
 
 // External CSS
 import "./CreateTeam.styles.css";
-import AutoComplete from './../AutoComplete/AutoComplete';
+
+// Component
+import AutoComplete from "./../AutoComplete/AutoComplete";
 
 const CreateTeam = ({ showHide }) => {
   const titleRef = useRef(); // holds data for creating team
-  
 
   const [teamErr, setTeamErr] = useState(""); // holds error on creation of team
   const [dmErr, setDmErr] = useState(""); // holds error on making DM
   const [dm, setDm] = useState("Enter UserName"); // holds error on
+
   const createChat = (e) => {
     e.preventDefault(); // prevent page reloading on form submittion
 
@@ -79,7 +81,7 @@ const CreateTeam = ({ showHide }) => {
         <span className="create-chat-title">Make a Direct Message</span>
         <span>{dmErr}</span>
         <form className="create-dm-form">
-          <AutoComplete setInput = {setDm} input = {dm}/>
+          <AutoComplete setInput={setDm} input={dm} />
           <button className="create-btn">Make</button>
         </form>
       </div>

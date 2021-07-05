@@ -19,10 +19,7 @@ const Room = ({ roomName, room, handleLogOut }) => {
   const [participants, setParticipants] = useState([]);
   const [showChat, setShowChat] = useState(false);
   const [currentDomntSpeaker, setCurrentDomntSpeaker] = useState("");
-  //vidState,
-  // audState,
-  // setVidState,
-  // setAudState,
+  
   const { screenTrack, setScreenTrack } = useContext(MeetContext);
 
   useEffect(() => {
@@ -64,13 +61,13 @@ const Room = ({ roomName, room, handleLogOut }) => {
 
   const handleDomntSpeaker = (participant) => {
     if (participant) {
-      console.log(participant.sid);
+     
       setCurrentDomntSpeaker(participant.sid);
     }
   };
   // function handle state of local participant video
   const handleToggleVideo = () => {
-    // setVidState(!vidState);
+   
     room.localParticipant.videoTracks.forEach((publication) =>
       publication.track.isEnabled
         ? publication.track.disable()
@@ -80,7 +77,7 @@ const Room = ({ roomName, room, handleLogOut }) => {
 
   // function handle state of local participant audio
   const handleToggleAudio = () => {
-    // setAudState(!audState);
+    
     room.localParticipant.audioTracks.forEach((publication) =>
       publication.track.isEnabled
         ? publication.track.disable()
@@ -103,7 +100,7 @@ const Room = ({ roomName, room, handleLogOut }) => {
         .catch(() => {});
     } else {
       room.localParticipant.unpublishTrack(screenTrack);
-      // screenTrack.stop();
+      
       setScreenTrack(false);
     }
   };

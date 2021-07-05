@@ -1,10 +1,22 @@
+// React libraries
 import React, { useContext, useState } from "react";
+
+// Material UI icons
 import AddIcon from "@material-ui/icons/Add";
 import CloseIcon from "@material-ui/icons/Close";
+
+// External CSS
 import "./AssignmentInstructionsForm.styles.css";
+
+// No assinees IMG
 import noInstructions from "../../Assets/instructions.png";
+
+// Context API
 import { AssignmentContext } from "../../Context/assignmentContext";
+
 const AssignmentInstructionsForm = () => {
+  // bring state for assignees form
+  // This section of form will let user give instructions for assignment to others
   const {
     handleToggleSection,
     handleFormSubmission,
@@ -12,21 +24,26 @@ const AssignmentInstructionsForm = () => {
     setAssignmentInstructions,
   } = useContext(AssignmentContext);
 
+  // hold current instruction
   const [currentInstructions, setCurrentInstructions] = useState("");
   const addInstruction = () => {
-    if(currentInstructions !== "")
-    setAssignmentInstructions([...assignmentInstructions, currentInstructions]);
+    if (currentInstructions !== "")
+      setAssignmentInstructions([
+        ...assignmentInstructions,
+        currentInstructions,
+      ]); // update instruction list
     setCurrentInstructions("");
   };
 
+  // function to remove any assignment cuurently entered
   const removeInstruction = (id) => {
-    
     setAssignmentInstructions((prevAssignmentInstructions) => {
       return prevAssignmentInstructions.filter((instruction, index) => {
         return index !== id;
       });
     });
   };
+
   return (
     <div className="assignent-assignees-form">
       <div className="assignment-assignees-left-panel">
