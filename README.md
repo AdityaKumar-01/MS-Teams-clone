@@ -19,7 +19,7 @@ Client conatins frontend part and server contains backend part for this website 
 <strong>API key</strong> and<strong> API sid</strong></em><br>
 <em> ‼️ Get a free account of <a href="https://chatengine.io/">Chat Engine</a> and note down your <strong>project ID</strong> and <strong>API key</strong> </em><br>
 
-<em> store them in .env file in src folder of client and root directory of server  </em><br>
+<em> store them in .env file in src folder of client and root directory of server  </em><br><br>
  ✔️1. Clone this repository 
  ```sh
   git clone https://github.com/AdityaKumar-01/MS-Teams-clone.git
@@ -78,7 +78,7 @@ Here is a list of those NPM packages 📝<br>
  <br>
  <h3><a href="https://www.twilio.com/">Twilio</a></h3>
  <p> Twilio is a very superb tool for communication. It has various feature like bulk message sender, audio and video call and many more. I used its video calling API 
- which is a wrapper around <strong>WebRTC</strong>. It provide you support at both frontend and backend to lisrtend various activity like people joining and leaving call,
+ which is a wrapper around <strong>WebRTC</strong>. It provide you support at both frontend and backend to listend various activity like people joining and leaving call,
  their tracks like audio and video and many more. It gives you a JWT token which is used for sessions to add people in a video conference. </p>
 
  
