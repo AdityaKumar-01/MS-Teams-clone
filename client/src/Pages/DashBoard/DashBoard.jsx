@@ -15,11 +15,18 @@ import Zoom from "@material-ui/core/Zoom";
 
 // Components
 import TeamsSection from "./../../Components/TeamsSection/TeamsSection.component";
-const CreateTeam  =  lazy(() => import("./../../Components/CreateTeam/CreateTeam.component"));
-const DMChats  =  lazy(() => import("./../../Components/DMChats/DMChats.component"));
-const ProfileSetting  =  lazy(() => import("./../../Components/ProfileSetting/ProfileSetting.component"));
-const Assignment  =  lazy(() => import("./../../Components/Assignment/Assignment.components"));
-
+const CreateTeam = lazy(() =>
+  import("./../../Components/CreateTeam/CreateTeam.component")
+);
+const DMChats = lazy(() =>
+  import("./../../Components/DMChats/DMChats.component")
+);
+const ProfileSetting = lazy(() =>
+  import("./../../Components/ProfileSetting/ProfileSetting.component")
+);
+const Assignment = lazy(() =>
+  import("./../../Components/Assignment/Assignment.components")
+);
 
 const DashBoard = () => {
   // React hooks to handle local states
@@ -56,7 +63,11 @@ const DashBoard = () => {
               placement="right"
             >
               <AddCircleRoundedIcon
-                style={{ color: "f54748", fontSize: 35, cursor: "pointer" }}
+                style={{
+                  color: showSection[0] ? "#FB9300" : "#f54748",
+                  fontSize: 35,
+                  cursor: "pointer",
+                }}
               />
             </Tooltip>
           </li>
@@ -67,7 +78,11 @@ const DashBoard = () => {
               placement="right"
             >
               <GroupRoundedIcon
-                style={{ color: "f54748", fontSize: 35, cursor: "pointer" }}
+                style={{
+                  color: showSection[1] ? "#FB9300" : "#f54748",
+                  fontSize: 35,
+                  cursor: "pointer",
+                }}
               />
             </Tooltip>
           </li>
@@ -78,7 +93,11 @@ const DashBoard = () => {
               placement="right"
             >
               <PersonSharpIcon
-                style={{ color: "f54748", fontSize: 35, cursor: "pointer" }}
+                style={{
+                  color: showSection[2] ? "#FB9300" : "#f54748",
+                  fontSize: 35,
+                  cursor: "pointer",
+                }}
               />
             </Tooltip>
           </li>
@@ -89,7 +108,11 @@ const DashBoard = () => {
               placement="right"
             >
               <AssignmentTurnedInRoundedIcon
-                style={{ color: "f54748", fontSize: 35, cursor: "pointer" }}
+                style={{
+                  color: showSection[3] ? "#FB9300" : "#f54748",
+                  fontSize: 35,
+                  cursor: "pointer",
+                }}
               />
             </Tooltip>
           </li>
@@ -100,7 +123,11 @@ const DashBoard = () => {
               placement="right"
             >
               <SettingsRoundedIcon
-                style={{ color: "f54748", fontSize: 35, cursor: "pointer" }}
+                style={{
+                  color: showSection[4] ? "#FB9300" : "#f54748",
+                  fontSize: 35,
+                  cursor: "pointer",
+                }}
               />
             </Tooltip>
           </li>

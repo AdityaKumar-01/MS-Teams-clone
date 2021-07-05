@@ -1,5 +1,6 @@
-import React from "react";
+import React, {useEffect} from "react";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
+import axios from "axios";
 
 // Pages
 import LoginPage from "./Pages/LoginPage/LoginPage";
@@ -17,6 +18,13 @@ import { MeetProvider } from "./Context/meetContext";
 import { AssignmentProvider } from "./Context/assignmentContext";
 
 const App = () => {
+
+  useEffect(() => {
+    setInterval(function () {
+      axios.get(`${process.env.REACT_APP_BACKEND_URL}`);
+    }, 300000); // every 5 minutes (300000)
+  });
+  
   return (
     <BrowserRouter>
       <Switch>

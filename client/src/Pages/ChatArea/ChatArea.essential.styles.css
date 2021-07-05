@@ -96,8 +96,9 @@
 }
 
 .ce-chat-feed-container{
+  margin-right:5% !important;
     min-height: 500px !important ;
-    max-height:500px !important;
+    max-height:80vh !important;
     
 }
 .ce-person-avatar .ce-avatar{

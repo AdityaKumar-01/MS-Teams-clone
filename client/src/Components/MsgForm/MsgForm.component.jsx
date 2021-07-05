@@ -1,4 +1,4 @@
-import React,{ useState } from "react";
+import React, { useState } from "react";
 
 // Material Icon
 import ImageIcon from "@material-ui/icons/Image";
@@ -14,18 +14,21 @@ import "./MsgForm.styles.css";
 import { v4 as uuidv4 } from "uuid";
 const MsgForm = (props) => {
   const [msg, setMsg] = useState(""); // holds state of input msg
+
   const { chatId, creds } = props; // credentials of the user required to make a API call
+
   const authObject = {
-   projectID:process.env.REACT_APP_PROJECT_ID,
-   userName:localStorage.getItem("userName"),
-        userSecret:localStorage.getItem("password")
+    projectID: process.env.REACT_APP_PROJECT_ID,
+    "User-Name": localStorage.getItem("userName"),
+    "User-Secret": localStorage.getItem("password"),
   };
+
   const handleMeet = () => {
     const uid = uuidv4();
-   
     const text = `meet@${uid}`;
-    sendMessage(authObject, chatId, { text });
-  }
+    sendMessage(creds, chatId, { text });
+  };
+
   // function to update state on writing anything in the msg box
   const handleChange = (event) => {
     setMsg(event.target.value);
@@ -34,7 +37,7 @@ const MsgForm = (props) => {
   // handle form submition
   const handleSubmit = (event) => {
     event.preventDefault();
-
+    console.log(creds);
     // remmove extra spaces from the msg
     const text = msg.trim();
 
@@ -46,8 +49,8 @@ const MsgForm = (props) => {
     setMsg(""); // clear the input
   };
 
-  // Function to send any picture 
-  const handleAttach= (event) => {
+  // Function to send any picture
+  const handleAttach = (event) => {
     // while sending a picture sendMessage expect a json object which helps in identifying type of msg
 
     sendMessage(creds, chatId, { files: event.target.files, text: "" });

@@ -31,7 +31,7 @@ const ChatFeed = (props) => {
     return keys.map((key, index) => {
       // create 2 var one for object of meesage and other to format text from msgObj
       var msgObj = messages[key];
-
+      
       // remove <p> and </p> tag from text
       var conMsg = String(msgObj.text);
       conMsg = conMsg.replace("</p>", "");
