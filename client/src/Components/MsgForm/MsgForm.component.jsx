@@ -36,6 +36,7 @@ const MsgForm = (props) => {
   // function to update state on writing anything in the msg box
   const handleChange = (event) => {
     setMsg(event.target.value);
+    console.log(creds);
   };
 
   // handle form submition

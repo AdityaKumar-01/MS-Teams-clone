@@ -68,7 +68,7 @@ router.post("/getChat", (req, res) => {
 
 router.post("/createChat", (req, res) => {
   const isDM = req.body.isDM;
-  const userNames = [req.body.name, req.body.userName];
+  const userNames = [req.body.userName, req.body.name];
   const authObject = {
     "Project-ID": process.env.CHAT_ENGINE_PROJECT_ID,
     "User-Name": req.body.name,
@@ -97,7 +97,7 @@ router.post("/createChat", (req, res) => {
   // Make the call
   axios(config)
     .then(function (response) {
-      console.log(response.status);
+      console.log(response);
       isDM
         ? res.json({
             status: 201,
@@ -112,7 +112,7 @@ router.post("/createChat", (req, res) => {
       // Notify the frontend that the chat is being created
     })
     .catch(function (error) {
-      console.log("error");
+      console.log(error);
       // if any error occurred send 400 status and error msg to be displayd
       res.json({
         status: 400,

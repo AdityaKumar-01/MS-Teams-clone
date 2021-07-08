@@ -3,6 +3,7 @@ import React, { useRef, useState } from "react";
 
 // NPM packages
 import axios from "axios";
+import { ChatEngine, getOrCreateChat } from "react-chat-engine";
 
 // External CSS
 import "./CreateTeam.styles.css";
@@ -12,7 +13,6 @@ import AutoComplete from "./../AutoComplete/AutoComplete";
 
 const CreateTeam = ({ showHide }) => {
   const titleRef = useRef(); // holds data for creating team
-
   const [teamErr, setTeamErr] = useState(""); // holds error on creation of team
   const [dmErr, setDmErr] = useState(""); // holds error on making DM
   const [dm, setDm] = useState("Enter UserName"); // holds error on
@@ -53,6 +53,18 @@ const CreateTeam = ({ showHide }) => {
       });
   };
 
+  function createDirectChat(e) {
+    e.preventDefault();
+    const authObject = {
+      projectID: process.env.REACT_APP_PROJECT_ID,
+      userName: localStorage.getItem("userName"),
+      userSecret: localStorage.getItem("password"),
+    };
+    
+    getOrCreateChat(authObject, { is_direct_chat: true, usernames: [dm]}, () =>
+      setDm("")
+    );
+  }
   return (
     <div className="team-create-wrapper">
       <div className="create-chat-col">
@@ -77,10 +89,10 @@ const CreateTeam = ({ showHide }) => {
         <hr width="1" size="100" />
       </div>
       {/* making DM form */}
-      <div className="create-chat-col" onSubmit={(e) => createChat(e)}>
+      <div className="create-chat-col">
         <span className="create-chat-title">Make a Direct Message</span>
         <span>{dmErr}</span>
-        <form className="create-dm-form">
+        <form className="create-dm-form" onSubmit={(e) => createChat(e)}>
           <AutoComplete setInput={setDm} input={dm} />
           <button className="create-btn">Make</button>
         </form>

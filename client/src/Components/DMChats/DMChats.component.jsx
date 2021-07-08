@@ -30,8 +30,6 @@ const DMChats = ({ showHide }) => {
       .then((response) => {
         // Display names of user with whom you have DMs
         if (response.data.status === 200) {
-         
-         
           // API sends us name of both the person in DM
           // Take only other name that is not you
           const users = response.data.info.filter( 
