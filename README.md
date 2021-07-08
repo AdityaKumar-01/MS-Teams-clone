@@ -6,7 +6,7 @@
 where atleast 2 people can join a room and have video call. On my way of building this I used <strong>MERN</strong> stack for building its frontend and backend. 
 I tried and added more featrues by myself to make it user-friendly</p>
 
-<hr>
+<img src="./client/src/Assets/Screenshot (36).png" alt="features">
 
 
 <h2> How to run in local system 💻 </h2>
@@ -18,8 +18,31 @@ Client conatins frontend part and server contains backend part for this website 
 <em> ‼️ Get a free account of <a href="https://www.twilio.com/">Twilio</a> and pen down your <strong>Account sid</strong>,
 <strong>API key</strong> and<strong> API sid</strong></em><br>
 <em> ‼️ Get a free account of <a href="https://chatengine.io/">Chat Engine</a> and note down your <strong>project ID</strong> and <strong>API key</strong> </em><br>
+<p> In client's <b>.env.local</b> file</p>
 
-<em> store them in .env file in src folder of client and root directory of server  </em><br><br>
+```sh
+REACT_APP_CHAT_ENGINE_API_KEY=XXXXXXXXXXXXXXXXXXXXX
+REACT_APP_PROJECT_ID=XXXXXXXXXXXXXXXXXXXXX
+REACT_APP_BACKEND_URL=XXXXXXXXXXXXXXXXXXXXX
+```
+<p>Deploy your backend on heroku and save the URL or write <code>http://localhost:5000</code> if your are running it locally</p>
+
+<p> In server's <b>.env</b> file</p>
+
+```sh
+TWILIO_ACCOUNT_SID = XXXXXXXXXXXXXXXXXXXXX
+TWILIO_API_KEY = XXXXXXXXXXXXXXXXXXXXX
+TWILIO_API_SECRET =XXXXXXXXXXXXXXXXXXXXX
+PORT=XXXXXXXXXXXXXXXXXXXXX
+MONGO_URL=XXXXXXXXXXXXXXXXXXXXX
+CHAT_ENGINE_API_KEY =XXXXXXXXXXXXXXXXXXXXX
+CHAT_ENGINE_PROJECT_ID =XXXXXXXXXXXXXXXXXXXXX
+MAIL_ID=XXXXXXXXXXXXXXXXXXXXX
+MAIL_SECRET=XXXXXXXXXXXXXXXXXXXXX
+```
+<p>Create a database in Mongo Atlas and note the secret and url of the cluster</p>
+<br><br>
+
  ✔️1. Clone this repository 
  ```sh
   git clone https://github.com/AdityaKumar-01/MS-Teams-clone.git
